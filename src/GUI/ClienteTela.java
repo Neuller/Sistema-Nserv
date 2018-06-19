@@ -1,5 +1,7 @@
 package GUI;
 
+import Beans.ClienteBeans;
+import Controller.ClienteController;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFormattedTextField;
@@ -11,6 +13,8 @@ public class ClienteTela extends javax.swing.JInternalFrame {
    MaskFormatter Formatotel;
    SimpleDateFormat Formatodata;
    Date DataAtual;
+   ClienteBeans ClienteB;
+   ClienteController ClienteC;
     
     public ClienteTela() {
         initComponents();
@@ -20,6 +24,9 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         Formatodata = new SimpleDateFormat("dd/MM/yyyy");
         DataAtual = new Date();
         TXT_Data.setText(Formatodata.format(DataAtual));
+        
+        ClienteB = new ClienteBeans();
+        ClienteC = new ClienteController();
     }
 
     @SuppressWarnings("unchecked")
@@ -51,6 +58,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         TBL_Clientes = new javax.swing.JTable();
         jSeparator4 = new javax.swing.JSeparator();
         BTN_Novo = new javax.swing.JButton();
+        BTN_Cadastrar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -114,6 +122,13 @@ public class ClienteTela extends javax.swing.JInternalFrame {
             }
         });
 
+        BTN_Cadastrar.setText("Cadastrar");
+        BTN_Cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_CadastrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,7 +162,10 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                         .addComponent(TXT_Buscar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BTN_Cadastrar))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -194,7 +212,9 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BTN_Novo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTN_Novo)
+                    .addComponent(BTN_Cadastrar))
                 .addContainerGap(162, Short.MAX_VALUE))
         );
 
@@ -213,8 +233,14 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         habilitarcampos(true);
     }//GEN-LAST:event_BTN_NovoActionPerformed
 
+    private void BTN_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CadastrarActionPerformed
+        popularClienteBeans();
+        ClienteC.verificardados(ClienteB);
+    }//GEN-LAST:event_BTN_CadastrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTN_Cadastrar;
     private javax.swing.JButton BTN_Novo;
     private javax.swing.JTable TBL_Clientes;
     private javax.swing.JTextField TXT_Bairro;
@@ -242,7 +268,17 @@ final void habilitarcampos(boolean valor){
     TXT_Rua.setEnabled(valor);
     TXT_Nome.setEnabled(valor);
     TXT_Telefone.setEnabled(valor);
+    TXT_Data.setEnabled(valor);
 }
+
+final void popularClienteBeans(){
+    ClienteB.setNome(TXT_Nome.getText());
+    ClienteB.setBairro(TXT_Bairro.getText());
+    ClienteB.setRua(TXT_Rua.getText());
+    ClienteB.setTelefone(TXT_Telefone.getText());
+    ClienteB.setDataCad(TXT_Data.getText());
+}
+
 
 
 }

@@ -2,6 +2,7 @@ package DAO;
 
 import Beans.ClienteBeans;
 import Utilitarios.Conexao;
+import Utilitarios.Corretores;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -23,12 +24,16 @@ public class ClienteDAO {
             st.setString(2, Cliente.getRua());
             st.setString(3, Cliente.getBairro());
             st.setString(4, Cliente.getTelefone());
-            st.setString(5, Cliente.getDataCad());
+            st.setString(5, Corretores.ConverterParaSQL(Cliente.getDataCad()));
             
             st.execute();
+            Conexao.getConnection().commit();
+            JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "", 1, new ImageIcon("Imagens/ok.png"));
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Conectar com o Banco", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+            JOptionPane.showMessageDialog(null, ex, "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           //JOptionPane.showMessageDialog(null, "Erro ao Cadastrar Registro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+            
         }
     }
     
