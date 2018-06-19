@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 public class Principal extends javax.swing.JFrame {
     
     FundoTela tela;
+    ClienteTela clientetela;
 
     public Principal() {
         initComponents();
@@ -39,6 +40,11 @@ public class Principal extends javax.swing.JFrame {
         MenuCadastro.setText("Cadastro");
 
         CadastroClientes.setText("Clientes");
+        CadastroClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastroClientesActionPerformed(evt);
+            }
+        });
         MenuCadastro.add(CadastroClientes);
 
         CadastroFuncionarios.setText("Funcionários");
@@ -83,6 +89,12 @@ public class Principal extends javax.swing.JFrame {
     private void CadastroFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroFuncionariosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CadastroFuncionariosActionPerformed
+
+    private void CadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroClientesActionPerformed
+        clientetela = new ClienteTela();
+        tela.add(clientetela);
+        clientetela.setVisible(true);
+    }//GEN-LAST:event_CadastroClientesActionPerformed
 
 
     public static void main(String args[]) {
