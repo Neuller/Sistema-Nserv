@@ -41,4 +41,8 @@ public class ClienteController {
         
         return true;        
     }
+    
+    public String controleDeCodigo(){
+        return ClienteD.proximoCliente();
+    }
 }

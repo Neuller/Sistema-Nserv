@@ -2,6 +2,7 @@ package GUI;
 
 import Beans.ClienteBeans;
 import Controller.ClienteController;
+import DAO.ClienteDAO;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFormattedTextField;
@@ -15,6 +16,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
    Date DataAtual;
    ClienteBeans ClienteB;
    ClienteController ClienteC;
+   
     
     public ClienteTela() {
         initComponents();
@@ -27,6 +29,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         
         ClienteB = new ClienteBeans();
         ClienteC = new ClienteController();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -165,7 +168,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BTN_Cadastrar))
+                                .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -231,6 +234,8 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
     private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
         habilitarcampos(true);
+        ClienteC.controleDeCodigo();
+        TXT_Codigo.setText(ClienteC.controleDeCodigo());
     }//GEN-LAST:event_BTN_NovoActionPerformed
 
     private void BTN_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CadastrarActionPerformed

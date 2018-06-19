@@ -68,7 +68,7 @@
                           <Group type="102" attributes="0">
                               <Component id="BTN_Novo" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="BTN_Cadastrar" min="-2" max="-2" attributes="0"/>
+                              <Component id="BTN_Cadastrar" min="-2" pref="80" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel5" min="-2" pref="50" max="-2" attributes="0"/>
