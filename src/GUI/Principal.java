@@ -2,6 +2,7 @@ package GUI;
 
 import Utilitarios.FundoTela;
 import java.awt.GridLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class Principal extends javax.swing.JFrame {
@@ -15,6 +16,11 @@ public class Principal extends javax.swing.JFrame {
         setLayout(new GridLayout());
         tela = new FundoTela("imagens/FundoTela.png");   // Fundo Responsivo
         getContentPane().add(tela);
+        
+        CadastroClientes.setIcon(new ImageIcon("Imagens/ico_clientes.png"));
+        CadastroFuncionarios.setIcon(new ImageIcon("Imagens/ico_func.png"));
+        CadastroCardapio.setIcon(new ImageIcon("Imagens/ico_cardapio.png"));
+        CadastroEntregador.setIcon(new ImageIcon("Imagens/ico_boy.png"));
     }
 
     @SuppressWarnings("unchecked")
@@ -38,8 +44,10 @@ public class Principal extends javax.swing.JFrame {
         setTitle("Pizzaria");
 
         MenuCadastro.setText("Cadastro");
+        MenuCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         CadastroClientes.setText("Clientes");
+        CadastroClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         CadastroClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CadastroClientesActionPerformed(evt);
@@ -48,6 +56,7 @@ public class Principal extends javax.swing.JFrame {
         MenuCadastro.add(CadastroClientes);
 
         CadastroFuncionarios.setText("Funcionários");
+        CadastroFuncionarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         CadastroFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CadastroFuncionariosActionPerformed(evt);
@@ -56,20 +65,30 @@ public class Principal extends javax.swing.JFrame {
         MenuCadastro.add(CadastroFuncionarios);
 
         CadastroCardapio.setText("Cardápio");
+        CadastroCardapio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MenuCadastro.add(CadastroCardapio);
 
         CadastroEntregador.setText("Entregador");
+        CadastroEntregador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CadastroEntregador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastroEntregadorActionPerformed(evt);
+            }
+        });
         MenuCadastro.add(CadastroEntregador);
 
         jMenuBar1.add(MenuCadastro);
 
         MenuCaixa.setText("Caixa");
+        MenuCaixa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuBar1.add(MenuCaixa);
 
         MenuRelatorios.setText("Relatórios");
+        MenuRelatorios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuBar1.add(MenuRelatorios);
 
         MenuSair.setText("Sair");
+        MenuSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuBar1.add(MenuSair);
 
         setJMenuBar(jMenuBar1);
@@ -95,6 +114,10 @@ public class Principal extends javax.swing.JFrame {
         tela.add(clientetela);
         clientetela.setVisible(true);
     }//GEN-LAST:event_CadastroClientesActionPerformed
+
+    private void CadastroEntregadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroEntregadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CadastroEntregadorActionPerformed
 
 
     public static void main(String args[]) {

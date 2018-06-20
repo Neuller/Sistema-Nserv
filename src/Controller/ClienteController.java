@@ -54,4 +54,30 @@ public class ClienteController {
     public ClienteBeans controlePreencherCampos(int Codigo){
         return ClienteD.preencherCampos(Codigo);
     }
+    
+    public boolean verificardadosEditar(ClienteBeans Cliente){
+        if(Cliente.getNome().equals("")){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+        return false;
+        }
+        
+        if(Cliente.getBairro().equals("")){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Bairro", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+        return false;
+        }
+          
+        if(Cliente.getRua().equals("")){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Rua", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+        return false;
+        }
+        
+        if(Cliente.getTelefone().equals("(  )      -    ")){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Telefone", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+        return false;
+        }
+        
+        ClienteD.editarCliente(Cliente);
+        
+        return true;        
+    }
 }

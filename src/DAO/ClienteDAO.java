@@ -95,4 +95,24 @@ public class ClienteDAO {
         return Cliente;
     }
   
+    public void editarCliente(ClienteBeans Cliente){
+        try {
+            String SQLInsertion = "update clientes set Cli_Nome = ?, Cli_Rua = ?, Cli_Bairro = ?, Cli_Telefone = ? where CodCliente = ?";
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
+            st.setString(1, Cliente.getNome());
+            st.setString(2, Cliente.getRua());
+            st.setString(3, Cliente.getBairro());
+            st.setString(4, Cliente.getTelefone());
+            st.setInt(5, Cliente.getCodigo());
+            st.execute();
+            Conexao.getConnection().commit();
+            JOptionPane.showMessageDialog(null, "Registro editado com sucesso", "", 1, new ImageIcon("Imagens/ok.png"));
+            
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, ex, "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Erro ao editar registro", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+            
+        }
+        
+    }
 }

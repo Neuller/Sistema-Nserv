@@ -288,6 +288,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TXT_BuscarActionPerformed
 
     private void TBL_ClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_ClientesMouseClicked
+        habilitarcampos(true);
         ClienteB = ClienteC.controlePreencherCampos(Integer.parseInt(Modelo.getValueAt(TBL_Clientes.getSelectedRow(), 0).toString()));
         TXT_Codigo.setText(ClienteB.getCodigo()+ "");
         TXT_Nome.setText(ClienteB.getNome());
@@ -302,7 +303,11 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TBL_ClientesMousePressed
 
     private void BTN_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EditarActionPerformed
-        // TODO add your handling code here:
+        popularClienteBeans();
+        ClienteC.verificardadosEditar(ClienteB);
+        limparCampos();
+        TXT_Buscar.setText("");
+        habilitarcampos(false);
     }//GEN-LAST:event_BTN_EditarActionPerformed
 
 
