@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 public class ClienteTela extends javax.swing.JInternalFrame {
@@ -16,6 +17,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
    Date DataAtual;
    ClienteBeans ClienteB;
    ClienteController ClienteC;
+   DefaultTableModel Modelo;
    
     
     public ClienteTela() {
@@ -24,12 +26,12 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         TXT_Data.setEnabled(false);
         habilitarcampos(false);
         Formatodata = new SimpleDateFormat("dd/MM/yyyy");
-        DataAtual = new Date();
-        TXT_Data.setText(Formatodata.format(DataAtual));
+        
         
         ClienteB = new ClienteBeans();
         ClienteC = new ClienteController();
-        
+        Modelo = (DefaultTableModel)TBL_Clientes.getModel();
+              
     }
 
     @SuppressWarnings("unchecked")
@@ -62,6 +64,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         jSeparator4 = new javax.swing.JSeparator();
         BTN_Novo = new javax.swing.JButton();
         BTN_Cadastrar = new javax.swing.JButton();
+        BTN_Editar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -97,12 +100,20 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Buscar");
 
+        TXT_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_BuscarActionPerformed(evt);
+            }
+        });
+        TXT_Buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TXT_BuscarKeyReleased(evt);
+            }
+        });
+
         TBL_Clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Código", "Nome", "Rua", "Bairro", "Telefone"
@@ -116,9 +127,18 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TBL_Clientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TBL_ClientesMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                TBL_ClientesMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(TBL_Clientes);
 
         BTN_Novo.setText("Novo");
+        BTN_Novo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BTN_Novo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTN_NovoActionPerformed(evt);
@@ -126,9 +146,18 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         });
 
         BTN_Cadastrar.setText("Cadastrar");
+        BTN_Cadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BTN_Cadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTN_CadastrarActionPerformed(evt);
+            }
+        });
+
+        BTN_Editar.setText("Editar");
+        BTN_Editar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BTN_Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_EditarActionPerformed(evt);
             }
         });
 
@@ -153,7 +182,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(TXT_Data, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(TXT_Bairro, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -166,13 +195,15 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TXT_Telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(TXT_Telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(jScrollPane1)
@@ -217,11 +248,12 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Novo)
-                    .addComponent(BTN_Cadastrar))
+                    .addComponent(BTN_Cadastrar)
+                    .addComponent(BTN_Editar))
                 .addContainerGap(162, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 500, 550);
+        setBounds(0, 0, 550, 550);
     }// </editor-fold>//GEN-END:initComponents
 
     private void TXT_CodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_CodigoActionPerformed
@@ -233,6 +265,8 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TXT_TelefoneActionPerformed
 
     private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
+        DataAtual = new Date();
+        TXT_Data.setText(Formatodata.format(DataAtual));
         habilitarcampos(true);
         ClienteC.controleDeCodigo();
         TXT_Codigo.setText(ClienteC.controleDeCodigo());
@@ -241,11 +275,40 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     private void BTN_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CadastrarActionPerformed
         popularClienteBeans();
         ClienteC.verificardados(ClienteB);
+        limparCampos();
     }//GEN-LAST:event_BTN_CadastrarActionPerformed
+
+    private void TXT_BuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_BuscarKeyReleased
+        Modelo.setNumRows(0);
+        ClienteC.controlePesquisa(TXT_Buscar.getText(), Modelo);      
+    }//GEN-LAST:event_TXT_BuscarKeyReleased
+
+    private void TXT_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_BuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TXT_BuscarActionPerformed
+
+    private void TBL_ClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_ClientesMouseClicked
+        ClienteB = ClienteC.controlePreencherCampos(Integer.parseInt(Modelo.getValueAt(TBL_Clientes.getSelectedRow(), 0).toString()));
+        TXT_Codigo.setText(ClienteB.getCodigo()+ "");
+        TXT_Nome.setText(ClienteB.getNome());
+        TXT_Rua.setText(ClienteB.getRua());
+        TXT_Bairro.setText(ClienteB.getBairro());
+        TXT_Telefone.setText(ClienteB.getTelefone());
+        TXT_Data.setText(ClienteB.getDataCad());
+    }//GEN-LAST:event_TBL_ClientesMouseClicked
+
+    private void TBL_ClientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_ClientesMousePressed
+  
+    }//GEN-LAST:event_TBL_ClientesMousePressed
+
+    private void BTN_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTN_EditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Cadastrar;
+    private javax.swing.JButton BTN_Editar;
     private javax.swing.JButton BTN_Novo;
     private javax.swing.JTable TBL_Clientes;
     private javax.swing.JTextField TXT_Bairro;
@@ -284,6 +347,14 @@ final void popularClienteBeans(){
     ClienteB.setDataCad(TXT_Data.getText());
 }
 
+final void limparCampos(){
+    TXT_Codigo.setText("");
+    TXT_Nome.setText("");
+    TXT_Rua.setText("");
+    TXT_Bairro.setText("");
+    TXT_Telefone.setText("");
+    TXT_Data.setText("");
+}
 
 
 }

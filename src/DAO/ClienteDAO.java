@@ -10,10 +10,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 public class ClienteDAO {
     
-    public ClienteDAO(){
+    
+    public ClienteDAO(){             
         
     }
     
@@ -54,7 +57,42 @@ public class ClienteDAO {
             return "0";
         }
         
-    }    
+    }     
     
-   
+    public void buscarCliente(String Pesquisa, DefaultTableModel Modelo){     
+        try {
+            String SQLSelection = "select * from clientes where Cli_Nome like '%" + Pesquisa + "%'" ;  
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLSelection);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                Modelo.addRow(new Object[] {rs.getString("CodCliente"), rs.getString("Cli_Nome"), rs.getString("Cli_Rua"), rs.getString("Cli_Bairro"), rs.getString("Cli_Telefone")});      
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar Cliente", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+        }
+        
+    }
+    
+    public ClienteBeans preencherCampos(int Codigo){
+        ClienteBeans Cliente = new ClienteBeans();
+        try {
+            String SQLSelection = "select * from clientes where CodCliente = ?" ;  
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLSelection);
+            st.setInt(1, Codigo);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+               Cliente.setCodigo(rs.getInt("CodCliente"));
+               Cliente.setNome(rs.getString("Cli_Nome"));
+               Cliente.setRua(rs.getString("Cli_Rua"));
+               Cliente.setBairro(rs.getString("Cli_Bairro"));
+               Cliente.setTelefone(rs.getString("Cli_Telefone"));
+               Cliente.setDataCad(Corretores.ConverterParaJava(rs.getString("Cli_DataCadastro")));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar Cliente", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+        }
+        
+        return Cliente;
+    }
+  
 }
