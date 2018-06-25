@@ -14,7 +14,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Código para abrir tela inteira
         setLayout(new GridLayout());
-        tela = new FundoTela("src/Icones/FundoTela.png");   // Fundo Responsivo
+        tela = new FundoTela("/Icones/FundoTela.png");   // Fundo Responsivo
         getContentPane().add(tela);
         
         CadastroClientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_clientes.png")));
