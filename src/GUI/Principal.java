@@ -14,13 +14,17 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Código para abrir tela inteira
         setLayout(new GridLayout());
-        tela = new FundoTela("imagens/FundoTela.png");   // Fundo Responsivo
+        tela = new FundoTela("src/Icones/FundoTela.png");   // Fundo Responsivo
         getContentPane().add(tela);
         
-        CadastroClientes.setIcon(new ImageIcon("Imagens/ico_clientes.png"));
-        CadastroFuncionarios.setIcon(new ImageIcon("Imagens/ico_func.png"));
-        CadastroCardapio.setIcon(new ImageIcon("Imagens/ico_cardapio.png"));
-        CadastroEntregador.setIcon(new ImageIcon("Imagens/ico_boy.png"));
+        CadastroClientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_clientes.png")));
+        CadastroFuncionarios.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_func.png")));
+        CadastroCardapio.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_cardapio.png")));
+        CadastroEntregador.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_boy.png")));
+        
+        ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_cardapio.png"));
+        setIconImage(logo.getImage());
+        
     }
 
     @SuppressWarnings("unchecked")
