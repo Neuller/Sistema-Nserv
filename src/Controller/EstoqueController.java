@@ -24,22 +24,22 @@ public class EstoqueController {
         return false;
         }
         
-        if(Estoque.getQuantidade().equals("")){
+        if(Estoque.getQuantidade() == 0){
            JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
           
-        if(Estoque.getValor().equals("")){
+        if(Estoque.getValor() == 0){
            JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
         
-        if(Estoque.getNF().equals("")){
+        if(Estoque.getNF() == 0){
            JOptionPane.showMessageDialog(null, "Preencha o campo NF", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
         
-        if(Estoque.getNCM().equals("")){
+        if(Estoque.getNCM() == 0){
            JOptionPane.showMessageDialog(null, "Preencha o campo NCM", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
@@ -67,22 +67,22 @@ public class EstoqueController {
         return false;
         }
         
-        if(Estoque.getQuantidade().equals("")){
+        if(Estoque.getQuantidade() == 0){
            JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
           
-        if(Estoque.getValor().equals("")){
+        if(Estoque.getValor() == 0){
            JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
         
-        if(Estoque.getNF().equals("")){
+        if(Estoque.getNF() == 0){
            JOptionPane.showMessageDialog(null, "Preencha o campo NF", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
         
-        if(Estoque.getNCM().equals("")){
+        if(Estoque.getNCM() == 0){
            JOptionPane.showMessageDialog(null, "Preencha o campo NCM", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }

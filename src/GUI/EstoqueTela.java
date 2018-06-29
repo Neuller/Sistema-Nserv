@@ -297,10 +297,10 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         EstoqueB = EstoqueC.controlePreencherCampos(Integer.parseInt(Modelo.getValueAt(TBL_Estoque.getSelectedRow(), 0).toString()));
         TXT_Codigo.setText(EstoqueB.getCodigo()+ "");
         TXT_Nome.setText(EstoqueB.getNome());
-        TXT_Quantidade.setText(EstoqueB.getQuantidade());
-        TXT_Valor.setText(EstoqueB.getValor());
-        TXT_NF.setText(EstoqueB.getNF());
-        TXT_NCM.setText(EstoqueB.getNCM());
+        TXT_Quantidade.setText(EstoqueB.getQuantidade()+ "");
+        TXT_Valor.setText(EstoqueB.getValor() + "");
+        TXT_NF.setText(EstoqueB.getNF() + "");
+        TXT_NCM.setText(EstoqueB.getNCM() + "");
     }//GEN-LAST:event_TBL_EstoqueMouseClicked
 
     private void TBL_EstoqueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_EstoqueMousePressed
