@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 public class Principal extends javax.swing.JFrame {
     
     FundoTela tela;
-    ClienteTela clientetela;
+    EstoqueTela estoquetela;
 
     public Principal() {
         initComponents();
@@ -17,10 +17,7 @@ public class Principal extends javax.swing.JFrame {
         tela = new FundoTela("/Icones/FundoTela.png");   // Fundo Responsivo
         getContentPane().add(tela);
         
-        CadastroClientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_clientes.png")));
-        CadastroFuncionarios.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_func.png")));
-        CadastroCardapio.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_cardapio.png")));
-        CadastroEntregador.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_boy.png")));
+        CadastroProdutos.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_clientes.png")));
         
         ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_cardapio.png"));
         setIconImage(logo.getImage());
@@ -34,12 +31,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuCadastro = new javax.swing.JMenu();
-        CadastroClientes = new javax.swing.JMenuItem();
-        CadastroFuncionarios = new javax.swing.JMenuItem();
-        CadastroCardapio = new javax.swing.JMenuItem();
-        CadastroEntregador = new javax.swing.JMenuItem();
-        MenuCaixa = new javax.swing.JMenu();
-        MenuRelatorios = new javax.swing.JMenu();
+        CadastroProdutos = new javax.swing.JMenuItem();
         MenuSair = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
@@ -50,46 +42,16 @@ public class Principal extends javax.swing.JFrame {
         MenuCadastro.setText("Cadastro");
         MenuCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        CadastroClientes.setText("Clientes");
-        CadastroClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        CadastroClientes.addActionListener(new java.awt.event.ActionListener() {
+        CadastroProdutos.setText("Produtos");
+        CadastroProdutos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CadastroProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadastroClientesActionPerformed(evt);
+                CadastroProdutosActionPerformed(evt);
             }
         });
-        MenuCadastro.add(CadastroClientes);
-
-        CadastroFuncionarios.setText("Funcionários");
-        CadastroFuncionarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        CadastroFuncionarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadastroFuncionariosActionPerformed(evt);
-            }
-        });
-        MenuCadastro.add(CadastroFuncionarios);
-
-        CadastroCardapio.setText("Cardápio");
-        CadastroCardapio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        MenuCadastro.add(CadastroCardapio);
-
-        CadastroEntregador.setText("Entregador");
-        CadastroEntregador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        CadastroEntregador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadastroEntregadorActionPerformed(evt);
-            }
-        });
-        MenuCadastro.add(CadastroEntregador);
+        MenuCadastro.add(CadastroProdutos);
 
         jMenuBar1.add(MenuCadastro);
-
-        MenuCaixa.setText("Caixa");
-        MenuCaixa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuBar1.add(MenuCaixa);
-
-        MenuRelatorios.setText("Relatórios");
-        MenuRelatorios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuBar1.add(MenuRelatorios);
 
         MenuSair.setText("Sair");
         MenuSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -109,19 +71,11 @@ public class Principal extends javax.swing.JFrame {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CadastroFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroFuncionariosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CadastroFuncionariosActionPerformed
-
-    private void CadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroClientesActionPerformed
-        clientetela = new ClienteTela();
-        tela.add(clientetela);
-        clientetela.setVisible(true);
-    }//GEN-LAST:event_CadastroClientesActionPerformed
-
-    private void CadastroEntregadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroEntregadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CadastroEntregadorActionPerformed
+    private void CadastroProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroProdutosActionPerformed
+        estoquetela = new EstoqueTela();
+        tela.add(estoquetela);
+        estoquetela.setVisible(true);
+    }//GEN-LAST:event_CadastroProdutosActionPerformed
 
 
     public static void main(String args[]) {
@@ -157,13 +111,8 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem CadastroCardapio;
-    private javax.swing.JMenuItem CadastroClientes;
-    private javax.swing.JMenuItem CadastroEntregador;
-    private javax.swing.JMenuItem CadastroFuncionarios;
+    private javax.swing.JMenuItem CadastroProdutos;
     private javax.swing.JMenu MenuCadastro;
-    private javax.swing.JMenu MenuCaixa;
-    private javax.swing.JMenu MenuRelatorios;
     private javax.swing.JMenu MenuSair;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

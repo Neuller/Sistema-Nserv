@@ -1,34 +1,32 @@
 package DAO;
 
-import Beans.ClienteBeans;
+import Beans.EstoqueBeans;
 import Utilitarios.Conexao;
-import Utilitarios.Corretores;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
-public class ClienteDAO {
+
+public class EstoqueDAO {
     
     
-    public ClienteDAO(){             
+    public EstoqueDAO(){             
         
     }
     
-    public void CadastrarCliente(ClienteBeans Cliente){
+    public void CadastrarProduto(EstoqueBeans Estoque){
         try {
-            String SQLInsertion = "insert into clientes(Cli_Nome, Cli_Rua, Cli_Bairro, Cli_Telefone, Cli_DataCadastro) values (?, ?, ?, ?, ?)";
+            String SQLInsertion = "insert into estoque(Est_Nome, Est_Quantidade, Est_Valor, Est_NF, Est_NCM) values (?, ?, ?, ?, ?)";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
-            st.setString(1, Cliente.getNome());
-            st.setString(2, Cliente.getRua());
-            st.setString(3, Cliente.getBairro());
-            st.setString(4, Cliente.getTelefone());
-            st.setString(5, Corretores.ConverterParaSQL(Cliente.getDataCad()));
+            st.setString(1, Estoque.getNome());
+            st.setInt(2, Estoque.getQuantidade());
+            st.setFloat(3, Estoque.getValor());
+            st.setInt(4, Estoque.getNF());
+            st.setInt(5, Estoque.getNCM());
             
             st.execute();
             Conexao.getConnection().commit();
@@ -42,13 +40,13 @@ public class ClienteDAO {
                
     }
     
-    public String proximoCliente(){
-            String SQLSelection = "select * from clientes order by CodCliente desc limit 1";
+    public String proximoProduto(){
+            String SQLSelection = "select * from estoque order by CodEstoque desc limit 1";
         try {
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = st.executeQuery();
             if(rs.next()){
-                return (Integer.parseInt(rs.getString("CodCliente")) + 1) + "";
+                return (Integer.parseInt(rs.getString("CodEstoque")) + 1) + "";
             }else{
                 return "1";
             }
@@ -59,51 +57,52 @@ public class ClienteDAO {
         
     }     
     
-    public void buscarCliente(String Pesquisa, DefaultTableModel Modelo){     
+    public void buscarProduto(String Pesquisa, DefaultTableModel Modelo){     
         try {
-            String SQLSelection = "select * from clientes where Cli_Nome like '%" + Pesquisa + "%'" ;  
+            String SQLSelection = "select * from estoque where Est_Nome like '%" + Pesquisa + "%'" ;  
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
-                Modelo.addRow(new Object[] {rs.getString("CodCliente"), rs.getString("Cli_Nome"), rs.getString("Cli_Rua"), rs.getString("Cli_Bairro"), rs.getString("Cli_Telefone")});      
+                Modelo.addRow(new Object[] {rs.getString("CodEstoque"), rs.getString("Est_Nome"), rs.getString("Est_Quantidade"), rs.getString("Est_Valor"), rs.getString("Est_NF"), rs.getString("Est_NCM")});      
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Buscar Cliente", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar Produto", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         }
         
     }
     
-    public ClienteBeans preencherCampos(int Codigo){
-        ClienteBeans Cliente = new ClienteBeans();
+    public EstoqueBeans preencherCampos(int Codigo){
+        EstoqueBeans Estoque = new EstoqueBeans();
         try {
-            String SQLSelection = "select * from clientes where CodCliente = ?" ;  
+            String SQLSelection = "select * from estoque where CodEstoque = ?" ;  
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLSelection);
             st.setInt(1, Codigo);
             ResultSet rs = st.executeQuery();
             if(rs.next()){
-               Cliente.setCodigo(rs.getInt("CodCliente"));
-               Cliente.setNome(rs.getString("Cli_Nome"));
-               Cliente.setRua(rs.getString("Cli_Rua"));
-               Cliente.setBairro(rs.getString("Cli_Bairro"));
-               Cliente.setTelefone(rs.getString("Cli_Telefone"));
-               Cliente.setDataCad(Corretores.ConverterParaJava(rs.getString("Cli_DataCadastro")));
+               Estoque.setCodigo(rs.getInt("CodEstoque"));
+               Estoque.setNome(rs.getString("Est_Nome"));
+               Estoque.setQuantidade(rs.getInt("Est_Quantidade"));
+               Estoque.setValor(rs.getFloat("Est_Valor"));
+               Estoque.setNF(rs.getInt("Est_NF"));
+               Estoque.setNCM(rs.getInt("Est_NCM"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Buscar Cliente", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar Produto", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         }
         
-        return Cliente;
+        return Estoque;
     }
   
-    public void editarCliente(ClienteBeans Cliente){
+    public void editarProduto(EstoqueBeans Estoque){
         try {
-            String SQLInsertion = "update clientes set Cli_Nome = ?, Cli_Rua = ?, Cli_Bairro = ?, Cli_Telefone = ? where CodCliente = ?";
+            String SQLInsertion = "update estoque set Est_Nome = ?, Est_Quantidade = ?, Est_Valor = ?, Est_NF = ?, Est_NCM = ? where CodEstoque = ?";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
-            st.setString(1, Cliente.getNome());
-            st.setString(2, Cliente.getRua());
-            st.setString(3, Cliente.getBairro());
-            st.setString(4, Cliente.getTelefone());
-            st.setInt(5, Cliente.getCodigo());
+            st.setString(1, Estoque.getNome());
+            st.setInt(2, Estoque.getQuantidade());
+            st.setFloat(3, Estoque.getValor());
+            st.setInt(4, Estoque.getNF());
+            st.setInt(5, Estoque.getNCM());
+            st.setInt(6, Estoque.getCodigo());
             st.execute();
             Conexao.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Registro editado com sucesso", "", 1, new ImageIcon("Imagens/ok.png"));

@@ -8,7 +8,7 @@ import javax.swing.JDesktopPane;
 
 
 public class FundoTela extends JDesktopPane {
-    private Image Imagem;
+    private final Image Imagem;
     
 public FundoTela(String imagem){
     this.Imagem =  new ImageIcon(Principal.class.getResource(imagem)).getImage();

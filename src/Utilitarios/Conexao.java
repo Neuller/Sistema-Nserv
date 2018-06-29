@@ -12,7 +12,7 @@ import org.gjt.mm.mysql.Driver;
 
 public class Conexao {
     
-    private final String URL = "jdbc:mysql://localhost:3306/pizzaria";
+    private final String URL = "jdbc:mysql://localhost:3306/nserv";
     private final String Driver = "org.gjt.mm.mysql.Driver";
     private final String Usuario = "root";
     private final String Senha = "";
