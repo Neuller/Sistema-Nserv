@@ -9,6 +9,7 @@ public class Principal extends javax.swing.JFrame {
     
     FundoTela tela;
     EstoqueTela estoquetela;
+    ClienteTela clientetela;
 
     public Principal() {
         initComponents();
@@ -17,9 +18,10 @@ public class Principal extends javax.swing.JFrame {
         tela = new FundoTela("/Icones/FundoTela.png");   // Fundo Responsivo
         getContentPane().add(tela);
         
-        CadastroProdutos.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_clientes.png")));
+        CadastroProdutos.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_product.png")));
+        MenuClientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_client.png")));
         
-        ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_cardapio.png"));
+        ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
         setIconImage(logo.getImage());
         
     }
@@ -29,18 +31,30 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuCadastro = new javax.swing.JMenu();
+        MenuClientes = new javax.swing.JMenuItem();
         CadastroProdutos = new javax.swing.JMenuItem();
         MenuSair = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Pizzaria");
+        setTitle("Nserv ");
 
         MenuCadastro.setText("Cadastro");
         MenuCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        MenuClientes.setText("Clientes");
+        MenuClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuClientesActionPerformed(evt);
+            }
+        });
+        MenuCadastro.add(MenuClientes);
 
         CadastroProdutos.setText("Produtos");
         CadastroProdutos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -76,6 +90,12 @@ public class Principal extends javax.swing.JFrame {
         tela.add(estoquetela);
         estoquetela.setVisible(true);
     }//GEN-LAST:event_CadastroProdutosActionPerformed
+
+    private void MenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuClientesActionPerformed
+        clientetela = new ClienteTela();
+        tela.add(clientetela);
+        clientetela.setVisible(true);
+    }//GEN-LAST:event_MenuClientesActionPerformed
 
 
     public static void main(String args[]) {
@@ -113,8 +133,10 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem CadastroProdutos;
     private javax.swing.JMenu MenuCadastro;
+    private javax.swing.JMenuItem MenuClientes;
     private javax.swing.JMenu MenuSair;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }

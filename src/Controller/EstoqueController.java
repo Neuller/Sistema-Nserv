@@ -24,22 +24,22 @@ public class EstoqueController {
         return false;
         }
         
-        if(Estoque.getQuantidade() == 0){
+        if(Estoque.getQuantidade()){
            JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
           
-        if(Estoque.getValor() == 0){
+        if(Estoque.getValor() == '?'){
            JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
         
-        if(Estoque.getNF() == 0){
+        if(Estoque.getNF() == '?'){
            JOptionPane.showMessageDialog(null, "Preencha o campo NF", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
         
-        if(Estoque.getNCM() == 0){
+        if(Estoque.getNCM() == '?'){
            JOptionPane.showMessageDialog(null, "Preencha o campo NCM", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
@@ -67,22 +67,22 @@ public class EstoqueController {
         return false;
         }
         
-        if(Estoque.getQuantidade() == 0){
+        if(Estoque.getQuantidade() == null){
            JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
           
-        if(Estoque.getValor() == 0){
+        if(Estoque.getValor() == null){
            JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
         
-        if(Estoque.getNF() == 0){
+        if(Estoque.getNF() == null){
            JOptionPane.showMessageDialog(null, "Preencha o campo NF", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
         
-        if(Estoque.getNCM() == 0){
+        if(Estoque.getNCM() == null){
            JOptionPane.showMessageDialog(null, "Preencha o campo NCM", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
