@@ -5,7 +5,7 @@ package Beans;
         private int Codigo;
         private String Nome;
         private int Quantidade;
-        private float Valor;
+        private double Valor;
         private int NF;
         private int NCM;
 
@@ -33,11 +33,11 @@ package Beans;
             this.Quantidade = Quantidade;
         }
 
-        public float getValor() {
+        public double getValor() {
             return Valor;
         }
 
-        public void setValor(float Valor) {
+        public void setValor(double Valor) {
             this.Valor = Valor;
         }
 

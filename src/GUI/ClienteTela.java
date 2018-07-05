@@ -54,13 +54,13 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         BTN_Novo = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         try {
-            Formatotel = new MaskFormatter("(##)# ####-####");   
+            Formatotel = new MaskFormatter("(##) 9 ####-####");   
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao Inserir Campo Personalizado", "Erro", 0);
         }
         TXT_Celular = new JFormattedTextField(Formatotel);
         try {
-            Formatotel = new MaskFormatter("(##)# ####-####");   
+            Formatotel = new MaskFormatter("(##) ####-####");   
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao Inserir Campo Personalizado", "Erro", 0);
         }
@@ -119,11 +119,11 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Rua", "Bairro", "Telefone"
+                "Código", "Nome", "Telefone", "Celular"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -291,6 +291,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TBL_ClientesMousePressed
 
     private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
+        limparCampos();
         DataAtual = new Date();
         TXT_Data.setText(Formatodata.format(DataAtual));
         habilitarcampos(true);

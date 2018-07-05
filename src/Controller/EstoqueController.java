@@ -24,22 +24,22 @@ public class EstoqueController {
         return false;
         }
         
-        if(Estoque.getQuantidade()){
+        if(Estoque.getQuantidade().equals("")){
            JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
           
-        if(Estoque.getValor() == '?'){
+        if(Estoque.getValor().equals("")){
            JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
         
-        if(Estoque.getNF() == '?'){
+        if(Estoque.getNF().equals("")){
            JOptionPane.showMessageDialog(null, "Preencha o campo NF", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
         
-        if(Estoque.getNCM() == '?'){
+        if(Estoque.getNCM().equals("")){
            JOptionPane.showMessageDialog(null, "Preencha o campo NCM", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }

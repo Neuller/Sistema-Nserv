@@ -24,7 +24,7 @@ public class EstoqueDAO {
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
             st.setString(1, Estoque.getNome());
             st.setInt(2, Estoque.getQuantidade());
-            st.setFloat(3, Estoque.getValor());
+            st.setDouble(3, Estoque.getValor());
             st.setInt(4, Estoque.getNF());
             st.setInt(5, Estoque.getNCM());
             
@@ -99,7 +99,7 @@ public class EstoqueDAO {
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
             st.setString(1, Estoque.getNome());
             st.setInt(2, Estoque.getQuantidade());
-            st.setFloat(3, Estoque.getValor());
+            st.setDouble(3, Estoque.getValor());
             st.setInt(4, Estoque.getNF());
             st.setInt(5, Estoque.getNCM());
             st.setInt(6, Estoque.getCodigo());

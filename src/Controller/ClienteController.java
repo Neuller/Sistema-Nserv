@@ -23,7 +23,7 @@ public class ClienteController {
         return false;
         }
         
-        if(Cliente.getTelefone().equals("(  )      -    ")){
+        if(Cliente.getTelefone().equals("(  )     -    ")){
            JOptionPane.showMessageDialog(null, "Preencha o campo Telefone", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
@@ -56,7 +56,7 @@ public class ClienteController {
         return false;
         }
         
-        if(Cliente.getTelefone().equals("(  )      -    ")){
+        if(Cliente.getTelefone().equals("(  )     -    ")){
            JOptionPane.showMessageDialog(null, "Preencha o campo Telefone", "", 0, new ImageIcon("Imagens/btn_sair.png"));
         return false;
         }
