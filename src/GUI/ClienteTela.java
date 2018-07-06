@@ -20,8 +20,11 @@ public class ClienteTela extends javax.swing.JInternalFrame {
    
     public ClienteTela() {
         initComponents();
+        BTN_Cadastrar.setVisible(false);
+        BTN_Editar.setVisible(false);
         TXT_Codigo.setEnabled(false);
         TXT_Data.setEnabled(false);
+        TXT_Buscar.setEnabled(false);
         habilitarcampos(false);
         Formatodata = new SimpleDateFormat("dd/MM/yyyy");
         
@@ -44,7 +47,6 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         TXT_Codigo = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         TXT_Nome = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         TXT_Buscar = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
@@ -65,6 +67,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Erro ao Inserir Campo Personalizado", "Erro", 0);
         }
         TXT_Telefone = new JFormattedTextField(Formatotel);
+        BTN_Pesquisar = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -98,8 +101,6 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                 TXT_CodigoActionPerformed(evt);
             }
         });
-
-        jLabel7.setText("Buscar");
 
         jLabel2.setText("Nome");
 
@@ -162,6 +163,13 @@ public class ClienteTela extends javax.swing.JInternalFrame {
             }
         });
 
+        BTN_Pesquisar.setText("Pesquisar");
+        BTN_Pesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_PesquisarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,9 +195,13 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                                 .addComponent(TXT_Data, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(TXT_Nome)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TXT_Telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TXT_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TXT_Celular, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -198,13 +210,9 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                         .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TXT_Telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTN_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXT_Celular, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(TXT_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -231,7 +239,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(BTN_Pesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -243,7 +251,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                     .addComponent(BTN_Novo)
                     .addComponent(BTN_Cadastrar)
                     .addComponent(BTN_Editar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -253,6 +261,11 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         popularClienteBeans();
         ClienteC.verificardados(ClienteB);
         limparCampos();
+        DataAtual = new Date();
+        TXT_Data.setText(Formatodata.format(DataAtual));
+        habilitarcampos(true);
+        ClienteC.controleDeCodigo();
+        TXT_Codigo.setText(ClienteC.controleDeCodigo());
     }//GEN-LAST:event_BTN_CadastrarActionPerformed
 
     private void BTN_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EditarActionPerformed
@@ -292,6 +305,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
     private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
         limparCampos();
+        BTN_Cadastrar.setVisible(true);
         DataAtual = new Date();
         TXT_Data.setText(Formatodata.format(DataAtual));
         habilitarcampos(true);
@@ -307,11 +321,20 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_TelefoneActionPerformed
 
+    private void BTN_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PesquisarActionPerformed
+        TXT_Buscar.setEnabled(true);
+        BTN_Novo.setVisible(false);
+        BTN_Editar.setVisible(true);
+        BTN_Cadastrar.setVisible(false);
+        habilitarcampos(false);
+    }//GEN-LAST:event_BTN_PesquisarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Cadastrar;
     private javax.swing.JButton BTN_Editar;
     private javax.swing.JButton BTN_Novo;
+    private javax.swing.JButton BTN_Pesquisar;
     private javax.swing.JTable TBL_Clientes;
     private javax.swing.JTextField TXT_Buscar;
     private javax.swing.JTextField TXT_Celular;
@@ -323,7 +346,6 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

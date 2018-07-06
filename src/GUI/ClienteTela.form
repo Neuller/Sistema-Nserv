@@ -47,9 +47,13 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel5" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="TXT_Telefone" min="-2" pref="163" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="TXT_Buscar" min="-2" pref="413" max="-2" attributes="0"/>
+                      <Component id="jLabel8" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="TXT_Celular" min="-2" pref="182" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="BTN_Novo" min="-2" pref="80" max="-2" attributes="0"/>
@@ -60,13 +64,9 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel5" min="-2" pref="50" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="TXT_Telefone" min="-2" pref="163" max="-2" attributes="0"/>
+                      <Component id="BTN_Pesquisar" min="-2" pref="90" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jLabel8" min="-2" pref="50" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="TXT_Celular" min="-2" pref="182" max="-2" attributes="0"/>
+                      <Component id="TXT_Buscar" min="-2" pref="400" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -100,7 +100,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="TXT_Buscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTN_Pesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
@@ -114,7 +114,7 @@
                   <Component id="BTN_Cadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BTN_Editar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -173,11 +173,6 @@
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
     <Component class="javax.swing.JTextField" name="TXT_Nome">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Buscar"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -279,6 +274,14 @@
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(Formatotel);"/>
         <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="   try {&#xd;&#xa;        Formatotel = new MaskFormatter(&quot;(##) ####-####&quot;);   &#xd;&#xa;        } catch (Exception e) {&#xd;&#xa;        JOptionPane.showMessageDialog(null, &quot;Erro ao Inserir Campo Personalizado&quot;, &quot;Erro&quot;, 0);&#xd;&#xa;        }"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="BTN_Pesquisar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pesquisar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTN_PesquisarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

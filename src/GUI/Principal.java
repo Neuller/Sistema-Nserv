@@ -36,7 +36,6 @@ public class Principal extends javax.swing.JFrame {
         MenuCadastro = new javax.swing.JMenu();
         MenuClientes = new javax.swing.JMenuItem();
         CadastroProdutos = new javax.swing.JMenuItem();
-        MenuSair = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
@@ -66,10 +65,6 @@ public class Principal extends javax.swing.JFrame {
         MenuCadastro.add(CadastroProdutos);
 
         jMenuBar1.add(MenuCadastro);
-
-        MenuSair.setText("Sair");
-        MenuSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuBar1.add(MenuSair);
 
         setJMenuBar(jMenuBar1);
 
@@ -134,7 +129,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem CadastroProdutos;
     private javax.swing.JMenu MenuCadastro;
     private javax.swing.JMenuItem MenuClientes;
-    private javax.swing.JMenu MenuSair;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;

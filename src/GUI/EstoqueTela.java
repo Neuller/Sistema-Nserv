@@ -2,7 +2,10 @@ package GUI;
 
 import Beans.EstoqueBeans;
 import Controller.EstoqueController;
+import Utilitarios.SoNumeros;
+import java.text.DecimalFormat;
 import javax.swing.table.DefaultTableModel;
+
 
 
 
@@ -11,16 +14,26 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
    EstoqueBeans EstoqueB;
    EstoqueController EstoqueC;
    DefaultTableModel Modelo;
+   DecimalFormat formatodecimal;
 
  
     public EstoqueTela() {
         initComponents();
+        //TXT_Valor.setDocument(new SoNumeros());
+        TXT_Quantidade.setDocument(new SoNumeros());
+        TXT_NF.setDocument(new SoNumeros());
+        TXT_NCM.setDocument(new SoNumeros());
         TXT_Codigo.setEnabled(false);
         habilitarcampos(false);
+        BTN_Cadastrar.setVisible(false);
+        BTN_Editar.setVisible(false);
+        TXT_Buscar.setEnabled(false);
+        BTN_Voltar.setVisible(false);
         
        EstoqueB = new EstoqueBeans();
        EstoqueC = new EstoqueController();
        Modelo = (DefaultTableModel)TBL_Estoque.getModel();
+       formatodecimal = new DecimalFormat("0.00");
     }
 
 
@@ -28,6 +41,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         TXT_NCM = new javax.swing.JTextField();
         BTN_Novo = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -37,7 +51,6 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         TXT_Codigo = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         TXT_Nome = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         TXT_Buscar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -48,8 +61,12 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         TXT_NF = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
-        TXT_Valor = new javax.swing.JTextField();
         TXT_Quantidade = new javax.swing.JTextField();
+        TXT_Valor = new javax.swing.JFormattedTextField();
+        BTN_Pesquisar = new javax.swing.JButton();
+        BTN_Voltar = new javax.swing.JButton();
+
+        jFormattedTextField1.setText("jFormattedTextField1");
 
         setClosable(true);
 
@@ -93,8 +110,6 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                 TXT_CodigoActionPerformed(evt);
             }
         });
-
-        jLabel7.setText("Buscar");
 
         jLabel2.setText("Nome");
 
@@ -141,6 +156,31 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Quantidade");
 
+        TXT_Valor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TXT_ValorFocusLost(evt);
+            }
+        });
+        TXT_Valor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_ValorActionPerformed(evt);
+            }
+        });
+
+        BTN_Pesquisar.setText("Pesquisar");
+        BTN_Pesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_PesquisarActionPerformed(evt);
+            }
+        });
+
+        BTN_Voltar.setText("Voltar");
+        BTN_Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_VoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,15 +188,11 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
             .addComponent(jSeparator1)
             .addComponent(jSeparator2)
             .addComponent(jSeparator4)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXT_Buscar))
-                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,32 +202,35 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(TXT_NF, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                            .addComponent(TXT_NCM))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(1, 1, 1)))
-                                    .addComponent(TXT_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(50, 50, 50))
+                                    .addComponent(TXT_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(TXT_NF, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                                .addComponent(TXT_NCM))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(1, 1, 1)))
+                                        .addComponent(jLabel3)
+                                        .addGap(17, 17, 17)
+                                        .addComponent(TXT_Valor))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81))
+                                .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(46, 46, 46)
+                                .addComponent(TXT_Nome))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(46, 46, 46)
-                        .addComponent(TXT_Nome)))
+                        .addComponent(BTN_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TXT_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -227,7 +266,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(BTN_Pesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -238,8 +277,9 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Novo)
                     .addComponent(BTN_Cadastrar)
-                    .addComponent(BTN_Editar))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addComponent(BTN_Editar)
+                    .addComponent(BTN_Voltar))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -251,14 +291,27 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
 
     private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
         habilitarcampos(true);
+        limparCampos();
+        BTN_Cadastrar.setVisible(true);
+        BTN_Voltar.setVisible(true);
         EstoqueC.controleDeCodigo();
         TXT_Codigo.setText(EstoqueC.controleDeCodigo());
+        TXT_Valor.setText("0");
+        TXT_Quantidade.setText("0");
+        TXT_NF.setText("0");
+        TXT_NCM.setText("0");
     }//GEN-LAST:event_BTN_NovoActionPerformed
 
     private void BTN_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CadastrarActionPerformed
         popularEstoqueBeans();
         EstoqueC.verificardados(EstoqueB);
-        limparCampos();
+        //limparCampos();
+        TXT_Nome.setText("");
+        TXT_Codigo.setText(EstoqueC.controleDeCodigo());
+        TXT_Valor.setText("0");
+        TXT_Quantidade.setText("0");
+        TXT_NF.setText("0");
+        TXT_NCM.setText("0");
     }//GEN-LAST:event_BTN_CadastrarActionPerformed
 
     private void BTN_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EditarActionPerformed
@@ -284,6 +337,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
 
     private void TBL_EstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_EstoqueMouseClicked
         habilitarcampos(true);
+        BTN_Editar.setVisible(true);
         EstoqueB = EstoqueC.controlePreencherCampos(Integer.parseInt(Modelo.getValueAt(TBL_Estoque.getSelectedRow(), 0).toString()));
         TXT_Codigo.setText(EstoqueB.getCodigo()+ "");
         TXT_Nome.setText(EstoqueB.getNome());
@@ -297,11 +351,41 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_TBL_EstoqueMousePressed
 
+    private void TXT_ValorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_ValorFocusLost
+
+    }//GEN-LAST:event_TXT_ValorFocusLost
+
+    private void TXT_ValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_ValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TXT_ValorActionPerformed
+
+    private void BTN_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PesquisarActionPerformed
+        habilitarcampos(false);
+        TXT_Buscar.setEnabled(true);
+        BTN_Novo.setVisible(false);
+        BTN_Editar.setVisible(true);
+        BTN_Cadastrar.setVisible(false); 
+        BTN_Voltar.setVisible(true);
+    }//GEN-LAST:event_BTN_PesquisarActionPerformed
+
+    private void BTN_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VoltarActionPerformed
+        TXT_Codigo.setEnabled(false);
+        habilitarcampos(false);
+        BTN_Cadastrar.setVisible(false);
+        BTN_Editar.setVisible(false);
+        TXT_Buscar.setEnabled(false);
+        BTN_Novo.setVisible(true);
+        limparCampos();
+        BTN_Voltar.setVisible(false);
+    }//GEN-LAST:event_BTN_VoltarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Cadastrar;
     private javax.swing.JButton BTN_Editar;
     private javax.swing.JButton BTN_Novo;
+    private javax.swing.JButton BTN_Pesquisar;
+    private javax.swing.JButton BTN_Voltar;
     private javax.swing.JTable TBL_Estoque;
     private javax.swing.JTextField TXT_Buscar;
     private javax.swing.JTextField TXT_Codigo;
@@ -309,14 +393,14 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TXT_NF;
     private javax.swing.JTextField TXT_Nome;
     private javax.swing.JTextField TXT_Quantidade;
-    private javax.swing.JTextField TXT_Valor;
+    private javax.swing.JFormattedTextField TXT_Valor;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -334,7 +418,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     final void popularEstoqueBeans() {
     EstoqueB.setNome(TXT_Nome.getText());
     EstoqueB.setQuantidade(Integer.parseInt(TXT_Quantidade.getText()));
-    EstoqueB.setValor(Integer.parseInt(TXT_Valor.getText()));
+    EstoqueB.setValor(Double.parseDouble(TXT_Valor.getText()));
     EstoqueB.setNF(Integer.parseInt(TXT_NF.getText()));
     EstoqueB.setNCM(Integer.parseInt(TXT_NCM.getText()));
     }

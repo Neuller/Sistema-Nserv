@@ -82,7 +82,7 @@ public class EstoqueDAO {
                Estoque.setCodigo(rs.getInt("CodEstoque"));
                Estoque.setNome(rs.getString("Est_Nome"));
                Estoque.setQuantidade(rs.getInt("Est_Quantidade"));
-               Estoque.setValor(rs.getFloat("Est_Valor"));
+               Estoque.setValor(rs.getDouble("Est_Valor"));
                Estoque.setNF(rs.getInt("Est_NF"));
                Estoque.setNCM(rs.getInt("Est_NCM"));
             }
