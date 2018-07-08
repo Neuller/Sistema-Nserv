@@ -21,6 +21,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     public ClienteTela() {
         initComponents();
         BTN_Cadastrar.setVisible(false);
+        BTN_Voltar.setVisible(false);
         BTN_Editar.setVisible(false);
         TXT_Codigo.setEnabled(false);
         TXT_Data.setEnabled(false);
@@ -68,6 +69,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         }
         TXT_Telefone = new JFormattedTextField(Formatotel);
         BTN_Pesquisar = new javax.swing.JButton();
+        BTN_Voltar = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -170,6 +172,13 @@ public class ClienteTela extends javax.swing.JInternalFrame {
             }
         });
 
+        BTN_Voltar.setText("Voltar");
+        BTN_Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_VoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -208,6 +217,8 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                         .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BTN_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,7 +261,8 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Novo)
                     .addComponent(BTN_Cadastrar)
-                    .addComponent(BTN_Editar))
+                    .addComponent(BTN_Editar)
+                    .addComponent(BTN_Voltar))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -305,6 +317,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
     private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
         limparCampos();
+        BTN_Voltar.setVisible(true);
         BTN_Cadastrar.setVisible(true);
         DataAtual = new Date();
         TXT_Data.setText(Formatodata.format(DataAtual));
@@ -324,10 +337,22 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     private void BTN_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PesquisarActionPerformed
         TXT_Buscar.setEnabled(true);
         BTN_Novo.setVisible(false);
+        BTN_Voltar.setVisible(true);
         BTN_Editar.setVisible(true);
         BTN_Cadastrar.setVisible(false);
         habilitarcampos(false);
     }//GEN-LAST:event_BTN_PesquisarActionPerformed
+
+    private void BTN_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VoltarActionPerformed
+        TXT_Codigo.setEnabled(false);
+        habilitarcampos(false);
+        BTN_Cadastrar.setVisible(false);
+        BTN_Editar.setVisible(false);
+        TXT_Buscar.setEnabled(false);
+        BTN_Novo.setVisible(true);
+        limparCampos();
+        BTN_Voltar.setVisible(false);
+    }//GEN-LAST:event_BTN_VoltarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -335,6 +360,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     private javax.swing.JButton BTN_Editar;
     private javax.swing.JButton BTN_Novo;
     private javax.swing.JButton BTN_Pesquisar;
+    private javax.swing.JButton BTN_Voltar;
     private javax.swing.JTable TBL_Clientes;
     private javax.swing.JTextField TXT_Buscar;
     private javax.swing.JTextField TXT_Celular;
