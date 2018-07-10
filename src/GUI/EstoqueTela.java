@@ -14,7 +14,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
    EstoqueBeans EstoqueB;
    EstoqueController EstoqueC;
    DefaultTableModel Modelo;
-   DecimalFormat formatodecimal;
+   DecimalFormat formatoDecimal;
 
  
     public EstoqueTela() {
@@ -33,7 +33,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
        EstoqueB = new EstoqueBeans();
        EstoqueC = new EstoqueController();
        Modelo = (DefaultTableModel)TBL_Estoque.getModel();
-       formatodecimal = new DecimalFormat("0.00");
+       formatoDecimal = new DecimalFormat("0.00");
     }
 
 

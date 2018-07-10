@@ -1,15 +1,25 @@
 package GUI;
 
+import Utilitarios.Conexao;
 import Utilitarios.FundoTela;
 import java.awt.GridLayout;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class Principal extends javax.swing.JFrame {
     
     FundoTela tela;
     EstoqueTela estoquetela;
     ClienteTela clientetela;
+    Connection conexao = null;
 
     public Principal() {
         initComponents();
@@ -24,6 +34,8 @@ public class Principal extends javax.swing.JFrame {
         ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
         setIconImage(logo.getImage());
         
+        conexao = Conexao.getConnection();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -36,6 +48,8 @@ public class Principal extends javax.swing.JFrame {
         MenuCadastro = new javax.swing.JMenu();
         MenuClientes = new javax.swing.JMenuItem();
         CadastroProdutos = new javax.swing.JMenuItem();
+        MenuRelatorios = new javax.swing.JMenu();
+        Rel_Clientes = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -66,6 +80,18 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(MenuCadastro);
 
+        MenuRelatorios.setText("Relatórios");
+
+        Rel_Clientes.setText("Clientes");
+        Rel_Clientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Rel_ClientesActionPerformed(evt);
+            }
+        });
+        MenuRelatorios.add(Rel_Clientes);
+
+        jMenuBar1.add(MenuRelatorios);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -91,6 +117,16 @@ public class Principal extends javax.swing.JFrame {
         tela.add(clientetela);
         clientetela.setVisible(true);
     }//GEN-LAST:event_MenuClientesActionPerformed
+
+    private void Rel_ClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rel_ClientesActionPerformed
+        try {
+            InputStream caminho = getClass().getResourceAsStream("/Relatorios/Rel_Clientes.jasper");
+            JasperPrint print = JasperFillManager.fillReport(caminho, null, conexao);
+            JasperViewer.viewReport(print, false);
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Rel_ClientesActionPerformed
 
 
     public static void main(String args[]) {
@@ -129,6 +165,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem CadastroProdutos;
     private javax.swing.JMenu MenuCadastro;
     private javax.swing.JMenuItem MenuClientes;
+    private javax.swing.JMenu MenuRelatorios;
+    private javax.swing.JMenuItem Rel_Clientes;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
