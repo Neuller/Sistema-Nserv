@@ -20,27 +20,27 @@ public class EstoqueController {
     
     public boolean verificardados(EstoqueBeans Estoque){
         if(Estoque.getNome().equals("")){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         
         if(Estoque.getQuantidade() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
           
         if(Estoque.getValor() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         
         if(Estoque.getNF() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo NF", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Preencha o campo NF", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         
         if(Estoque.getNCM() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo NCM", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Preencha o campo NCM", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         
@@ -63,27 +63,27 @@ public class EstoqueController {
     
     public boolean verificardadosEditar(EstoqueBeans Estoque){
         if(Estoque.getNome().equals("")){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         
         if(Estoque.getQuantidade() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
           
         if(Estoque.getValor() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         
         if(Estoque.getNF() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo NF", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Preencha o campo NF", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         
         if(Estoque.getNCM() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo NCM", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Preencha o campo NCM", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         

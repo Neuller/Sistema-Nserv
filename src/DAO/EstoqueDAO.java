@@ -30,11 +30,11 @@ public class EstoqueDAO {
             
             st.execute();
             Conexao.getConnection().commit();
-            JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "", 1, new ImageIcon("Imagens/ok.png"));
+            JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
             
         } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(null, ex, "", 0, new ImageIcon("Imagens/btn_sair.png"));
-           JOptionPane.showMessageDialog(null, "Erro ao Cadastrar Produto", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Erro ao Cadastrar Produto", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
             
         }
                
@@ -51,7 +51,7 @@ public class EstoqueDAO {
                 return "1";
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Buscar Produto", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar Produto", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
             return "0";
         }
         
@@ -66,7 +66,7 @@ public class EstoqueDAO {
                 Modelo.addRow(new Object[] {rs.getString("CodEstoque"), rs.getString("Est_Nome"), rs.getString("Est_Quantidade"), rs.getString("Est_Valor"), rs.getString("Est_NF"), rs.getString("Est_NCM")});      
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Buscar Produto", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar Produto", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         }
         
     }
@@ -87,7 +87,7 @@ public class EstoqueDAO {
                Estoque.setNCM(rs.getInt("Est_NCM"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Buscar Produto", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar Produto", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         }
         
         return Estoque;
@@ -105,11 +105,11 @@ public class EstoqueDAO {
             st.setInt(6, Estoque.getCodigo());
             st.execute();
             Conexao.getConnection().commit();
-            JOptionPane.showMessageDialog(null, "Produto editado com sucesso", "", 1, new ImageIcon("Imagens/ok.png"));
+            JOptionPane.showMessageDialog(null, "Produto editado com sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
             
         } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(null, ex, "", 0, new ImageIcon("Imagens/btn_sair.png"));
-           JOptionPane.showMessageDialog(null, "Erro ao editar Produto", "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Erro ao editar Produto", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
             
         }
         
