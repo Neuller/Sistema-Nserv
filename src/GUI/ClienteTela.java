@@ -84,6 +84,11 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         });
 
         TXT_Data.setEditable(false);
+        TXT_Data.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_DataActionPerformed(evt);
+            }
+        });
 
         BTN_Editar.setText("Editar");
         BTN_Editar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -166,6 +171,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         });
 
         BTN_Pesquisar.setText("Pesquisar");
+        BTN_Pesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BTN_Pesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTN_PesquisarActionPerformed(evt);
@@ -173,6 +179,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         });
 
         BTN_Voltar.setText("Voltar");
+        BTN_Voltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BTN_Voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTN_VoltarActionPerformed(evt);
@@ -284,6 +291,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         popularClienteBeans();
         ClienteC.verificardadosEditar(ClienteB);
         limparCampos();
+        Modelo.removeRow(TBL_Clientes.getSelectedRow());
         TXT_Buscar.setText("");
         habilitarcampos(false);
     }//GEN-LAST:event_BTN_EditarActionPerformed
@@ -351,8 +359,14 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         TXT_Buscar.setEnabled(false);
         BTN_Novo.setVisible(true);
         limparCampos();
+        Modelo.removeRow(TBL_Clientes.getSelectedRow());
+        TXT_Buscar.setText("");
         BTN_Voltar.setVisible(false);
     }//GEN-LAST:event_BTN_VoltarActionPerformed
+
+    private void TXT_DataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_DataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TXT_DataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

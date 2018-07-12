@@ -19,6 +19,7 @@ public class Principal extends javax.swing.JFrame {
     FundoTela tela;
     EstoqueTela estoquetela;
     ClienteTela clientetela;
+    OSTela ostela;
     Connection conexao = null;
 
     public Principal() {
@@ -28,7 +29,7 @@ public class Principal extends javax.swing.JFrame {
         tela = new FundoTela("/Icones/FundoTela.png");   // Fundo Responsivo
         getContentPane().add(tela);
         
-        CadastroProdutos.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_product.png")));
+        CadastroProdutos.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_stock.png")));
         MenuClientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_client.png")));
         
         ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
@@ -48,6 +49,8 @@ public class Principal extends javax.swing.JFrame {
         MenuCadastro = new javax.swing.JMenu();
         MenuClientes = new javax.swing.JMenuItem();
         CadastroProdutos = new javax.swing.JMenuItem();
+        MenuServicos = new javax.swing.JMenu();
+        MenuOS = new javax.swing.JMenuItem();
         MenuRelatorios = new javax.swing.JMenu();
         Rel_Clientes = new javax.swing.JMenuItem();
 
@@ -62,6 +65,7 @@ public class Principal extends javax.swing.JFrame {
         MenuCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         MenuClientes.setText("Clientes");
+        MenuClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MenuClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuClientesActionPerformed(evt);
@@ -69,7 +73,7 @@ public class Principal extends javax.swing.JFrame {
         });
         MenuCadastro.add(MenuClientes);
 
-        CadastroProdutos.setText("Produtos");
+        CadastroProdutos.setText("Estoque");
         CadastroProdutos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         CadastroProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,9 +84,23 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(MenuCadastro);
 
+        MenuServicos.setText("Serviços");
+
+        MenuOS.setText("Emitir Serviços");
+        MenuOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuOSActionPerformed(evt);
+            }
+        });
+        MenuServicos.add(MenuOS);
+
+        jMenuBar1.add(MenuServicos);
+
         MenuRelatorios.setText("Relatórios");
+        MenuRelatorios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         Rel_Clientes.setText("Clientes");
+        Rel_Clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Rel_Clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Rel_ClientesActionPerformed(evt);
@@ -128,6 +146,12 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Rel_ClientesActionPerformed
 
+    private void MenuOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuOSActionPerformed
+        ostela = new OSTela();
+        tela.add(ostela);
+        ostela.setVisible(true);
+    }//GEN-LAST:event_MenuOSActionPerformed
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -165,7 +189,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem CadastroProdutos;
     private javax.swing.JMenu MenuCadastro;
     private javax.swing.JMenuItem MenuClientes;
+    private javax.swing.JMenuItem MenuOS;
     private javax.swing.JMenu MenuRelatorios;
+    private javax.swing.JMenu MenuServicos;
     private javax.swing.JMenuItem Rel_Clientes;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

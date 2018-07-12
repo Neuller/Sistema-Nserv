@@ -168,6 +168,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         });
 
         BTN_Pesquisar.setText("Pesquisar");
+        BTN_Pesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BTN_Pesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTN_PesquisarActionPerformed(evt);
@@ -175,6 +176,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         });
 
         BTN_Voltar.setText("Voltar");
+        BTN_Voltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BTN_Voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTN_VoltarActionPerformed(evt);
@@ -318,6 +320,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         popularEstoqueBeans();
         EstoqueC.verificardadosEditar(EstoqueB);
         limparCampos();
+        Modelo.removeRow(TBL_Estoque.getSelectedRow());
         TXT_Buscar.setText("");
         habilitarcampos(false);
     }//GEN-LAST:event_BTN_EditarActionPerformed
@@ -356,7 +359,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TXT_ValorFocusLost
 
     private void TXT_ValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_ValorActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_TXT_ValorActionPerformed
 
     private void BTN_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PesquisarActionPerformed
@@ -376,6 +379,8 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         TXT_Buscar.setEnabled(false);
         BTN_Novo.setVisible(true);
         limparCampos();
+        Modelo.removeRow(TBL_Estoque.getSelectedRow());
+        TXT_Buscar.setText("");
         BTN_Voltar.setVisible(false);
     }//GEN-LAST:event_BTN_VoltarActionPerformed
 
@@ -418,7 +423,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     final void popularEstoqueBeans() {
     EstoqueB.setNome(TXT_Nome.getText());
     EstoqueB.setQuantidade(Integer.parseInt(TXT_Quantidade.getText()));
-    EstoqueB.setValor(Double.parseDouble(TXT_Valor.getText()));
+    EstoqueB.setValor(Double.parseDouble(TXT_Valor.getText().replace(",",".")));
     EstoqueB.setNF(Integer.parseInt(TXT_NF.getText()));
     EstoqueB.setNCM(Integer.parseInt(TXT_NCM.getText()));
     }

@@ -320,6 +320,9 @@
     <Component class="javax.swing.JButton" name="BTN_Pesquisar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pesquisar"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor em Forma de M&#xe3;o"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTN_PesquisarActionPerformed"/>
@@ -328,6 +331,9 @@
     <Component class="javax.swing.JButton" name="BTN_Voltar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Voltar"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor em Forma de M&#xe3;o"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTN_VoltarActionPerformed"/>
