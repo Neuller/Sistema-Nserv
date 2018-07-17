@@ -1,12 +1,10 @@
 package Beans;
 
-import java.util.Date;
 
-
-public class OSBeans {
+public class ServicosBeans {
     
-    private int OS;
-    private String Data_OS;
+    private int CodServicos;
+    private String Data_Servicos;
     private String Tipo;
     private String Situacao;
     private String Aparelho;
@@ -14,22 +12,30 @@ public class OSBeans {
     private String Tecnico;
     private String Garantia;
     private double Valor;
-    private int Cli_OS;
+    private int Cli_Servicos;
 
-    public int getOS() {
-        return OS;
+        public int getCodServicos() {
+        return CodServicos;
     }
 
-    public void setOS(int OS) {
-        this.OS = OS;
+    public void setCodServicos(int CodServicos) {
+        this.CodServicos = CodServicos;
     }
 
-    public String getData_OS() {
-        return Data_OS;
+    public int getCli_Servicos() {
+        return Cli_Servicos;
     }
 
-    public void setData_OS(String Data_OS) {
-        this.Data_OS = Data_OS;
+    public void setCli_Servicos(int Cli_Servicos) {
+        this.Cli_Servicos = Cli_Servicos;
+    }
+
+    public String getData_Servicos() {
+        return Data_Servicos;
+    }
+
+    public void setData_Servicos(String Data_Servicos) {
+        this.Data_Servicos = Data_Servicos;
     }
 
     public String getTipo() {
@@ -87,14 +93,5 @@ public class OSBeans {
     public void setValor(double Valor) {
         this.Valor = Valor;
     }
-
-    public int getCli_OS() {
-        return Cli_OS;
-    }
-
-    public void setCli_OS(int Cli_OS) {
-        this.Cli_OS = Cli_OS;
-    }
-    
-    
+  
 }

@@ -1,7 +1,7 @@
 package GUI;
 
-import Beans.OSBeans;
-import Controller.OSController;
+import Beans.ServicosBeans;
+import Controller.ServicosController;
 import java.sql.*;
 import Utilitarios.Conexao;
 import Utilitarios.Corretores;
@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 import java.util.Date;
-import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -20,8 +19,8 @@ public class OSTela extends javax.swing.JInternalFrame {
     ResultSet rs = null;
     SimpleDateFormat Formatodata;
     Date DataAtual;
-    OSBeans OSB;
-    OSController OSC;
+    ServicosBeans ServicosB;
+    ServicosController ServicosC;
     DefaultTableModel Modelo;   
     
 
@@ -33,14 +32,15 @@ public class OSTela extends javax.swing.JInternalFrame {
         TXT_Data.setEnabled(false);
         BTN_Voltar.setVisible(false);
         BTN_Pesquisar.setEnabled(false);
+        TBL_Clientes.setVisible(false);
         habilitarcampos(false);
         conexao = Conexao.getConnection();
         Formatodata = new SimpleDateFormat("dd/MM/yyyy");
        
         
         
-           OSB = new OSBeans();
-           OSC = new OSController();
+           ServicosB = new ServicosBeans();
+           ServicosC = new ServicosController();
            Modelo = (DefaultTableModel)TBL_Clientes.getModel();
            
     }
@@ -60,7 +60,36 @@ public class OSTela extends javax.swing.JInternalFrame {
     private void setar_campos(){
         Modelo.removeRow(TBL_Clientes.getSelectedRow());
         int setar = TBL_Clientes.getSelectedRow();
-        TXT_Codigo.setText(TBL_Clientes.getModel().getValueAt(setar, 0).toString());   
+        TXT_CodCliente.setText(TBL_Clientes.getModel().getValueAt(setar, 0).toString());   
+    }
+    
+    private void emitir_servico(){
+        String sql = "insert into servicos(Data_Servicos, Tipo, Situacao, Aparelho, Informacao, Tecnico, Garantia, Valor, Cli_Servicos) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            pst = conexao.prepareStatement(sql);
+            
+            pst.setString(1, Corretores.ConverterParaSQL(TXT_Data.getText()));
+            pst.setString(2, CB_Tipo.getSelectedItem().toString());
+            pst.setString(3, CB_Situacao.getSelectedItem().toString());
+            pst.setString(4, TXT_Aparelho.getText());
+            pst.setString(5, TXT_Informacao.getText());
+            pst.setString(6, CB_Tecnico.getSelectedItem().toString());
+            pst.setString(7, CB_Garantia.getSelectedItem().toString());
+            pst.setDouble(8, Double.parseDouble(TXT_Valor.getText().replace(",",".")));
+            pst.setInt(9, Integer.parseInt(TXT_CodCliente.getText()));
+            
+            if((TXT_Aparelho.getText().isEmpty()) || (TXT_Informacao.getText().isEmpty()) || (TXT_Valor.getText().isEmpty())){
+                JOptionPane.showMessageDialog(null, "Preencha todos os Campos");
+            }else{
+                int adicionado = pst.executeUpdate();
+                if(adicionado > 0){
+                    JOptionPane.showMessageDialog(null, "Salvo com Sucesso");
+                    limparCampos();
+                }
+            }          
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -71,7 +100,7 @@ public class OSTela extends javax.swing.JInternalFrame {
         PN_OS = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        TXT_NumeroOs = new javax.swing.JTextField();
+        TXT_CodServico = new javax.swing.JTextField();
         TXT_Data = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         CB_Situacao = new javax.swing.JComboBox<>();
@@ -79,7 +108,7 @@ public class OSTela extends javax.swing.JInternalFrame {
         TXT_Clientes = new javax.swing.JTextField();
         BTN_Pesquisar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        TXT_Codigo = new javax.swing.JTextField();
+        TXT_CodCliente = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TBL_Clientes = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
@@ -120,14 +149,14 @@ public class OSTela extends javax.swing.JInternalFrame {
 
         PN_OS.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setText("Número OS");
+        jLabel1.setText("Código Serviço");
 
         jLabel2.setText("Data");
 
-        TXT_NumeroOs.setEditable(false);
-        TXT_NumeroOs.addActionListener(new java.awt.event.ActionListener() {
+        TXT_CodServico.setEditable(false);
+        TXT_CodServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TXT_NumeroOsActionPerformed(evt);
+                TXT_CodServicoActionPerformed(evt);
             }
         });
 
@@ -141,7 +170,7 @@ public class OSTela extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TXT_NumeroOs, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TXT_CodServico, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -155,7 +184,7 @@ public class OSTela extends javax.swing.JInternalFrame {
                 .addGroup(PN_OSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(TXT_NumeroOs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TXT_CodServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TXT_Data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -190,9 +219,9 @@ public class OSTela extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel4.setText("Código");
+        jLabel4.setText("Código Cliente");
 
-        TXT_Codigo.setEditable(false);
+        TXT_CodCliente.setEditable(false);
 
         TBL_Clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -230,7 +259,7 @@ public class OSTela extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PN_ClientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PN_ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PN_ClientesLayout.createSequentialGroup()
                         .addComponent(TXT_Clientes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -238,7 +267,7 @@ public class OSTela extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(TXT_CodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(6, 6, 6))
         );
         PN_ClientesLayout.setVerticalGroup(
@@ -248,7 +277,7 @@ public class OSTela extends javax.swing.JInternalFrame {
                 .addGroup(PN_ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_Clientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TXT_CodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTN_Pesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -408,20 +437,23 @@ public class OSTela extends javax.swing.JInternalFrame {
 
     private void BTN_PesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_PesquisarMouseClicked
         pesquisar_cliente();
+        TBL_Clientes.setVisible(true);
     }//GEN-LAST:event_BTN_PesquisarMouseClicked
 
     private void TXT_ClientesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_ClientesKeyReleased
         pesquisar_cliente();
+        TBL_Clientes.setVisible(true);
     }//GEN-LAST:event_TXT_ClientesKeyReleased
 
     private void TBL_ClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_ClientesMouseClicked
         setar_campos();
-        TXT_Codigo.setEnabled(true);
+        TXT_CodCliente.setEnabled(true);
         TXT_Aparelho.setEnabled(true);
         TXT_Valor.setEnabled(true);
         TXT_Valor.setText("0");
         TXT_Informacao.setEnabled(true);    
         TXT_Clientes.setEnabled(true);     
+        BTN_Novo.setVisible(false);
     }//GEN-LAST:event_TBL_ClientesMouseClicked
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
@@ -433,22 +465,30 @@ public class OSTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_CB_SituacaoActionPerformed
 
     private void BTN_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CadastrarActionPerformed
-        popularOSBeans();
-        OSC.verificardados(OSB);
+        emitir_servico();
+        
+        /*popularOSBeans();
+        ServicosC.verificardados(ServicosB);
+        //limparCampos();
+        TXT_Aparelho.setText("");
+        TXT_CodCliente.setText(ServicosC.controleDeCodigo());
+        TXT_Valor.setText("0");
+        DataAtual = new Date();
+        TXT_Data.setText(Formatodata.format(DataAtual));
+*/
     }//GEN-LAST:event_BTN_CadastrarActionPerformed
 
     private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
         limparCampos();
-        BTN_Novo.setVisible(false);
-        BTN_Pesquisar.setEnabled(true);
-        BTN_Voltar.setVisible(true);
-        BTN_Cadastrar.setVisible(true);
         DataAtual = new Date();
         TXT_Data.setText(Formatodata.format(DataAtual));
+        BTN_Pesquisar.setEnabled(true);
+        BTN_Cadastrar.setVisible(true);
+        BTN_Voltar.setVisible(true);
+        ServicosC.controleDeCodigo();
+        TXT_CodServico.setText(ServicosC.controleDeCodigo());
+        TXT_CodServico.setEnabled(true);  
         TXT_Data.setEnabled(true); 
-        TXT_NumeroOs.setEnabled(true); 
-        OSC.controleDeCodigo();
-        TXT_NumeroOs.setText(OSC.controleDeCodigo());
     }//GEN-LAST:event_BTN_NovoActionPerformed
 
     private void BTN_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PesquisarActionPerformed
@@ -456,7 +496,7 @@ public class OSTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BTN_PesquisarActionPerformed
 
     private void BTN_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VoltarActionPerformed
-        TXT_Codigo.setEnabled(false);
+        TXT_CodCliente.setEnabled(false);
         habilitarcampos(false);
         BTN_Cadastrar.setVisible(false);
         BTN_Editar.setVisible(false);
@@ -466,9 +506,9 @@ public class OSTela extends javax.swing.JInternalFrame {
         BTN_Voltar.setVisible(false);
     }//GEN-LAST:event_BTN_VoltarActionPerformed
 
-    private void TXT_NumeroOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_NumeroOsActionPerformed
+    private void TXT_CodServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_CodServicoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TXT_NumeroOsActionPerformed
+    }//GEN-LAST:event_TXT_CodServicoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -486,10 +526,10 @@ public class OSTela extends javax.swing.JInternalFrame {
     private javax.swing.JTable TBL_Clientes;
     private javax.swing.JTextField TXT_Aparelho;
     private javax.swing.JTextField TXT_Clientes;
-    private javax.swing.JTextField TXT_Codigo;
+    private javax.swing.JTextField TXT_CodCliente;
+    private javax.swing.JTextField TXT_CodServico;
     private javax.swing.JTextField TXT_Data;
     private javax.swing.JTextField TXT_Informacao;
-    private javax.swing.JTextField TXT_NumeroOs;
     private javax.swing.JTextField TXT_Valor;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
@@ -506,28 +546,31 @@ public class OSTela extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     final void habilitarcampos(boolean valor){
-        TXT_Codigo.setEnabled(valor);
+        TXT_CodCliente.setEnabled(valor);
         TXT_Aparelho.setEnabled(valor);
         TXT_Valor.setEnabled(valor);
         TXT_Informacao.setEnabled(valor);    
-        TXT_NumeroOs.setEnabled(valor); 
+        TXT_CodServico.setEnabled(valor); 
         TXT_Clientes.setEnabled(valor); 
 }
     
     final void limparCampos(){
-        TXT_Codigo.setText("");
+        TXT_CodCliente.setText("");
         TXT_Aparelho.setText("");
         TXT_Valor.setText("");
         TXT_Informacao.setText("");      
     }
     
     final void popularOSBeans(){
-    OSB.setTipo(CB_Tipo.getSelectedItem().toString());
-    OSB.setSituacao(CB_Situacao.getSelectedItem().toString());
-    OSB.setAparelho(TXT_Aparelho.getText());
-    OSB.setInformacao(TXT_Informacao.getText());
-    OSB.setTecnico(CB_Tecnico.getSelectedItem().toString());
-    OSB.setGarantia(CB_Garantia.getSelectedItem().toString());
-    OSB.setValor(Double.parseDouble(TXT_Valor.getText().replace(",",".")));
+    ServicosB.setData_Servicos(TXT_Data.getText());
+    ServicosB.setTipo(CB_Tipo.getSelectedItem().toString());
+    ServicosB.setSituacao(CB_Situacao.getSelectedItem().toString());
+    ServicosB.setAparelho(TXT_Aparelho.getText());
+    ServicosB.setInformacao(TXT_Informacao.getText());
+    ServicosB.setTecnico(CB_Tecnico.getSelectedItem().toString());
+    ServicosB.setGarantia(CB_Garantia.getSelectedItem().toString());
+    ServicosB.setValor(Double.parseDouble(TXT_Valor.getText().replace(",",".")));
+    ServicosB.setCli_Servicos((TXT_CodCliente.getText()));
 }
+    
 }

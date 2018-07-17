@@ -323,6 +323,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         Modelo.removeRow(TBL_Estoque.getSelectedRow());
         TXT_Buscar.setText("");
         habilitarcampos(false);
+        TXT_Buscar.setEnabled(false);
     }//GEN-LAST:event_BTN_EditarActionPerformed
 
     private void TXT_CodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_CodigoActionPerformed

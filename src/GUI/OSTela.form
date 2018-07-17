@@ -181,7 +181,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="TXT_NumeroOs" min="-2" pref="80" max="-2" attributes="0"/>
+                  <Component id="TXT_CodServico" min="-2" pref="80" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -197,7 +197,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="TXT_NumeroOs" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="TXT_CodServico" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="TXT_Data" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="25" max="32767" attributes="0"/>
@@ -208,7 +208,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="N&#xfa;mero OS"/>
+            <Property name="text" type="java.lang.String" value="C&#xf3;digo Servi&#xe7;o"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -216,12 +216,12 @@
             <Property name="text" type="java.lang.String" value="Data"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="TXT_NumeroOs">
+        <Component class="javax.swing.JTextField" name="TXT_CodServico">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TXT_NumeroOsActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TXT_CodServicoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="TXT_Data">
@@ -272,7 +272,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="417" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="400" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="TXT_Clientes" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -280,7 +280,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="TXT_Codigo" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="TXT_CodCliente" min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
@@ -294,7 +294,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="TXT_Clientes" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="TXT_Codigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="TXT_CodCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="BTN_Pesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -324,10 +324,10 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="C&#xf3;digo"/>
+            <Property name="text" type="java.lang.String" value="C&#xf3;digo Cliente"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="TXT_Codigo">
+        <Component class="javax.swing.JTextField" name="TXT_CodCliente">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>

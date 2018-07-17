@@ -24,7 +24,7 @@ public class Conexao {
             Con.setAutoCommit(false);
             //JOptionPane.showMessageDialog(null, "Conectado com Sucesso", "Conectado", 1);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao Conectar com o Banco", "", 0);
+            JOptionPane.showMessageDialog(null, "Erro ao Conectar com o Banco de Dados", "", 0);
         }
         
     }
