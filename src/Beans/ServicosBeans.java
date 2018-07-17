@@ -4,7 +4,7 @@ package Beans;
 public class ServicosBeans {
     
     private int CodServicos;
-    private String Data_Servicos;
+    private String Data_Servico;
     private String Tipo;
     private String Situacao;
     private String Aparelho;
@@ -12,9 +12,9 @@ public class ServicosBeans {
     private String Tecnico;
     private String Garantia;
     private double Valor;
-    private int Cli_Servicos;
+    private int CodCliente;
 
-        public int getCodServicos() {
+    public int getCodServicos() {
         return CodServicos;
     }
 
@@ -22,20 +22,20 @@ public class ServicosBeans {
         this.CodServicos = CodServicos;
     }
 
-    public int getCli_Servicos() {
-        return Cli_Servicos;
+    public int getCodCliente() {
+        return CodCliente;
     }
 
-    public void setCli_Servicos(int Cli_Servicos) {
-        this.Cli_Servicos = Cli_Servicos;
+    public void setCodCliente(int CodCliente) {
+        this.CodCliente = CodCliente;
     }
 
-    public String getData_Servicos() {
-        return Data_Servicos;
+    public String getData_Servico() {
+        return Data_Servico;
     }
 
-    public void setData_Servicos(String Data_Servicos) {
-        this.Data_Servicos = Data_Servicos;
+    public void setData_Servico(String Data_Servico) {
+        this.Data_Servico = Data_Servico;
     }
 
     public String getTipo() {

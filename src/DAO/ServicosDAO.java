@@ -18,9 +18,9 @@ public class ServicosDAO {
     
     public void CadastrarOS(ServicosBeans OS){
         try {
-            String SQLInsertion = "insert into servicos(Data_Servicos, Tipo, Situacao, Aparelho, Informacao, Tecnico, Garantia, Valor, Cli_Servicos) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String SQLInsertion = "insert into servicos(Data_Servico, Tipo, Situacao, Aparelho, Informacao, Tecnico, Garantia, Valor, CodCliente) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
-            st.setString(1, Corretores.ConverterParaSQL(OS.getData_Servicos()));
+            st.setString(1, Corretores.ConverterParaSQL(OS.getData_Servico()));
             st.setString(2, OS.getTipo());
             st.setString(3, OS.getSituacao());
             st.setString(4, OS.getAparelho());
@@ -28,7 +28,7 @@ public class ServicosDAO {
             st.setString(6, OS.getTecnico());
             st.setString(7, OS.getGarantia());
             st.setDouble(8, OS.getValor());
-            st.setInt(9, OS.getCli_Servicos());                    
+            st.setInt(9, OS.getCodCliente());                    
             st.execute();
             Conexao.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
@@ -67,7 +67,7 @@ public class ServicosDAO {
             ResultSet rs = st.executeQuery();
             if(rs.next()){
                Servicos.setCodServicos(rs.getInt("CodServicos"));
-               Servicos.setData_Servicos(Corretores.ConverterParaJava(rs.getString("Data_Servicos")));
+               Servicos.setData_Servico(Corretores.ConverterParaJava(rs.getString("Data_Servico")));
                Servicos.setTipo(rs.getString("Tipo"));
                Servicos.setSituacao(rs.getString("Situacao"));
                Servicos.setAparelho(rs.getString("Aparelho"));
@@ -75,7 +75,7 @@ public class ServicosDAO {
                Servicos.setTecnico(rs.getString("Tecnico"));
                Servicos.setGarantia(rs.getString("Garantia"));
                Servicos.setValor(rs.getDouble("Valor"));              
-               Servicos.setCli_Servicos(rs.getInt("Cli_Servicos"));
+               Servicos.setCodCliente(rs.getInt("CodCliente"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Buscar Serviço", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
@@ -86,9 +86,9 @@ public class ServicosDAO {
   
     public void editarOS(ServicosBeans OS){
         try {
-            String SQLInsertion = "update servicos set Data_Servicos = ?, Tipo = ?, Situacao = ?, Aparelho = ?, Informacao = ?, Tecnico = ?, Garantia = ?, Valor = ?, Cli_Servicos = ? where CodServicos = ?";
+            String SQLInsertion = "update servicos set Data_Servico = ?, Tipo = ?, Situacao = ?, Aparelho = ?, Informacao = ?, Tecnico = ?, Garantia = ?, Valor = ?, CodCliente = ? where CodServicos = ?";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
-            st.setString(1, OS.getData_Servicos());
+            st.setString(1, OS.getData_Servico());
             st.setString(2, OS.getTipo());
             st.setString(3, OS.getSituacao());
             st.setString(4, OS.getAparelho());
@@ -96,7 +96,7 @@ public class ServicosDAO {
             st.setString(6, OS.getTecnico());
             st.setString(7, OS.getGarantia());
             st.setDouble(8, OS.getValor());
-            st.setInt(9, OS.getCli_Servicos());
+            st.setInt(9, OS.getCodCliente());
             st.execute();
             Conexao.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Editado com sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));

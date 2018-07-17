@@ -14,8 +14,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class OSTela extends javax.swing.JInternalFrame {
     
-    Connection conexao = null;
-    PreparedStatement pst = null;
     ResultSet rs = null;
     SimpleDateFormat Formatodata;
     Date DataAtual;
@@ -34,7 +32,7 @@ public class OSTela extends javax.swing.JInternalFrame {
         BTN_Pesquisar.setEnabled(false);
         TBL_Clientes.setVisible(false);
         habilitarcampos(false);
-        conexao = Conexao.getConnection();
+        //conexao = Conexao.getConnection();
         Formatodata = new SimpleDateFormat("dd/MM/yyyy");
        
         
@@ -46,9 +44,10 @@ public class OSTela extends javax.swing.JInternalFrame {
     }
     
     private void pesquisar_cliente(){
-        String sql = "select CodCliente as ID, Cli_Nome as Nome, Cli_Telefone as Telefone, Cli_Celular as Celular from clientes where Cli_Nome like ?";
+        String SQLInsertion = "select CodCliente as ID, Cli_Nome as Nome, Cli_Telefone as Telefone, Cli_Celular as Celular from clientes where Cli_Nome like ?";
         try {
-            pst = conexao.prepareStatement(sql);
+           
+            PreparedStatement pst = Conexao.getConnection().prepareStatement(SQLInsertion);
             pst.setString(1, TXT_Clientes.getText() + "%");
             rs = pst.executeQuery();
             TBL_Clientes.setModel(DbUtils.resultSetToTableModel(rs));
@@ -62,36 +61,7 @@ public class OSTela extends javax.swing.JInternalFrame {
         int setar = TBL_Clientes.getSelectedRow();
         TXT_CodCliente.setText(TBL_Clientes.getModel().getValueAt(setar, 0).toString());   
     }
-    
-    private void emitir_servico(){
-        String sql = "insert into servicos(Data_Servicos, Tipo, Situacao, Aparelho, Informacao, Tecnico, Garantia, Valor, Cli_Servicos) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try {
-            pst = conexao.prepareStatement(sql);
-            
-            pst.setString(1, Corretores.ConverterParaSQL(TXT_Data.getText()));
-            pst.setString(2, CB_Tipo.getSelectedItem().toString());
-            pst.setString(3, CB_Situacao.getSelectedItem().toString());
-            pst.setString(4, TXT_Aparelho.getText());
-            pst.setString(5, TXT_Informacao.getText());
-            pst.setString(6, CB_Tecnico.getSelectedItem().toString());
-            pst.setString(7, CB_Garantia.getSelectedItem().toString());
-            pst.setDouble(8, Double.parseDouble(TXT_Valor.getText().replace(",",".")));
-            pst.setInt(9, Integer.parseInt(TXT_CodCliente.getText()));
-            
-            if((TXT_Aparelho.getText().isEmpty()) || (TXT_Informacao.getText().isEmpty()) || (TXT_Valor.getText().isEmpty())){
-                JOptionPane.showMessageDialog(null, "Preencha todos os Campos");
-            }else{
-                int adicionado = pst.executeUpdate();
-                if(adicionado > 0){
-                    JOptionPane.showMessageDialog(null, "Salvo com Sucesso");
-                    limparCampos();
-                }
-            }          
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-    
+      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -449,8 +419,7 @@ public class OSTela extends javax.swing.JInternalFrame {
         setar_campos();
         TXT_CodCliente.setEnabled(true);
         TXT_Aparelho.setEnabled(true);
-        TXT_Valor.setEnabled(true);
-        TXT_Valor.setText("0");
+        TXT_Valor.setEnabled(true);   
         TXT_Informacao.setEnabled(true);    
         TXT_Clientes.setEnabled(true);     
         BTN_Novo.setVisible(false);
@@ -465,27 +434,24 @@ public class OSTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_CB_SituacaoActionPerformed
 
     private void BTN_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CadastrarActionPerformed
-        emitir_servico();
+        //emitir_servico();
         
-        /*popularOSBeans();
+        popularOSBeans();
         ServicosC.verificardados(ServicosB);
-        //limparCampos();
         TXT_Aparelho.setText("");
         TXT_CodCliente.setText(ServicosC.controleDeCodigo());
-        TXT_Valor.setText("0");
         DataAtual = new Date();
         TXT_Data.setText(Formatodata.format(DataAtual));
-*/
     }//GEN-LAST:event_BTN_CadastrarActionPerformed
 
     private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
         limparCampos();
         DataAtual = new Date();
         TXT_Data.setText(Formatodata.format(DataAtual));
+        TXT_Valor.setText("0");
         BTN_Pesquisar.setEnabled(true);
         BTN_Cadastrar.setVisible(true);
         BTN_Voltar.setVisible(true);
-        ServicosC.controleDeCodigo();
         TXT_CodServico.setText(ServicosC.controleDeCodigo());
         TXT_CodServico.setEnabled(true);  
         TXT_Data.setEnabled(true); 
@@ -562,7 +528,7 @@ public class OSTela extends javax.swing.JInternalFrame {
     }
     
     final void popularOSBeans(){
-    ServicosB.setData_Servicos(TXT_Data.getText());
+    ServicosB.setData_Servico(TXT_Data.getText());
     ServicosB.setTipo(CB_Tipo.getSelectedItem().toString());
     ServicosB.setSituacao(CB_Situacao.getSelectedItem().toString());
     ServicosB.setAparelho(TXT_Aparelho.getText());
@@ -570,7 +536,7 @@ public class OSTela extends javax.swing.JInternalFrame {
     ServicosB.setTecnico(CB_Tecnico.getSelectedItem().toString());
     ServicosB.setGarantia(CB_Garantia.getSelectedItem().toString());
     ServicosB.setValor(Double.parseDouble(TXT_Valor.getText().replace(",",".")));
-    ServicosB.setCli_Servicos((TXT_CodCliente.getText()));
+    ServicosB.setCodCliente(Integer.parseInt(TXT_CodCliente.getText()));
 }
     
 }
