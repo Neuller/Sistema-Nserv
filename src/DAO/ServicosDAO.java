@@ -18,13 +18,13 @@ public class ServicosDAO {
     
     public void CadastrarOS(ServicosBeans OS){
         try {
-            String SQLInsertion = "insert into servicos(Data_Servico, Genero, Modelo, Situacao, Aparelho, Informacao, Tecnico, Garantia, Valor, CodCliente) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String SQLInsertion = "insert into servicos(Data_Servico, Genero, Situacao, Aparelho, Modelo, Informacao, Tecnico, Garantia, Valor, CodCliente) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
             st.setString(1, Corretores.ConverterParaSQL(OS.getData_Servico()));
             st.setString(2, OS.getGenero());
-            st.setString(3, OS.getModelo());
-            st.setString(4, OS.getSituacao());
-            st.setString(5, OS.getAparelho());
+            st.setString(3, OS.getSituacao());
+            st.setString(4, OS.getAparelho());
+            st.setString(5, OS.getModelo());
             st.setString(6, OS.getInformacao());
             st.setString(7, OS.getTecnico());
             st.setString(8, OS.getGarantia());
@@ -69,10 +69,10 @@ public class ServicosDAO {
             if(rs.next()){
                Servicos.setCodServicos(rs.getInt("CodServicos"));
                Servicos.setData_Servico(Corretores.ConverterParaJava(rs.getString("Data_Servico")));
-               Servicos.setGenero(rs.getString("Genero"));
-               Servicos.setModelo(rs.getString("Modelo"));
+               Servicos.setGenero(rs.getString("Genero"));       
                Servicos.setSituacao(rs.getString("Situacao"));
                Servicos.setAparelho(rs.getString("Aparelho"));
+               Servicos.setModelo(rs.getString("Modelo"));
                Servicos.setInformacao(rs.getString("Informacao"));
                Servicos.setTecnico(rs.getString("Tecnico"));
                Servicos.setGarantia(rs.getString("Garantia"));
@@ -88,18 +88,17 @@ public class ServicosDAO {
   
     public void editarOS(ServicosBeans OS){
         try {
-            String SQLInsertion = "update servicos set Data_Servico = ?, Genero = ?, Modelo = ?, Situacao = ?, Aparelho = ?, Informacao = ?, Tecnico = ?, Garantia = ?, Valor = ?, CodCliente = ? where CodServicos = ?";
-            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
-            st.setString(1, OS.getData_Servico());
-            st.setString(2, OS.getGenero());
-            st.setString(3, OS.getModelo());
-            st.setString(4, OS.getSituacao());
-            st.setString(5, OS.getAparelho());
-            st.setString(6, OS.getInformacao());
-            st.setString(7, OS.getTecnico());
-            st.setString(8, OS.getGarantia());
-            st.setDouble(9, OS.getValor());
-            st.setInt(10, OS.getCodCliente());
+            String SQLInsertion = "update servicos set Genero = ?, Situacao = ?, Aparelho = ?, Modelo = ?, Informacao = ?, Tecnico = ?, Garantia = ?, Valor = ? where CodServicos = ?";
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);        
+            st.setString(1, OS.getGenero());
+            st.setString(2, OS.getSituacao());
+            st.setString(3, OS.getAparelho());
+            st.setString(4, OS.getModelo());
+            st.setString(5, OS.getInformacao());
+            st.setString(6, OS.getTecnico());
+            st.setString(7, OS.getGarantia());
+            st.setDouble(8, OS.getValor());
+            st.setInt(9, OS.getCodServicos());
             st.execute();
             Conexao.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Editado com sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));

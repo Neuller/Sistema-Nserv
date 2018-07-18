@@ -20,7 +20,17 @@ public class ServicosController {
         if(OS.getAparelho().equals("")){
            JOptionPane.showMessageDialog(null, "Preencha o campo Aparelho", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
-        }                        
+        } 
+        
+        if(OS.getInformacao().equals("")){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Informação", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }
+        
+        if(OS.getModelo().equals("")){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Modelo", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }
         
         ServicosD.CadastrarOS(OS);
         
@@ -41,14 +51,14 @@ public class ServicosController {
            JOptionPane.showMessageDialog(null, "Preencha o campo Aparelho", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
-        
-        if(OS.getInformacao().equals("")){
+       
+       if(OS.getInformacao().equals("")){
            JOptionPane.showMessageDialog(null, "Preencha o campo Informação", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         
-        if(OS.getValor() == 0){
-        JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+       if(OS.getModelo().equals("")){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Modelo", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         

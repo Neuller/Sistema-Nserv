@@ -55,7 +55,42 @@ public class OSTela extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-
+    
+    private void pesquisar_os(){
+        String num_os = JOptionPane.showInputDialog("Número da OS");
+        String sql = "select * from servicos where CodServicos =" + num_os;
+        try {
+            PreparedStatement pst = Conexao.getConnection().prepareStatement(sql);
+            rs = pst.executeQuery();
+            if(rs.next()){
+                TXT_CodServico.setText(rs.getString(1));
+                TXT_Data.setText(Corretores.ConverterParaJava(rs.getString(2)));
+                CB_Genero.setSelectedItem(rs.getString(3));
+                CB_Situacao.setSelectedItem(rs.getString(4));
+                TXT_Aparelho.setText(rs.getString(5));
+                TXT_Modelo.setText(rs.getString(6));
+                TXT_Informacao.setText(rs.getString(7));
+                CB_Tecnico.setSelectedItem(rs.getString(8));
+                CB_Garantia.setSelectedItem(rs.getString(9));
+                TXT_Valor.setText(rs.getString(10));
+                TXT_CodCliente.setText(rs.getString(11));
+                habilitarcampos(true);        
+                BTN_Novo.setVisible(false);
+                BTN_Editar.setVisible(true);
+                BTN_Voltar.setVisible(true);
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "Serviço não cadastrado");
+            }
+            
+        } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException e) {
+            JOptionPane.showMessageDialog(null, "Campo Inválido");
+            //System.out.println(e);
+        }catch(Exception e2){
+            JOptionPane.showMessageDialog(null, e2);       
+    }
+    }
+    
     private void setar_campos(){
         Modelo.removeRow(TBL_Clientes.getSelectedRow());
         int setar = TBL_Clientes.getSelectedRow();
@@ -72,6 +107,7 @@ public class OSTela extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         TXT_CodServico = new javax.swing.JTextField();
         TXT_Data = new javax.swing.JTextField();
+        BTN_PesqOS = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         CB_Situacao = new javax.swing.JComboBox<>();
         PN_Clientes = new javax.swing.JPanel();
@@ -133,6 +169,14 @@ public class OSTela extends javax.swing.JInternalFrame {
 
         TXT_Data.setEditable(false);
 
+        BTN_PesqOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/buscar pequeno.png"))); // NOI18N
+        BTN_PesqOS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BTN_PesqOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_PesqOSActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PN_OSLayout = new javax.swing.GroupLayout(PN_OS);
         PN_OS.setLayout(PN_OSLayout);
         PN_OSLayout.setHorizontalGroup(
@@ -145,7 +189,11 @@ public class OSTela extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TXT_Data, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PN_OSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PN_OSLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(BTN_PesqOS))
+                    .addComponent(TXT_Data, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PN_OSLayout.setVerticalGroup(
@@ -157,7 +205,9 @@ public class OSTela extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(TXT_CodServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TXT_Data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BTN_PesqOS)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jLabel3.setText("Situação");
@@ -251,13 +301,13 @@ public class OSTela extends javax.swing.JInternalFrame {
                     .addComponent(TXT_CodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTN_Pesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jLabel5.setText("Aparelho");
 
-        jLabel6.setText("Informação");
+        jLabel6.setText("Defeito");
 
         jLabel7.setText("Técnico");
 
@@ -267,7 +317,7 @@ public class OSTela extends javax.swing.JInternalFrame {
 
         CB_Tecnico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Neuller César", "Mario Jackson" }));
 
-        CB_Garantia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Funcional", "30 Dias", "90 Dias", "180 Dias", "360 Dias" }));
+        CB_Garantia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Funcional", "30 Dias", "90 Dias", "180 Dias", "360 Dias", "Orçamento" }));
 
         BTN_Cadastrar.setText("Cadastrar");
         BTN_Cadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -287,6 +337,11 @@ public class OSTela extends javax.swing.JInternalFrame {
 
         BTN_Editar.setText("Editar");
         BTN_Editar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BTN_Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_EditarActionPerformed(evt);
+            }
+        });
 
         BTN_Voltar.setText("Voltar");
         BTN_Voltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -320,7 +375,6 @@ public class OSTela extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PN_OS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,8 +389,9 @@ public class OSTela extends javax.swing.JInternalFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(CB_Garantia, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addComponent(CB_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(39, 39, 39)
+                                .addComponent(CB_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(PN_OS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
                         .addComponent(PN_Clientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
@@ -353,7 +408,7 @@ public class OSTela extends javax.swing.JInternalFrame {
                                         .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -380,11 +435,10 @@ public class OSTela extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PN_Clientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
                         .addComponent(PN_OS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CB_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CB_Situacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
@@ -417,7 +471,7 @@ public class OSTela extends javax.swing.JInternalFrame {
                     .addComponent(BTN_Novo)
                     .addComponent(BTN_Editar)
                     .addComponent(BTN_Voltar))
-                .addGap(34, 34, 34))
+                .addGap(44, 44, 44))
         );
 
         setBounds(0, 0, 800, 450);
@@ -457,6 +511,8 @@ public class OSTela extends javax.swing.JInternalFrame {
         popularOSBeans();
         ServicosC.verificardados(ServicosB);
         TXT_Aparelho.setText("");
+        TXT_Modelo.setText("");
+        TXT_CodCliente.setText("");
         TXT_CodCliente.setText(ServicosC.controleDeCodigo());
         DataAtual = new Date();
         TXT_Data.setText(Formatodata.format(DataAtual));
@@ -472,10 +528,13 @@ public class OSTela extends javax.swing.JInternalFrame {
         TXT_CodServico.setText(ServicosC.controleDeCodigo());
         TXT_CodServico.setEnabled(true);  
         TXT_Data.setEnabled(true); 
+        pesquisar_cliente();
+        TBL_Clientes.setVisible(true);
     }//GEN-LAST:event_BTN_NovoActionPerformed
 
     private void BTN_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PesquisarActionPerformed
-        TXT_Clientes.setEnabled(true);        
+        TXT_Clientes.setEnabled(true);  
+        pesquisar_cliente();
     }//GEN-LAST:event_BTN_PesquisarActionPerformed
 
     private void BTN_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VoltarActionPerformed
@@ -501,11 +560,24 @@ public class OSTela extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_ModeloActionPerformed
 
+    private void BTN_PesqOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PesqOSActionPerformed
+        pesquisar_os();  
+        TXT_Data.setEnabled(true); 
+        TXT_Clientes.setEnabled(false); 
+    }//GEN-LAST:event_BTN_PesqOSActionPerformed
+
+    private void BTN_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EditarActionPerformed
+        popularOSBeans();
+        ServicosC.verificardadosEditar(ServicosB);
+        limparCampos();
+    }//GEN-LAST:event_BTN_EditarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Cadastrar;
     private javax.swing.JButton BTN_Editar;
     private javax.swing.JButton BTN_Novo;
+    private javax.swing.JButton BTN_PesqOS;
     private javax.swing.JButton BTN_Pesquisar;
     private javax.swing.JButton BTN_Voltar;
     private javax.swing.JComboBox<String> CB_Garantia;
