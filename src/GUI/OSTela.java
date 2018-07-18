@@ -95,8 +95,9 @@ public class OSTela extends javax.swing.JInternalFrame {
         BTN_Novo = new javax.swing.JButton();
         BTN_Editar = new javax.swing.JButton();
         BTN_Voltar = new javax.swing.JButton();
+        CB_Genero = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        CB_Tipo = new javax.swing.JComboBox<>();
+        TXT_Modelo = new javax.swing.JTextField();
 
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -161,7 +162,7 @@ public class OSTela extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Situação");
 
-        CB_Situacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Na Bancada", "Entrega Feita", "Orçamento Reprovado", "Aguardando Aprovação", "Aguardando Peças", "Abandonado pelo Cliente", "Retornou" }));
+        CB_Situacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entrada", "Na Bancada", "Entrega Feita", "Orçamento Reprovado", "Aguardando Aprovação", "Aguardando Peças", "Abandonado pelo Cliente", "Retorno" }));
         CB_Situacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CB_SituacaoActionPerformed(evt);
@@ -229,7 +230,7 @@ public class OSTela extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PN_ClientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PN_ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PN_ClientesLayout.createSequentialGroup()
                         .addComponent(TXT_Clientes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -250,7 +251,7 @@ public class OSTela extends javax.swing.JInternalFrame {
                     .addComponent(TXT_CodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTN_Pesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -266,7 +267,7 @@ public class OSTela extends javax.swing.JInternalFrame {
 
         CB_Tecnico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Neuller César", "Mario Jackson" }));
 
-        CB_Garantia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "30 Dias", "90 Dias", "180 Dias", "360 Dias" }));
+        CB_Garantia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Funcional", "30 Dias", "90 Dias", "180 Dias", "360 Dias" }));
 
         BTN_Cadastrar.setText("Cadastrar");
         BTN_Cadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -295,9 +296,20 @@ public class OSTela extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel10.setText("Tipo");
+        CB_Genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Orçamento", "Ordem de Serviço" }));
+        CB_Genero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CB_GeneroActionPerformed(evt);
+            }
+        });
 
-        CB_Tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordem de Serviço", "Orçamento" }));
+        jLabel10.setText("Marca/Modelo");
+
+        TXT_Modelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_ModeloActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -308,81 +320,89 @@ public class OSTela extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(29, 29, 29)
-                                .addComponent(CB_Tecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(PN_OS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(CB_Tecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(CB_Situacao, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(CB_Garantia, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel10))
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CB_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CB_Situacao, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(38, 38, 38)
+                                .addComponent(CB_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(32, 32, 32)
                         .addComponent(PN_Clientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9))
-                                .addGap(24, 24, 24)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(CB_Garantia, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(24, 24, 24))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TXT_Informacao)
-                                    .addComponent(TXT_Aparelho))))
-                        .addGap(24, 24, 24))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(TXT_Aparelho, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(TXT_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(TXT_Informacao))
+                                .addContainerGap())))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PN_Clientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
                         .addComponent(PN_OS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CB_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(CB_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(jLabel3))
-                            .addComponent(CB_Situacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                            .addComponent(CB_Situacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(CB_Tecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(PN_Clientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel5))
-                    .addComponent(TXT_Aparelho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CB_Tecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(CB_Garantia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(TXT_Aparelho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(TXT_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -393,8 +413,6 @@ public class OSTela extends javax.swing.JInternalFrame {
                     .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(CB_Garantia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTN_Cadastrar)
                     .addComponent(BTN_Novo)
                     .addComponent(BTN_Editar)
@@ -402,7 +420,7 @@ public class OSTela extends javax.swing.JInternalFrame {
                 .addGap(34, 34, 34))
         );
 
-        setBounds(0, 0, 800, 400);
+        setBounds(0, 0, 800, 450);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_PesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTN_PesquisarMouseClicked
@@ -417,10 +435,12 @@ public class OSTela extends javax.swing.JInternalFrame {
 
     private void TBL_ClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_ClientesMouseClicked
         setar_campos();
+        TXT_Valor.setText("0");
         TXT_CodCliente.setEnabled(true);
         TXT_Aparelho.setEnabled(true);
         TXT_Valor.setEnabled(true);   
-        TXT_Informacao.setEnabled(true);    
+        TXT_Informacao.setEnabled(true); 
+        TXT_Modelo.setEnabled(true);
         TXT_Clientes.setEnabled(true);     
         BTN_Novo.setVisible(false);
     }//GEN-LAST:event_TBL_ClientesMouseClicked
@@ -434,8 +454,6 @@ public class OSTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_CB_SituacaoActionPerformed
 
     private void BTN_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CadastrarActionPerformed
-        //emitir_servico();
-        
         popularOSBeans();
         ServicosC.verificardados(ServicosB);
         TXT_Aparelho.setText("");
@@ -447,8 +465,7 @@ public class OSTela extends javax.swing.JInternalFrame {
     private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
         limparCampos();
         DataAtual = new Date();
-        TXT_Data.setText(Formatodata.format(DataAtual));
-        TXT_Valor.setText("0");
+        TXT_Data.setText(Formatodata.format(DataAtual));       
         BTN_Pesquisar.setEnabled(true);
         BTN_Cadastrar.setVisible(true);
         BTN_Voltar.setVisible(true);
@@ -476,6 +493,14 @@ public class OSTela extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_CodServicoActionPerformed
 
+    private void CB_GeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_GeneroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CB_GeneroActionPerformed
+
+    private void TXT_ModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_ModeloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TXT_ModeloActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Cadastrar;
@@ -484,9 +509,9 @@ public class OSTela extends javax.swing.JInternalFrame {
     private javax.swing.JButton BTN_Pesquisar;
     private javax.swing.JButton BTN_Voltar;
     private javax.swing.JComboBox<String> CB_Garantia;
+    private javax.swing.JComboBox<String> CB_Genero;
     private javax.swing.JComboBox<String> CB_Situacao;
     private javax.swing.JComboBox<String> CB_Tecnico;
-    private javax.swing.JComboBox<String> CB_Tipo;
     private javax.swing.JPanel PN_Clientes;
     private javax.swing.JPanel PN_OS;
     private javax.swing.JTable TBL_Clientes;
@@ -496,6 +521,7 @@ public class OSTela extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TXT_CodServico;
     private javax.swing.JTextField TXT_Data;
     private javax.swing.JTextField TXT_Informacao;
+    private javax.swing.JTextField TXT_Modelo;
     private javax.swing.JTextField TXT_Valor;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
@@ -518,18 +544,21 @@ public class OSTela extends javax.swing.JInternalFrame {
         TXT_Informacao.setEnabled(valor);    
         TXT_CodServico.setEnabled(valor); 
         TXT_Clientes.setEnabled(valor); 
+        TXT_Modelo.setEnabled(valor);
 }
     
     final void limparCampos(){
         TXT_CodCliente.setText("");
         TXT_Aparelho.setText("");
         TXT_Valor.setText("");
-        TXT_Informacao.setText("");      
+        TXT_Informacao.setText("");   
+        TXT_Modelo.setText("");
     }
     
     final void popularOSBeans(){
     ServicosB.setData_Servico(TXT_Data.getText());
-    ServicosB.setTipo(CB_Tipo.getSelectedItem().toString());
+    ServicosB.setGenero(CB_Genero.getSelectedItem().toString());
+    ServicosB.setModelo(TXT_Modelo.getText());
     ServicosB.setSituacao(CB_Situacao.getSelectedItem().toString());
     ServicosB.setAparelho(TXT_Aparelho.getText());
     ServicosB.setInformacao(TXT_Informacao.getText());

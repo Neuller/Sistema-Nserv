@@ -5,7 +5,8 @@ public class ServicosBeans {
     
     private int CodServicos;
     private String Data_Servico;
-    private String Tipo;
+    private String Genero;
+    private String Modelo;
     private String Situacao;
     private String Aparelho;
     private String Informacao;
@@ -26,6 +27,14 @@ public class ServicosBeans {
         return CodCliente;
     }
 
+    public String getModelo() {
+        return Modelo;
+    }
+
+    public void setModelo(String Modelo) {
+        this.Modelo = Modelo;
+    }
+
     public void setCodCliente(int CodCliente) {
         this.CodCliente = CodCliente;
     }
@@ -38,12 +47,12 @@ public class ServicosBeans {
         this.Data_Servico = Data_Servico;
     }
 
-    public String getTipo() {
-        return Tipo;
+    public String getGenero() {
+        return Genero;
     }
 
-    public void setTipo(String tipo) {
-        this.Tipo = Tipo;
+    public void setGenero(String Genero) {
+        this.Genero = Genero;
     }
 
     public String getSituacao() {
