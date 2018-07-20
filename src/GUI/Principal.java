@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -53,6 +54,7 @@ public class Principal extends javax.swing.JFrame {
         MenuOS = new javax.swing.JMenuItem();
         MenuRelatorios = new javax.swing.JMenu();
         Rel_Clientes = new javax.swing.JMenuItem();
+        Rel_Servicos = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -108,6 +110,14 @@ public class Principal extends javax.swing.JFrame {
         });
         MenuRelatorios.add(Rel_Clientes);
 
+        Rel_Servicos.setText("Serviços");
+        Rel_Servicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Rel_ServicosActionPerformed(evt);
+            }
+        });
+        MenuRelatorios.add(Rel_Servicos);
+
         jMenuBar1.add(MenuRelatorios);
 
         setJMenuBar(jMenuBar1);
@@ -152,6 +162,18 @@ public class Principal extends javax.swing.JFrame {
         ostela.setVisible(true);
     }//GEN-LAST:event_MenuOSActionPerformed
 
+    private void Rel_ServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rel_ServicosActionPerformed
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a visualização do Relatório?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if(confirma ==  JOptionPane.YES_OPTION){
+        try {
+            InputStream caminho = getClass().getResourceAsStream("");
+            JasperPrint print = JasperFillManager.fillReport(caminho, null, conexao);
+            JasperViewer.viewReport(print, false);
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Rel_ServicosActionPerformed
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -193,6 +215,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuRelatorios;
     private javax.swing.JMenu MenuServicos;
     private javax.swing.JMenuItem Rel_Clientes;
+    private javax.swing.JMenuItem Rel_Servicos;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;

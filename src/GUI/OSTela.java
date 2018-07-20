@@ -5,11 +5,23 @@ import Controller.ServicosController;
 import java.sql.*;
 import Utilitarios.Conexao;
 import Utilitarios.Corretores;
+import java.io.File;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 public class OSTela extends javax.swing.JInternalFrame {
@@ -19,7 +31,8 @@ public class OSTela extends javax.swing.JInternalFrame {
     Date DataAtual;
     ServicosBeans ServicosB;
     ServicosController ServicosC;
-    DefaultTableModel Modelo;   
+    DefaultTableModel Modelo; 
+    Connection conexao = null;
     
 
     public OSTela() {
@@ -40,6 +53,7 @@ public class OSTela extends javax.swing.JInternalFrame {
            ServicosB = new ServicosBeans();
            ServicosC = new ServicosController();
            Modelo = (DefaultTableModel)TBL_Clientes.getModel();
+           conexao = Conexao.getConnection();
            
     }
     
@@ -134,6 +148,7 @@ public class OSTela extends javax.swing.JInternalFrame {
         CB_Genero = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         TXT_Modelo = new javax.swing.JTextField();
+        BTN_Imprimir = new javax.swing.JButton();
 
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -307,7 +322,7 @@ public class OSTela extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Aparelho");
 
-        jLabel6.setText("Defeito");
+        jLabel6.setText("Informação");
 
         jLabel7.setText("Técnico");
 
@@ -366,6 +381,13 @@ public class OSTela extends javax.swing.JInternalFrame {
             }
         });
 
+        BTN_Imprimir.setText("Imprimir");
+        BTN_Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_ImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -403,20 +425,8 @@ public class OSTela extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(24, 24, 24))
+                                .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -427,6 +437,18 @@ public class OSTela extends javax.swing.JInternalFrame {
                                         .addComponent(TXT_Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(TXT_Informacao))
                                 .addContainerGap())))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BTN_Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -470,7 +492,8 @@ public class OSTela extends javax.swing.JInternalFrame {
                     .addComponent(BTN_Cadastrar)
                     .addComponent(BTN_Novo)
                     .addComponent(BTN_Editar)
-                    .addComponent(BTN_Voltar))
+                    .addComponent(BTN_Voltar)
+                    .addComponent(BTN_Imprimir))
                 .addGap(44, 44, 44))
         );
 
@@ -567,15 +590,39 @@ public class OSTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BTN_PesqOSActionPerformed
 
     private void BTN_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EditarActionPerformed
-        popularOSBeans();
+        popularOSBeansEditar();
         ServicosC.verificardadosEditar(ServicosB);
         limparCampos();
     }//GEN-LAST:event_BTN_EditarActionPerformed
+
+    private void BTN_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ImprimirActionPerformed
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a visualização da Impressão?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if(confirma ==  JOptionPane.YES_OPTION){
+            Map p = new HashMap();
+            p.put("CodServicos", TXT_CodServico.getText());
+            JasperReport relatorio;
+            JasperPrint impressao;           
+        try {
+            if(!TXT_CodServico.getText().equals("")){ 
+            relatorio = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/Relatorios/Imp_Servicos.jrxml");
+            impressao = JasperFillManager.fillReport(relatorio, p, conexao);
+            JasperViewer view  = new JasperViewer(impressao, false);
+            view.setTitle("Serviços");
+            view.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "Pesquise um Serviço para Impressão", "Atenção", 0);
+            }
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }                                            
+    }//GEN-LAST:event_BTN_ImprimirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Cadastrar;
     private javax.swing.JButton BTN_Editar;
+    private javax.swing.JButton BTN_Imprimir;
     private javax.swing.JButton BTN_Novo;
     private javax.swing.JButton BTN_PesqOS;
     private javax.swing.JButton BTN_Pesquisar;
@@ -628,6 +675,7 @@ public class OSTela extends javax.swing.JInternalFrame {
     }
     
     final void popularOSBeans(){
+      
     ServicosB.setData_Servico(TXT_Data.getText());
     ServicosB.setGenero(CB_Genero.getSelectedItem().toString());
     ServicosB.setModelo(TXT_Modelo.getText());
@@ -640,4 +688,18 @@ public class OSTela extends javax.swing.JInternalFrame {
     ServicosB.setCodCliente(Integer.parseInt(TXT_CodCliente.getText()));
 }
     
+    final void popularOSBeansEditar(){
+        
+    ServicosB.setCodServicos(Integer.parseInt(TXT_CodServico.getText()));  
+    ServicosB.setGenero(CB_Genero.getSelectedItem().toString());
+    ServicosB.setModelo(TXT_Modelo.getText());
+    ServicosB.setSituacao(CB_Situacao.getSelectedItem().toString());
+    ServicosB.setAparelho(TXT_Aparelho.getText());
+    ServicosB.setInformacao(TXT_Informacao.getText());
+    ServicosB.setTecnico(CB_Tecnico.getSelectedItem().toString());
+    ServicosB.setGarantia(CB_Garantia.getSelectedItem().toString());
+    ServicosB.setValor(Double.parseDouble(TXT_Valor.getText().replace(",",".")));
+    
+    }
+        
 }
