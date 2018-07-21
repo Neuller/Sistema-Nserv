@@ -6,7 +6,6 @@ import java.sql.*;
 import Utilitarios.Conexao;
 import Utilitarios.Corretores;
 import java.io.File;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
@@ -109,6 +108,29 @@ public class OSTela extends javax.swing.JInternalFrame {
         Modelo.removeRow(TBL_Clientes.getSelectedRow());
         int setar = TBL_Clientes.getSelectedRow();
         TXT_CodCliente.setText(TBL_Clientes.getModel().getValueAt(setar, 0).toString());   
+    }
+    
+    private void imprimir(){
+         int confirma = JOptionPane.showConfirmDialog(null, "Confirma a visualização da Impressão?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if(confirma ==  JOptionPane.YES_OPTION){
+            Map p = new HashMap();
+            p.put("Cod_Servicos", Integer.parseInt(TXT_CodServico.getText()));
+            JasperReport relatorio;
+            JasperPrint impressao;           
+        try {
+            if(!TXT_CodServico.getText().equals("")){ 
+            relatorio = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/Relatorios/Imp_Servicos.jrxml");
+            impressao = JasperFillManager.fillReport(relatorio, p, conexao);
+            JasperViewer view  = new JasperViewer(impressao, false);
+            view.setTitle("Ordem de Serviço/Orçamento");
+            view.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "Pesquise um Serviço para Impressão", "Atenção", 0);
+            }
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }   
     }
       
     @SuppressWarnings("unchecked")
@@ -596,26 +618,7 @@ public class OSTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BTN_EditarActionPerformed
 
     private void BTN_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ImprimirActionPerformed
-        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a visualização da Impressão?", "Atenção", JOptionPane.YES_NO_OPTION);
-        if(confirma ==  JOptionPane.YES_OPTION){
-            Map p = new HashMap();
-            p.put("CodServicos", TXT_CodServico.getText());
-            JasperReport relatorio;
-            JasperPrint impressao;           
-        try {
-            if(!TXT_CodServico.getText().equals("")){ 
-            relatorio = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/Relatorios/Imp_Servicos.jrxml");
-            impressao = JasperFillManager.fillReport(relatorio, p, conexao);
-            JasperViewer view  = new JasperViewer(impressao, false);
-            view.setTitle("Serviços");
-            view.setVisible(true);
-            }else{
-                JOptionPane.showMessageDialog(null, "Pesquise um Serviço para Impressão", "Atenção", 0);
-            }
-        } catch (JRException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }                                            
+        imprimir();                                       
     }//GEN-LAST:event_BTN_ImprimirActionPerformed
 
 
