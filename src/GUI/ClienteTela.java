@@ -19,7 +19,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
    DefaultTableModel Modelo;
    
     public ClienteTela() {
-        initComponents();
+        initComponents();       
         BTN_Cadastrar.setVisible(false);
         BTN_Voltar.setVisible(false);
         BTN_Editar.setVisible(false);
@@ -39,89 +39,56 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PainelCabecalho = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        PainelGeral = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        BTN_Cadastrar = new javax.swing.JButton();
-        TXT_Data = new javax.swing.JTextField();
-        BTN_Editar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        TXT_Codigo = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        TXT_Nome = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        TXT_Buscar = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         TBL_Clientes = new javax.swing.JTable();
-        jSeparator4 = new javax.swing.JSeparator();
-        BTN_Novo = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        try {
-            Formatotel = new MaskFormatter("(##) 9 ####-####");   
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao Inserir Campo Personalizado", "Erro", 0);
-        }
-        TXT_Celular = new JFormattedTextField(Formatotel);
+        TXT_Codigo = new javax.swing.JTextField();
+        BTN_Cadastrar = new javax.swing.JButton();
+        TXT_Buscar = new javax.swing.JTextField();
         try {
             Formatotel = new MaskFormatter("(##) ####-####");   
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao Inserir Campo Personalizado", "Erro", 0);
         }
         TXT_Telefone = new JFormattedTextField(Formatotel);
+        TXT_Data = new javax.swing.JTextField();
+        BTN_Editar = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        TXT_Nome = new javax.swing.JTextField();
         BTN_Pesquisar = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
+        BTN_Novo = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        try {
+            Formatotel = new MaskFormatter("(##) 9 ####-####");   
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Inserir Campo Personalizado", "Erro", 0);
+        }
+        TXT_Celular = new JFormattedTextField(Formatotel);
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         BTN_Voltar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
+        setTitle("Cadastro de Clientes");
+        setPreferredSize(new java.awt.Dimension(567, 447));
 
+        PainelCabecalho.setBackground(new java.awt.Color(7, 143, 201));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/ico_nserv.png"))); // NOI18N
+
+        PainelGeral.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Telefone");
 
-        BTN_Cadastrar.setText("Cadastrar");
-        BTN_Cadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BTN_Cadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_CadastrarActionPerformed(evt);
-            }
-        });
-
-        TXT_Data.setEditable(false);
-        TXT_Data.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TXT_DataActionPerformed(evt);
-            }
-        });
-
-        BTN_Editar.setText("Editar");
-        BTN_Editar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BTN_Editar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_EditarActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Código");
-
-        jLabel6.setText("Data Cadastro");
-
-        TXT_Codigo.setEditable(false);
-        TXT_Codigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TXT_CodigoActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Nome");
-
-        TXT_Buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TXT_BuscarActionPerformed(evt);
-            }
-        });
-        TXT_Buscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                TXT_BuscarKeyReleased(evt);
-            }
-        });
-
+        TBL_Clientes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TBL_Clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -138,6 +105,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TBL_Clientes.setGridColor(new java.awt.Color(255, 255, 255));
         TBL_Clientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TBL_ClientesMouseClicked(evt);
@@ -148,28 +116,65 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(TBL_Clientes);
 
-        BTN_Novo.setText("Novo");
-        BTN_Novo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BTN_Novo.addActionListener(new java.awt.event.ActionListener() {
+        TXT_Codigo.setEditable(false);
+        TXT_Codigo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        TXT_Codigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_NovoActionPerformed(evt);
+                TXT_CodigoActionPerformed(evt);
             }
         });
 
-        jLabel8.setText("Celular");
-
-        TXT_Celular.addActionListener(new java.awt.event.ActionListener() {
+        BTN_Cadastrar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        BTN_Cadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Valid.png"))); // NOI18N
+        BTN_Cadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BTN_Cadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TXT_CelularActionPerformed(evt);
+                BTN_CadastrarActionPerformed(evt);
             }
         });
 
+        TXT_Buscar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        TXT_Buscar.setOpaque(false);
+        TXT_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_BuscarActionPerformed(evt);
+            }
+        });
+        TXT_Buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TXT_BuscarKeyReleased(evt);
+            }
+        });
+
+        TXT_Telefone.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        TXT_Telefone.setOpaque(false);
         TXT_Telefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TXT_TelefoneActionPerformed(evt);
             }
         });
 
+        TXT_Data.setEditable(false);
+        TXT_Data.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        TXT_Data.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_DataActionPerformed(evt);
+            }
+        });
+
+        BTN_Editar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        BTN_Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Edit.png"))); // NOI18N
+        BTN_Editar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BTN_Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_EditarActionPerformed(evt);
+            }
+        });
+
+        TXT_Nome.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        TXT_Nome.setOpaque(false);
+
+        BTN_Pesquisar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         BTN_Pesquisar.setText("Pesquisar");
         BTN_Pesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BTN_Pesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +183,37 @@ public class ClienteTela extends javax.swing.JInternalFrame {
             }
         });
 
-        BTN_Voltar.setText("Voltar");
+        BTN_Novo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        BTN_Novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/New.png"))); // NOI18N
+        BTN_Novo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BTN_Novo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_NovoActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel8.setText("Celular");
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setText("Código");
+
+        TXT_Celular.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        TXT_Celular.setOpaque(false);
+        TXT_Celular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_CelularActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setText("Nome");
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel6.setText("Data Cadastro");
+
+        BTN_Voltar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        BTN_Voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Voltar.png"))); // NOI18N
         BTN_Voltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BTN_Voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,31 +221,31 @@ public class ClienteTela extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addComponent(jSeparator2)
-            .addComponent(jSeparator4)
-            .addComponent(jScrollPane1)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout PainelGeralLayout = new javax.swing.GroupLayout(PainelGeral);
+        PainelGeral.setLayout(PainelGeralLayout);
+        PainelGeralLayout.setHorizontalGroup(
+            PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelGeralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
+                    .addComponent(jSeparator2)
+                    .addComponent(jSeparator4)
+                    .addComponent(jScrollPane1)
+                    .addGroup(PainelGeralLayout.createSequentialGroup()
+                        .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel1))
                         .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PainelGeralLayout.createSequentialGroup()
                                 .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(23, 23, 23)
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(TXT_Data, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(TXT_Nome)))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(PainelGeralLayout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TXT_Telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,36 +253,36 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TXT_Celular, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(PainelGeralLayout.createSequentialGroup()
                         .addComponent(BTN_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TXT_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(TXT_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PainelGeralLayout.createSequentialGroup()
+                        .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        PainelGeralLayout.setVerticalGroup(
+            PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelGeralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TXT_Data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(TXT_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel8)
                     .addComponent(TXT_Celular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,7 +290,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                 .addGap(9, 9, 9)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTN_Pesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -265,12 +300,42 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTN_Novo)
-                    .addComponent(BTN_Cadastrar)
-                    .addComponent(BTN_Editar)
-                    .addComponent(BTN_Voltar))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout PainelCabecalhoLayout = new javax.swing.GroupLayout(PainelCabecalho);
+        PainelCabecalho.setLayout(PainelCabecalhoLayout);
+        PainelCabecalhoLayout.setHorizontalGroup(
+            PainelCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelCabecalhoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addContainerGap())
+            .addComponent(PainelGeral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        PainelCabecalhoLayout.setVerticalGroup(
+            PainelCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelCabecalhoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(PainelGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PainelCabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PainelCabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -375,6 +440,8 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     private javax.swing.JButton BTN_Novo;
     private javax.swing.JButton BTN_Pesquisar;
     private javax.swing.JButton BTN_Voltar;
+    private javax.swing.JPanel PainelCabecalho;
+    private javax.swing.JPanel PainelGeral;
     private javax.swing.JTable TBL_Clientes;
     private javax.swing.JTextField TXT_Buscar;
     private javax.swing.JTextField TXT_Celular;
@@ -384,6 +451,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TXT_Telefone;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
