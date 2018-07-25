@@ -50,10 +50,10 @@ public class OSTela extends javax.swing.JInternalFrame {
        
         
         
-           ServicosB = new ServicosBeans();
-           ServicosC = new ServicosController();
-           Modelo = (DefaultTableModel)TBL_Clientes.getModel();
-           conexao = Conexao.getConnection();
+        ServicosB = new ServicosBeans();
+        ServicosC = new ServicosController();
+        Modelo = (DefaultTableModel)TBL_Clientes.getModel();
+        conexao = Conexao.getConnection();
            
     }
     
@@ -494,7 +494,8 @@ public class OSTela extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BTN_Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BTN_Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))
                     .addGroup(PainelGeralLayout.createSequentialGroup()
                         .addComponent(TXT_Aparelho, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)

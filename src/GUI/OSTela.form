@@ -119,6 +119,7 @@
                               <Component id="BTN_Voltar" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="BTN_Imprimir" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="TXT_Aparelho" min="-2" pref="300" max="-2" attributes="0"/>
