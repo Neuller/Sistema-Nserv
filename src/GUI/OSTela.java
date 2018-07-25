@@ -5,7 +5,6 @@ import Controller.ServicosController;
 import java.sql.*;
 import Utilitarios.Conexao;
 import Utilitarios.Corretores;
-import java.awt.Color;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
@@ -15,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -321,6 +319,7 @@ public class OSTela extends javax.swing.JInternalFrame {
 
         BTN_Imprimir.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         BTN_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Print.png"))); // NOI18N
+        BTN_Imprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BTN_Imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTN_ImprimirActionPerformed(evt);
