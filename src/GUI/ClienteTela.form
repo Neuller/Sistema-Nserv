@@ -175,11 +175,13 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jSeparator4" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="BTN_Cadastrar" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
-                          <Component id="BTN_Editar" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
-                          <Component id="BTN_Voltar" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="BTN_Novo" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="BTN_Cadastrar" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                              <Component id="BTN_Editar" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                              <Component id="BTN_Voltar" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

@@ -15,7 +15,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 
-public class Principal extends javax.swing.JFrame {
+public class PrincipalP extends javax.swing.JFrame {
     
     FundoTela tela;
     EstoqueTela estoquetela;
@@ -23,7 +23,7 @@ public class Principal extends javax.swing.JFrame {
     OSTela ostela;
     Connection conexao = null;
 
-    public Principal() {
+    public PrincipalP() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Código para abrir tela inteira
         setLayout(new GridLayout());
@@ -33,7 +33,6 @@ public class Principal extends javax.swing.JFrame {
         CadastroProdutos.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_stock.png")));
         MenuClientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_client.png")));
         MenuOS.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_os.png")));
-        MenuDesconectar.setIcon(new ImageIcon(getClass().getResource("/Icones/desconect.png")));
         
         ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
         setIconImage(logo.getImage());
@@ -52,22 +51,18 @@ public class Principal extends javax.swing.JFrame {
         MenuCadastro = new javax.swing.JMenu();
         MenuClientes = new javax.swing.JMenuItem();
         CadastroProdutos = new javax.swing.JMenuItem();
-        MenuUsuarios = new javax.swing.JMenuItem();
         MenuServicos = new javax.swing.JMenu();
         MenuOS = new javax.swing.JMenuItem();
         MenuRelatorios = new javax.swing.JMenu();
         Rel_Clientes = new javax.swing.JMenuItem();
         Rel_Servicos = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        MenuDesconectar = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Nserv - Administrador");
+        setTitle("Nserv - Usuário Padrão");
 
         MenuCadastro.setText("Cadastro");
         MenuCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -89,15 +84,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         MenuCadastro.add(CadastroProdutos);
-
-        MenuUsuarios.setText("Usuários");
-        MenuUsuarios.setName("MenuUsuarios"); // NOI18N
-        MenuUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuUsuariosActionPerformed(evt);
-            }
-        });
-        MenuCadastro.add(MenuUsuarios);
 
         jMenuBar1.add(MenuCadastro);
 
@@ -134,20 +120,6 @@ public class Principal extends javax.swing.JFrame {
         MenuRelatorios.add(Rel_Servicos);
 
         jMenuBar1.add(MenuRelatorios);
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/gear.png"))); // NOI18N
-
-        MenuDesconectar.setText("Desconectar");
-        MenuDesconectar.setName("MenuDesconectar"); // NOI18N
-        MenuDesconectar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuDesconectarActionPerformed(evt);
-            }
-        });
-        jMenu3.add(MenuDesconectar);
-
-        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -181,7 +153,7 @@ public class Principal extends javax.swing.JFrame {
             JasperPrint print = JasperFillManager.fillReport(caminho, null, conexao);
             JasperViewer.viewReport(print, false);
         } catch (JRException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PrincipalP.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Rel_ClientesActionPerformed
 
@@ -199,24 +171,10 @@ public class Principal extends javax.swing.JFrame {
             JasperPrint print = JasperFillManager.fillReport(caminho, null, conexao);
             JasperViewer.viewReport(print, false);
         } catch (JRException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PrincipalP.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Rel_ServicosActionPerformed
     }
-    
-    private void MenuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuUsuariosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuUsuariosActionPerformed
-
-    private void MenuDesconectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuDesconectarActionPerformed
-        if(JOptionPane.showConfirmDialog(this, "Deseja Finalizar a Sessão?", "", JOptionPane.YES_NO_OPTION, 0, new ImageIcon(getClass().getResource("/Icones/desconect2.png"))) ==  (JOptionPane.YES_OPTION)){
-        this.dispose();
-        Login login = new Login();
-        login.setLocationRelativeTo(null);
-        login.setVisible(true);              
-    }
-    }//GEN-LAST:event_MenuDesconectarActionPerformed
-    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -232,20 +190,21 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new PrincipalP().setVisible(true);
             }
         });
     }
@@ -254,16 +213,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem CadastroProdutos;
     private javax.swing.JMenu MenuCadastro;
     private javax.swing.JMenuItem MenuClientes;
-    private javax.swing.JMenuItem MenuDesconectar;
     private javax.swing.JMenuItem MenuOS;
     private javax.swing.JMenu MenuRelatorios;
     private javax.swing.JMenu MenuServicos;
-    private javax.swing.JMenuItem MenuUsuarios;
     private javax.swing.JMenuItem Rel_Clientes;
     private javax.swing.JMenuItem Rel_Servicos;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables

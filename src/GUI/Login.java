@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import Utilitarios.Conexao;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -15,6 +19,7 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
     
     SplashScreen inicio;
+    Connection conexao = null;
 
     /**
      * Creates new form Login
@@ -23,8 +28,9 @@ public class Login extends javax.swing.JFrame {
         initComponents();        
         this.setLocationRelativeTo(null);
         ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
-        setIconImage(logo.getImage());
-                
+        setIconImage(logo.getImage()); 
+        
+        conexao = Conexao.getConnection();    
     }
     
     public Login(SplashScreen inicio){
@@ -37,8 +43,9 @@ public class Login extends javax.swing.JFrame {
         setProgress(99, "Inicializando..");  
         this.setLocationRelativeTo(null);
         ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
-        setIconImage(logo.getImage());
-                     
+        setIconImage(logo.getImage()); 
+        
+        conexao = Conexao.getConnection();               
     }
     
     void setProgress(int percent, String info){
@@ -46,12 +53,70 @@ public class Login extends javax.swing.JFrame {
         inicio.getJProgressBar().setValue(percent);
         
         try {
-            Thread.sleep(1000);
+            Thread.sleep(800);
             
         } catch (InterruptedException e) {
             JOptionPane.showMessageDialog(this, "Não foi possível Carregar a Inicialização");
         }
     }    
+    
+    public void Logar(String id, String senha){
+        String dado = null;
+        try {
+            String sql = "select Nome_Usuario from usuarios where Nome_Usuario = '"+id+"' ";
+            Statement st = conexao.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.first()){
+                String sql2 = "select Senha_Usuario from usuarios where Senha_Usuario = '"+senha+"' ";
+                Statement st2 = conexao.createStatement();
+                ResultSet rs2 = st2.executeQuery(sql2);
+                if(rs2.first()){
+                    String sql3 = "select Tipo_Usuario from usuarios where Nome_Usuario = '"+id+"' and Senha_Usuario = '"+senha+"' ";
+                    Statement st3 = conexao.createStatement();
+                    ResultSet rs3 = st3.executeQuery(sql3);
+                    
+                    while(rs3.next()){
+                        dado = rs3.getString(1);                   
+                    }
+                    
+                    if(dado.equals("Administrador")){
+                        String sql4 = "select Nome_Usuario from usuarios where Nome_Usuario = '"+id+"' ";
+                        Statement st4 = conexao.createStatement();
+                        ResultSet rs4 = st4.executeQuery(sql4);
+                        
+                        while(rs4.next()){
+                        dado = rs4.getString(1);                   
+                        }
+                        
+                        dispose();
+                        Principal princ = new Principal();
+                        JOptionPane.showMessageDialog(this, "Bem Vindo " + dado, "Administrador", 0, new ImageIcon(getClass().getResource("/Icones/welcome.png")));                      
+                        princ.setVisible(true);                                             
+                    }else{
+                        String sql5 = "select Nome_Usuario from usuarios where Nome_Usuario = '"+id+"' ";
+                        Statement st5 = conexao.createStatement();
+                        ResultSet rs5 = st5.executeQuery(sql5);
+                        
+                        while(rs5.next()){
+                        dado = rs5.getString(1);                   
+                        }
+                        
+                        dispose();
+                        PrincipalP princP = new PrincipalP();
+                        JOptionPane.showMessageDialog(this, "Bem Vindo " + dado, "Usuário Padrão", 0, new ImageIcon(getClass().getResource("/Icones/welcome.png")));                      
+                        princP.setVisible(true);   
+                        
+                    }                                                                             
+                }else{
+                    JOptionPane.showMessageDialog(this, "Senha Incorreta");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Usuario Não Encontrado");
+            }
+        } catch (Exception e) {
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,7 +133,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         PainelCentral = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        senha2 = new jpass.JRPasswordField();
+        senha = new jpass.JRPasswordField();
         usuario = new app.bolivia.swing.JCTextField();
         BTN_Entrar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -91,7 +156,7 @@ public class Login extends javax.swing.JFrame {
         setTitle("Login");
         setBackground(new java.awt.Color(7, 143, 201));
         setLocationByPlatform(true);
-        setPreferredSize(new java.awt.Dimension(430, 330));
+        setPreferredSize(new java.awt.Dimension(430, 430));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
@@ -119,6 +184,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         PainelCentral.setBackground(new java.awt.Color(255, 255, 255));
+        PainelCentral.setPreferredSize(new java.awt.Dimension(417, 325));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -127,17 +193,17 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(7, 143, 201)));
         jLabel1.setOpaque(true);
 
-        senha2.setBackground(new java.awt.Color(7, 143, 201));
-        senha2.setBorder(null);
-        senha2.setForeground(new java.awt.Color(255, 255, 255));
-        senha2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        senha2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        senha2.setName(""); // NOI18N
-        senha2.setPhColor(new java.awt.Color(255, 255, 255));
-        senha2.setPlaceholder("Senha");
-        senha2.addActionListener(new java.awt.event.ActionListener() {
+        senha.setBackground(new java.awt.Color(7, 143, 201));
+        senha.setBorder(null);
+        senha.setForeground(new java.awt.Color(255, 255, 255));
+        senha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        senha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        senha.setName("senha"); // NOI18N
+        senha.setPhColor(new java.awt.Color(255, 255, 255));
+        senha.setPlaceholder("Senha");
+        senha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                senha2ActionPerformed(evt);
+                senhaActionPerformed(evt);
             }
         });
 
@@ -146,6 +212,7 @@ public class Login extends javax.swing.JFrame {
         usuario.setForeground(new java.awt.Color(255, 255, 255));
         usuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         usuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        usuario.setName("usuario"); // NOI18N
         usuario.setPhColor(new java.awt.Color(255, 255, 255));
         usuario.setPlaceholder("Usuario");
         usuario.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -161,6 +228,11 @@ public class Login extends javax.swing.JFrame {
         BTN_Entrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BTN_Entrar.setOpaque(false);
         BTN_Entrar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Botão Entrar2.png"))); // NOI18N
+        BTN_Entrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_EntrarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/login.user.png"))); // NOI18N
 
@@ -186,10 +258,10 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PainelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(senha2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
+                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
             .addGroup(PainelCentralLayout.createSequentialGroup()
                 .addGroup(PainelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BTN_Entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,14 +278,13 @@ public class Login extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(senha2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelCentralLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PainelCentralLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(BTN_Entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(BTN_Sair, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5))
         );
@@ -235,8 +306,8 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(PainelCab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PainelCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(PainelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(PainelLogin);
@@ -244,17 +315,27 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void senha2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senha2ActionPerformed
+    private void senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_senha2ActionPerformed
+    }//GEN-LAST:event_senhaActionPerformed
 
     private void usuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usuarioKeyReleased
-        usuario.setText(usuario.getText().toUpperCase());
+        //usuario.setText(usuario.getText().toUpperCase());
     }//GEN-LAST:event_usuarioKeyReleased
 
     private void BTN_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SairActionPerformed
         dispose();
     }//GEN-LAST:event_BTN_SairActionPerformed
+
+    private void BTN_EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EntrarActionPerformed
+        String us = usuario.getText();
+        String key = senha.getText();
+        if(us.equals("") || key.equals("")){
+            JOptionPane.showMessageDialog(this, "Preencha todos os Campos", "Login", 0);
+        }else{
+            Logar(us, key);
+        }
+    }//GEN-LAST:event_BTN_EntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,7 +382,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private jpass.JRPasswordField senha2;
+    private jpass.JRPasswordField senha;
     private app.bolivia.swing.JCTextField usuario;
     // End of variables declaration//GEN-END:variables
 }
