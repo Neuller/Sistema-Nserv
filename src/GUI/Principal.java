@@ -32,6 +32,7 @@ public class Principal extends javax.swing.JFrame {
         
         CadastroProdutos.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_stock.png")));
         MenuClientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_client.png")));
+        MenuOS.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_os.png")));
         
         ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
         setIconImage(logo.getImage());

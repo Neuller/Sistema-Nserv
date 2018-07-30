@@ -6,12 +6,15 @@
 package GUI;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Ncesar
  */
 public class Login extends javax.swing.JFrame {
+    
+    SplashScreen inicio;
 
     /**
      * Creates new form Login
@@ -21,7 +24,34 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
         setIconImage(logo.getImage());
+                
     }
+    
+    public Login(SplashScreen inicio){
+        this.inicio = inicio;
+        initComponents();
+        setProgress(0, "Carregando..");
+        setProgress(20, "Conectando ao Banco..");
+        setProgress(60, "Carregando Módulos..");
+        setProgress(90, "Carregando Interface..");     
+        setProgress(99, "Inicializando..");  
+        this.setLocationRelativeTo(null);
+        ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
+        setIconImage(logo.getImage());
+                     
+    }
+    
+    void setProgress(int percent, String info){
+        inicio.getJLabel().setText(info);
+        inicio.getJProgressBar().setValue(percent);
+        
+        try {
+            Thread.sleep(1000);
+            
+        } catch (InterruptedException e) {
+            JOptionPane.showMessageDialog(this, "Não foi possível Carregar a Inicialização");
+        }
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.

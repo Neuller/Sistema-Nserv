@@ -1,18 +1,76 @@
 package GUI;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
+import javax.swing.plaf.basic.BasicProgressBarUI;
 
 
 public class SplashScreen extends javax.swing.JFrame {
+    
+    SplashScreen spl = this;
+    Color MYCOLOR = new Color(51, 153, 255);
 
     public SplashScreen() {
         initComponents();
         this.setLocationRelativeTo(null);
+        startThread();
+        
+        Progresso.setUI(new BasicProgressBarUI(){
+            @Override
+            protected void paintDeterminate(Graphics g, JComponent jc) {
+               Graphics2D g2d = (Graphics2D)g;
+               
+               int baixo = Progresso.getWidth();
+               int alto = Progresso.getHeight();
+               int espacobaixo = baixo;
+               int espacoalto = alto - 5;
+               
+               double pJProgress = Progresso.getPercentComplete();
+               
+               espacobaixo = (int) (espacobaixo*pJProgress);
+               
+               g2d.setColor(MYCOLOR);
+               Rectangle Progress1 = new Rectangle(5 ,5, espacobaixo -5, espacoalto -5);
+               g2d.fill(Progress1);               
+               
+               
+            }
+            
+        });
         
         ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
         setIconImage(logo.getImage());
     }
-
+    
+    void startThread(){
+    Thread hi = new Thread(new Runnable() {      
+        @Override
+        public void run(){
+            Login log = new Login(spl);
+            log.setLocationRelativeTo(null);
+            log.setVisible(true);
+            dispose();
+        }
+    }
+    );
+    
+    hi.start();
+    
+    }
+    
+    public JProgressBar getJProgressBar(){
+        return Progresso;
+    }
+    
+    public JLabel getJLabel(){
+        return lblText;
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -21,7 +79,7 @@ public class SplashScreen extends javax.swing.JFrame {
         PainelGeral = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         PainelProgressBar = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblText = new javax.swing.JLabel();
         Progresso = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -38,7 +96,12 @@ public class SplashScreen extends javax.swing.JFrame {
         PainelProgressBar.setBackground(new java.awt.Color(255, 255, 255));
         PainelProgressBar.setOpaque(false);
 
-        jLabel2.setText("Carregando...");
+        lblText.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblText.setText("Carregando...");
+        lblText.setName("lblText"); // NOI18N
+
+        Progresso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
+        Progresso.setName("Progresso"); // NOI18N
 
         javax.swing.GroupLayout PainelProgressBarLayout = new javax.swing.GroupLayout(PainelProgressBar);
         PainelProgressBar.setLayout(PainelProgressBarLayout);
@@ -50,13 +113,13 @@ public class SplashScreen extends javax.swing.JFrame {
                     .addComponent(Progresso, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PainelProgressBarLayout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(jLabel2)))
+                        .addComponent(lblText)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PainelProgressBarLayout.setVerticalGroup(
             PainelProgressBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelProgressBarLayout.createSequentialGroup()
-                .addComponent(jLabel2)
+                .addComponent(lblText)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Progresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -134,6 +197,6 @@ public class SplashScreen extends javax.swing.JFrame {
     private javax.swing.JPanel PainelProgressBar;
     private javax.swing.JProgressBar Progresso;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblText;
     // End of variables declaration//GEN-END:variables
 }

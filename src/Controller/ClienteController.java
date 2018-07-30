@@ -21,17 +21,7 @@ public class ClienteController {
         if(Cliente.getNome().equals("")){
            JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
-        }
-        
-        if(Cliente.getTelefone().equals("(  )     -    ")){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Telefone", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }
-        
-        if(Cliente.getCelular().equals("(  ) 9     -    ")){
-        JOptionPane.showMessageDialog(null, "Preencha o campo Celular", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }
+        }           
         
         ClienteD.CadastrarCliente(Cliente);
         
@@ -54,17 +44,7 @@ public class ClienteController {
         if(Cliente.getNome().equals("")){
            JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
-        }
-        
-        if(Cliente.getTelefone().equals("(  )     -    ")){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Telefone", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }
-        
-        if(Cliente.getCelular().equals("(  ) 9     -    ")){
-        JOptionPane.showMessageDialog(null, "Preencha o campo Celular", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }
+        }            
         
         ClienteD.editarCliente(Cliente);
         
