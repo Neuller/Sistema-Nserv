@@ -6,7 +6,7 @@ public class ServicosBeans {
     private int CodServicos;
     private String Data_Servico;
     private String Genero;
-    private String Modelo;
+    private String Serial;
     private String Situacao;
     private String Aparelho;
     private String Informacao;
@@ -27,12 +27,12 @@ public class ServicosBeans {
         return CodCliente;
     }
 
-    public String getModelo() {
-        return Modelo;
+    public String getSerial() {
+        return Serial;
     }
 
-    public void setModelo(String Modelo) {
-        this.Modelo = Modelo;
+    public void setSerial(String Serial) {
+        this.Serial = Serial;
     }
 
     public void setCodCliente(int CodCliente) {

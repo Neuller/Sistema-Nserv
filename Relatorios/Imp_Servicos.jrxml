@@ -3,48 +3,47 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="143"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="Cod_Servicos" class="java.lang.Integer">
+	<parameter name="Cod_Serial" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
+     clientes.`CodCliente` AS clientes_CodCliente,
+     clientes.`Cli_Nome` AS clientes_Cli_Nome,
+     clientes.`Cli_Telefone` AS clientes_Cli_Telefone,
+     clientes.`Cli_Celular` AS clientes_Cli_Celular,
      servicos.`CodServicos` AS servicos_CodServicos,
      servicos.`Data_Servico` AS servicos_Data_Servico,
      servicos.`Genero` AS servicos_Genero,
      servicos.`Situacao` AS servicos_Situacao,
      servicos.`Aparelho` AS servicos_Aparelho,
-     servicos.`Modelo` AS servicos_Modelo,
+     servicos.`Serial` AS servicos_Serial,
      servicos.`Informacao` AS servicos_Informacao,
      servicos.`Tecnico` AS servicos_Tecnico,
      servicos.`Garantia` AS servicos_Garantia,
      servicos.`Valor` AS servicos_Valor,
-     servicos.`CodCliente` AS servicos_CodCliente,
-     clientes.`CodCliente` AS clientes_CodCliente,
-     clientes.`Cli_Nome` AS clientes_Cli_Nome,
-     clientes.`Cli_Telefone` AS clientes_Cli_Telefone,
-     clientes.`Cli_DataCadastro` AS clientes_Cli_DataCadastro,
-     clientes.`Cli_Celular` AS clientes_Cli_Celular
+     servicos.`CodCliente` AS servicos_CodCliente
 FROM
      `clientes` clientes INNER JOIN `servicos` servicos ON clientes.`CodCliente` = servicos.`CodCliente`
 
-where servicos.`CodServicos`=$P{Cod_Servicos}]]>
+WHERE
+      servicos.`Serial` = $P{Cod_Serial}]]>
 	</queryString>
+	<field name="clientes_CodCliente" class="java.lang.Integer"/>
+	<field name="clientes_Cli_Nome" class="java.lang.String"/>
+	<field name="clientes_Cli_Telefone" class="java.lang.String"/>
+	<field name="clientes_Cli_Celular" class="java.lang.String"/>
 	<field name="servicos_CodServicos" class="java.lang.Integer"/>
 	<field name="servicos_Data_Servico" class="java.lang.String"/>
 	<field name="servicos_Genero" class="java.lang.String"/>
 	<field name="servicos_Situacao" class="java.lang.String"/>
 	<field name="servicos_Aparelho" class="java.lang.String"/>
-	<field name="servicos_Modelo" class="java.lang.String"/>
+	<field name="servicos_Serial" class="java.lang.String"/>
 	<field name="servicos_Informacao" class="java.lang.String"/>
 	<field name="servicos_Tecnico" class="java.lang.String"/>
 	<field name="servicos_Garantia" class="java.lang.String"/>
 	<field name="servicos_Valor" class="java.lang.Double"/>
 	<field name="servicos_CodCliente" class="java.lang.Integer"/>
-	<field name="clientes_CodCliente" class="java.lang.Integer"/>
-	<field name="clientes_Cli_Nome" class="java.lang.String"/>
-	<field name="clientes_Cli_Telefone" class="java.lang.String"/>
-	<field name="clientes_Cli_DataCadastro" class="java.lang.String"/>
-	<field name="clientes_Cli_Celular" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -58,12 +57,14 @@ where servicos.`CodServicos`=$P{Cod_Servicos}]]>
 				<text><![CDATA[Ordem de Serviço / Orçamento]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="687" y="10" width="100" height="20" uuid="4cbc4e74-1ffc-4766-a10c-8b1bf82ee7a9"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="655" y="10" width="140" height="20" uuid="4cbc4e74-1ffc-4766-a10c-8b1bf82ee7a9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="587" y="10" width="100" height="20" uuid="5aeaefaf-7db3-4695-9167-e90ff0ae2cd5"/>
+				<reportElement x="555" y="10" width="100" height="20" uuid="5aeaefaf-7db3-4695-9167-e90ff0ae2cd5"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -72,158 +73,179 @@ where servicos.`CodServicos`=$P{Cod_Servicos}]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="210" splitType="Stretch">
+		<band height="142" splitType="Stretch">
 			<image>
-				<reportElement x="297" y="0" width="208" height="210" uuid="3282b5e7-95cf-47be-8a0a-ec31a3e12172"/>
+				<reportElement x="0" y="0" width="139" height="142" uuid="3282b5e7-95cf-47be-8a0a-ec31a3e12172"/>
 				<imageExpression><![CDATA["C:\\Users\\Ncesar\\Documents\\NetBeansProjects\\Sistema Nserv\\src\\Icones\\Logo NSERV.png"]]></imageExpression>
 			</image>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="42" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="22" width="100" height="20" uuid="ad1726c6-69c1-4d33-9e6c-be5c2298340a"/>
+				<reportElement x="8" y="1" width="100" height="20" uuid="cc9dcfef-8da8-482c-ac5a-973f1af50c23"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[Número Serviço]]></text>
+				<text><![CDATA[Código Cliente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="108" y="1" width="687" height="20" uuid="2ead07df-63c2-4fdb-9a4a-fbbb816d9d0f"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{servicos_CodCliente}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="40" width="802" height="1" uuid="a95166b8-c0a7-47fd-8cf9-5b200e619831"/>
+			</line>
+			<staticText>
+				<reportElement x="8" y="41" width="100" height="20" uuid="340eb411-3bef-432f-9b94-0fbaab2dd81d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Código Serviço]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="22" width="100" height="20" uuid="be4b0b4d-caa0-4e57-909e-ddda93830977"/>
+				<reportElement x="108" y="41" width="120" height="20" uuid="fdea692c-0c83-4dc4-86f3-22dcc455747b"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Data Serviço]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="202" y="22" width="100" height="20" uuid="4ac8c1a5-f047-499f-95b5-855f113e16f9"/>
+				<reportElement x="228" y="41" width="120" height="20" uuid="2524e83e-4547-4edf-92d2-35203a4b5899"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Genero]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="302" y="22" width="100" height="20" uuid="1176ad4e-71a9-47b9-bb27-3fbb125f3270"/>
-				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Situação]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="402" y="22" width="100" height="20" uuid="6ac59726-68e6-4f61-927c-40f82789367d"/>
-				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Aparelho]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="502" y="22" width="100" height="20" uuid="464e9445-c645-43fc-a477-e305c69d4aa0"/>
+				<reportElement x="348" y="41" width="120" height="20" uuid="c5c3d33f-4206-4df3-9914-fec7e9dceeb1"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[Modelo]]></text>
+				<text><![CDATA[Serial]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="602" y="22" width="100" height="20" uuid="16a1569e-ca74-4297-ab91-e6e7ccd398f2"/>
+				<reportElement x="468" y="41" width="127" height="20" uuid="7d2966e1-e9b8-4ec0-aefa-787e12f95289"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Informação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="595" y="41" width="100" height="20" uuid="71a49ab7-947d-40ec-aa64-efa93835da47"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Técnico]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="702" y="22" width="100" height="20" uuid="c15a9fda-fc22-42b4-bae8-4264d46e50b1"/>
+				<reportElement x="695" y="41" width="100" height="20" uuid="c513bdfa-d120-460b-abb4-73f49aa9032f"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Garantia]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="73854fcf-d0c3-4353-8f25-02e0537e65f1"/>
+				<reportElement x="8" y="21" width="100" height="20" uuid="8e7d8689-24cf-4ecb-85f1-fc28f828ac00"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Cliente]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="0" width="100" height="20" uuid="6167651a-4c3a-4b87-b8e8-1ba1f7480e95"/>
+				<reportElement x="108" y="21" width="687" height="20" uuid="d26dd7f3-c9ef-4df9-b85b-24a0a55e1bb0"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{clientes_Cli_Nome}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="0" y="20" width="802" height="2" uuid="7190d17b-8632-49a3-90d6-7df8801d9b0b"/>
-			</line>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="64" splitType="Stretch">
+		<band height="60" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20" uuid="e37cd9f4-a692-4b14-94da-971609089d69"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="8" y="0" width="100" height="20" uuid="959f148d-ad15-42c3-9c72-c65236fd8a4a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{servicos_CodServicos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="0" width="100" height="20" uuid="1b5be783-fd41-4b98-aa14-51828d970785"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{servicos_Data_Servico}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="202" y="0" width="100" height="20" uuid="e66665f9-17bd-4da6-872b-d8a9d601f6d3"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{servicos_Genero}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="302" y="0" width="100" height="20" uuid="db5fa3f3-6289-4b5e-8dc9-2415eb543b3d"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{servicos_Situacao}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="402" y="0" width="100" height="20" uuid="d555094d-859d-45a8-9946-de971e655f97"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{servicos_Aparelho}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="502" y="0" width="100" height="20" uuid="52835c06-9afa-4291-a93b-d662a8ba9b03"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{servicos_Modelo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="602" y="0" width="100" height="20" uuid="34e1c07c-0073-42a1-8de2-071c0196c23b"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{servicos_Tecnico}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="702" y="0" width="100" height="20" uuid="17ca5d0b-c309-4216-8462-9639452d7bea"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{servicos_Garantia}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="100" y="22" width="100" height="20" uuid="8f5791be-f8ba-4cf1-84c5-735d08bb80f4"/>
-				<textFieldExpression><![CDATA[$F{servicos_Informacao}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="0" y="22" width="100" height="20" uuid="ad1e9313-74ef-43c6-a197-b81a9c4fefbb"/>
+				<reportElement x="108" y="40" width="120" height="20" uuid="b742cd3c-eae1-4303-a767-8ef5fe4e2744"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[Informação]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="100" y="42" width="100" height="20" uuid="465e6f7f-2a3b-47fa-a8a0-015d3726acf8"/>
-				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[$F{servicos_Valor}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="42" width="100" height="20" uuid="78964156-a925-470f-9d38-be30abf79810"/>
+				<reportElement x="8" y="40" width="100" height="20" uuid="f56fef1b-869f-46a8-90f4-e950aaba7736"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Valor]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="20" width="802" height="2" uuid="9d2db7f3-53fc-42cd-af00-5b9e2f41216b"/>
+				<reportElement x="0" y="19" width="802" height="1" uuid="1942d4d3-7462-4592-be3f-7441e5ee783c"/>
 			</line>
-			<line>
-				<reportElement x="0" y="62" width="802" height="2" uuid="ab3eb439-8801-40dc-8630-ce35f8abfc9d"/>
-			</line>
+			<textField>
+				<reportElement x="108" y="20" width="120" height="20" uuid="51e8ba85-383b-4003-9221-af64412e7097"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{servicos_Genero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="108" y="0" width="120" height="20" uuid="676543ed-e2a2-448a-8d69-24cb0d7c42ec"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{servicos_Data_Servico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="0" width="120" height="20" uuid="222d368f-e2e7-45a2-a4c1-87e3e108e113"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{servicos_Aparelho}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="348" y="0" width="120" height="20" uuid="4e8637a0-3f2b-4232-9ad9-c1262863498e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{servicos_Serial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="0" width="127" height="20" uuid="cc0eb9fd-2ba4-479a-a838-e349a75e3a36"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{servicos_Informacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="695" y="0" width="100" height="20" uuid="b6240d6b-87d6-4b32-96d4-aa132eff5675"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{servicos_Garantia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="20" width="100" height="20" uuid="8ba68fe2-ffce-4a11-80e8-a07935bd5432"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Gênero]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="595" y="0" width="100" height="20" uuid="05507ad0-d84e-4caf-b799-12dd3294a98a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{servicos_Tecnico}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

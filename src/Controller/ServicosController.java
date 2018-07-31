@@ -17,18 +17,14 @@ public class ServicosController {
     }
     
     public boolean verificardados(ServicosBeans OS){
+        
         if(OS.getAparelho().equals("")){
            JOptionPane.showMessageDialog(null, "Preencha o campo Aparelho", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         } 
-        
-        if(OS.getInformacao().equals("")){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Informação", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }
-        
-        if(OS.getModelo().equals("")){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Modelo", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+             
+        if(OS.getSerial().equals("")){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Serial", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         
@@ -52,13 +48,8 @@ public class ServicosController {
         return false;
         }
        
-       if(OS.getInformacao().equals("")){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Informação", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }
-        
-       if(OS.getModelo().equals("")){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Modelo", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+       if(OS.getSerial().equals("")){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Serial", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         
