@@ -15,6 +15,15 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
    EstoqueController EstoqueC;
    DefaultTableModel Modelo;
    DecimalFormat formatoDecimal;
+   
+   private static EstoqueTela estoquetela;   
+   
+   public static EstoqueTela getInstancia(){
+       if(estoquetela == null){
+           estoquetela = new EstoqueTela();          
+       }
+       return estoquetela;
+   }
 
  
     public EstoqueTela() {

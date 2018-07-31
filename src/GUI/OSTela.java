@@ -33,6 +33,15 @@ public class OSTela extends javax.swing.JInternalFrame {
     DefaultTableModel Modelo; 
     Connection conexao = null;
     
+   private static OSTela ostela;   
+   
+   public static OSTela getInstancia(){
+       if(ostela == null){
+           ostela = new OSTela();          
+       }
+       return ostela;
+   }
+    
 
     public OSTela() {
         initComponents();     

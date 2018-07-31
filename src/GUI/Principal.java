@@ -2,6 +2,7 @@ package GUI;
 
 import Utilitarios.Conexao;
 import Utilitarios.FundoTela;
+import Utilitarios.GerentedeJanelas;
 import java.awt.GridLayout;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -17,18 +18,24 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class Principal extends javax.swing.JFrame {
     
-    FundoTela tela;
+    GerentedeJanelas gerentedeJanelas;
+    //FundoTela tela;
     EstoqueTela estoquetela;
     ClienteTela clientetela;
     OSTela ostela;
     Connection conexao = null;
 
+    
+    public static boolean fecha = false;
+    public static boolean fecha1 = false;
+       
     public Principal() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Código para abrir tela inteira
         setLayout(new GridLayout());
-        tela = new FundoTela("/Icones/FundoTela.png");   // Fundo Responsivo
-        getContentPane().add(tela);
+        //tela = new FundoTela("/Icones/FundoTela.png");   // Fundo Responsivo
+        //getContentPane().add(tela);
+        
         
         CadastroProdutos.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_stock.png")));
         MenuClientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_client.png")));
@@ -37,6 +44,8 @@ public class Principal extends javax.swing.JFrame {
         
         ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
         setIconImage(logo.getImage());
+        
+        this.gerentedeJanelas = new GerentedeJanelas(jDesktopPane1);
         
         conexao = Conexao.getConnection();
         
@@ -48,6 +57,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuCadastro = new javax.swing.JMenu();
         MenuClientes = new javax.swing.JMenuItem();
@@ -68,6 +78,17 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nserv - Administrador");
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 279, Short.MAX_VALUE)
+        );
 
         MenuCadastro.setText("Cadastro");
         MenuCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -155,24 +176,26 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void CadastroProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroProdutosActionPerformed
-        estoquetela = new EstoqueTela();
-        tela.add(estoquetela);
-        estoquetela.setVisible(true);
+        //estoquetela = new EstoqueTela();
+        //tela.add(estoquetela);
+        //estoquetela.setVisible(true);
+        gerentedeJanelas.abrirJanelas(estoquetela.getInstancia());
     }//GEN-LAST:event_CadastroProdutosActionPerformed
 
     private void MenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuClientesActionPerformed
-        clientetela = new ClienteTela();
-        tela.add(clientetela);
-        clientetela.setVisible(true);
+        //clientetela = new ClienteTela();
+        //tela.add(clientetela);
+        //clientetela.setVisible(true);
+        gerentedeJanelas.abrirJanelas(clientetela.getInstancia());
     }//GEN-LAST:event_MenuClientesActionPerformed
 
     private void Rel_ClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rel_ClientesActionPerformed
@@ -186,9 +209,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_Rel_ClientesActionPerformed
 
     private void MenuOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuOSActionPerformed
-        ostela = new OSTela();
-        tela.add(ostela);
-        ostela.setVisible(true);
+        //ostela = new OSTela();
+        //tela.add(ostela);
+        //ostela.setVisible(true);
+        gerentedeJanelas.abrirJanelas(ostela.getInstancia());
     }//GEN-LAST:event_MenuOSActionPerformed
 
     private void Rel_ServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rel_ServicosActionPerformed
@@ -261,6 +285,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuUsuarios;
     private javax.swing.JMenuItem Rel_Clientes;
     private javax.swing.JMenuItem Rel_Servicos;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

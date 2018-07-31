@@ -18,6 +18,15 @@ public class ClienteTela extends javax.swing.JInternalFrame {
    ClienteController ClienteC;
    DefaultTableModel Modelo;
    
+   private static ClienteTela clientetela;   
+   
+   public static ClienteTela getInstancia(){
+       if(clientetela == null){
+           clientetela = new ClienteTela();          
+       }
+       return clientetela;
+   }
+   
     public ClienteTela() {
         initComponents();       
         BTN_Cadastrar.setVisible(false);
