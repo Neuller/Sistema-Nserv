@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rel_Clientes" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f3ba8d80-3d58-4e21-872a-b25043491b99">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     clientes.`CodCliente` AS clientes_CodCliente,
+     clientes.`Cli_Nome` AS clientes_Cli_Nome,
+     clientes.`Cli_Telefone` AS clientes_Cli_Telefone,
+     clientes.`Cli_DataCadastro` AS clientes_Cli_DataCadastro,
+     clientes.`Cli_Celular` AS clientes_Cli_Celular
+FROM
+     `clientes` clientes]]>
+	</queryString>
+	<field name="clientes_CodCliente" class="java.lang.Integer"/>
+	<field name="clientes_Cli_Nome" class="java.lang.String"/>
+	<field name="clientes_Cli_Telefone" class="java.lang.String"/>
+	<field name="clientes_Cli_DataCadastro" class="java.lang.String"/>
+	<field name="clientes_Cli_Celular" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="111" y="0" width="332" height="35" uuid="77fe73cf-0e82-4a75-9c1d-f798f08a7e3c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Clientes]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="7" width="100" height="20" uuid="2ec1be1a-62b1-4734-8a48-2b531b4d2d0d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="133" splitType="Stretch">
+			<image>
+				<reportElement x="59" y="0" width="437" height="133" uuid="55f5ac2c-f155-4c2e-a042-35e2df07c07f"/>
+				<imageExpression><![CDATA["D:\\NSERV\\Painel.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20" uuid="0c3f69f4-b4c2-473b-9d23-01b798c500a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="175" height="20" uuid="84987412-4d6a-4fc6-a002-8748f709a3f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="0" width="100" height="20" uuid="69ecfee8-0138-4666-8bd6-fac334d9dba4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Data de Cadastro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="0" width="100" height="20" uuid="d30307be-2aac-4b25-9013-919f930fe5a0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" uuid="08425bdf-1eca-4db7-8f6e-fde44a75169c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Celular]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="80" height="20" uuid="adeb4b77-5a52-4b3b-bbb1-0af707860344"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clientes_CodCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="175" height="20" uuid="b3c41e10-6108-43a3-9c2b-0a302be3a059"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clientes_Cli_Nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="255" y="0" width="100" height="20" uuid="2ff0dfca-bd4f-4ca5-a999-1ee47553fb2a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clientes_Cli_DataCadastro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="0" width="100" height="20" uuid="bf92c126-7707-4917-a82e-201f9f1384e9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clientes_Cli_Telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="21fc2229-a3aa-4b9d-bf7e-c16bf4ad1145"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clientes_Cli_Celular}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

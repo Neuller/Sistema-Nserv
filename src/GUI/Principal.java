@@ -1,7 +1,6 @@
 package GUI;
 
 import Utilitarios.Conexao;
-import Utilitarios.FundoTela;
 import Utilitarios.GerentedeJanelas;
 import java.awt.GridLayout;
 import java.io.InputStream;
@@ -41,6 +40,9 @@ public class Principal extends javax.swing.JFrame {
         MenuClientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_client.png")));
         MenuOS.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_os.png")));
         MenuDesconectar.setIcon(new ImageIcon(getClass().getResource("/Icones/desconect.png")));
+        Rel_Clientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_reportfull.png")));
+        Rel_Estoque.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_reportfull.png")));
+        Rel_Clientes30.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_report30.png")));
         
         ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
         setIconImage(logo.getImage());
@@ -67,7 +69,9 @@ public class Principal extends javax.swing.JFrame {
         MenuOS = new javax.swing.JMenuItem();
         MenuRelatorios = new javax.swing.JMenu();
         Rel_Clientes = new javax.swing.JMenuItem();
-        Rel_Servicos = new javax.swing.JMenuItem();
+        Rel_Estoque = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        Rel_Clientes30 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         MenuDesconectar = new javax.swing.JMenuItem();
@@ -137,7 +141,7 @@ public class Principal extends javax.swing.JFrame {
         MenuRelatorios.setText("Relatórios");
         MenuRelatorios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        Rel_Clientes.setText("Clientes");
+        Rel_Clientes.setText("Clientes - Completo");
         Rel_Clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Rel_Clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,13 +150,22 @@ public class Principal extends javax.swing.JFrame {
         });
         MenuRelatorios.add(Rel_Clientes);
 
-        Rel_Servicos.setText("Serviços");
-        Rel_Servicos.addActionListener(new java.awt.event.ActionListener() {
+        Rel_Estoque.setText("Estoque - Completo");
+        Rel_Estoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Rel_ServicosActionPerformed(evt);
+                Rel_EstoqueActionPerformed(evt);
             }
         });
-        MenuRelatorios.add(Rel_Servicos);
+        MenuRelatorios.add(Rel_Estoque);
+        MenuRelatorios.add(jSeparator1);
+
+        Rel_Clientes30.setText("Clientes - 30 Dias");
+        Rel_Clientes30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Rel_Clientes30ActionPerformed(evt);
+            }
+        });
+        MenuRelatorios.add(Rel_Clientes30);
 
         jMenuBar1.add(MenuRelatorios);
         jMenuBar1.add(jMenu2);
@@ -199,6 +212,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuClientesActionPerformed
 
     private void Rel_ClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rel_ClientesActionPerformed
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a visualização do Relatório?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if(confirma ==  JOptionPane.YES_OPTION){
         try {
             InputStream caminho = getClass().getResourceAsStream("/Relatorios/Rel_Clientes.jasper");
             JasperPrint print = JasperFillManager.fillReport(caminho, null, conexao);
@@ -207,7 +222,8 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Rel_ClientesActionPerformed
-
+    }
+    
     private void MenuOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuOSActionPerformed
         //ostela = new OSTela();
         //tela.add(ostela);
@@ -215,17 +231,17 @@ public class Principal extends javax.swing.JFrame {
         gerentedeJanelas.abrirJanelas(ostela.getInstancia());
     }//GEN-LAST:event_MenuOSActionPerformed
 
-    private void Rel_ServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rel_ServicosActionPerformed
+    private void Rel_EstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rel_EstoqueActionPerformed
         int confirma = JOptionPane.showConfirmDialog(null, "Confirma a visualização do Relatório?", "Atenção", JOptionPane.YES_NO_OPTION);
         if(confirma ==  JOptionPane.YES_OPTION){
         try {
-            InputStream caminho = getClass().getResourceAsStream("");
+            InputStream caminho = getClass().getResourceAsStream("/Relatorios/Rel_Estoque.jasper");
             JasperPrint print = JasperFillManager.fillReport(caminho, null, conexao);
             JasperViewer.viewReport(print, false);
         } catch (JRException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_Rel_ServicosActionPerformed
+    }//GEN-LAST:event_Rel_EstoqueActionPerformed
     }
     
     private void MenuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuUsuariosActionPerformed
@@ -240,6 +256,19 @@ public class Principal extends javax.swing.JFrame {
         login.setVisible(true);              
     }
     }//GEN-LAST:event_MenuDesconectarActionPerformed
+
+    private void Rel_Clientes30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rel_Clientes30ActionPerformed
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a visualização do Relatório?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if(confirma ==  JOptionPane.YES_OPTION){
+        try {
+            InputStream caminho = getClass().getResourceAsStream("/Relatorios/Rel_Clientes30.jasper");
+            JasperPrint print = JasperFillManager.fillReport(caminho, null, conexao);
+            JasperViewer.viewReport(print, false);
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }                                            
+    }//GEN-LAST:event_Rel_Clientes30ActionPerformed
     
 
     public static void main(String args[]) {
@@ -284,12 +313,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuServicos;
     private javax.swing.JMenuItem MenuUsuarios;
     private javax.swing.JMenuItem Rel_Clientes;
-    private javax.swing.JMenuItem Rel_Servicos;
+    private javax.swing.JMenuItem Rel_Clientes30;
+    private javax.swing.JMenuItem Rel_Estoque;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

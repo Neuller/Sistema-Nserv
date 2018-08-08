@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rel_Estoque" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d405d81d-603c-47a7-abe2-15bd628a63b0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     estoque.`CodEstoque` AS estoque_CodEstoque,
+     estoque.`Est_Nome` AS estoque_Est_Nome,
+     estoque.`Est_Quantidade` AS estoque_Est_Quantidade,
+     estoque.`Est_Valor` AS estoque_Est_Valor,
+     estoque.`Est_NF` AS estoque_Est_NF,
+     estoque.`Est_NCM` AS estoque_Est_NCM
+FROM
+     `estoque` estoque]]>
+	</queryString>
+	<field name="estoque_CodEstoque" class="java.lang.Integer"/>
+	<field name="estoque_Est_Nome" class="java.lang.String"/>
+	<field name="estoque_Est_Quantidade" class="java.lang.Integer"/>
+	<field name="estoque_Est_Valor" class="java.lang.Double"/>
+	<field name="estoque_Est_NF" class="java.lang.Integer"/>
+	<field name="estoque_Est_NCM" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="7" width="100" height="20" uuid="810c16ce-039c-4e11-b30d-657c255d1061"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="111" y="0" width="332" height="35" uuid="3d82c8a2-61a0-41ee-92e3-a528097e954e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Clientes]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="133" splitType="Stretch">
+			<image>
+				<reportElement x="59" y="0" width="437" height="133" uuid="a1f29397-4caf-4049-8ebf-2301d09a82ac"/>
+				<imageExpression><![CDATA["D:\\NSERV\\Painel.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20" uuid="2b8a2250-8082-4afd-8fa8-a8339bb388cf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="155" height="20" uuid="6bf1f06b-58aa-4e32-a499-3d5b47933056"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="0" width="80" height="20" uuid="791a5a7f-65df-462f-9c9b-0f1e67c006cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="0" width="80" height="20" uuid="9c72151e-e8cc-4311-84aa-71804b6032e2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="0" width="80" height="20" uuid="9a268dab-b5fb-4f1b-b21d-4c7587c8a9a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[NF-E]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="0" width="80" height="20" uuid="79d46a92-4f81-4a0a-9fc5-1d4028e41979"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[NCM]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="80" height="20" uuid="ca4e1649-d792-4920-bebb-a74de82cb27e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estoque_CodEstoque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="155" height="20" uuid="131c9b09-1dab-481a-ab17-6c98acd89d7c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estoque_Est_Nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="0" width="80" height="20" uuid="365ef5a4-dd2d-4978-810c-a2bb57897662"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estoque_Est_Quantidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="315" y="0" width="80" height="20" uuid="33c384c6-7caf-4d0f-a44e-4c2ed82ec496"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estoque_Est_Valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="80" height="20" uuid="95bfd425-f71b-4784-a2dc-e836c738586d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estoque_Est_NF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="0" width="80" height="20" uuid="50a68a6b-22b7-4ee6-a733-b05648c3b717"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estoque_Est_NCM}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

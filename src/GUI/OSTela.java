@@ -2,7 +2,6 @@ package GUI;
 
 import Beans.ServicosBeans;
 import Controller.ServicosController;
-import DAO.ServicosDAO;
 import java.sql.*;
 import Utilitarios.Conexao;
 import Utilitarios.Corretores;
@@ -48,11 +47,10 @@ public class OSTela extends javax.swing.JInternalFrame {
     public OSTela() {
         initComponents();     
         BTN_Imprimir.setEnabled(false);
+        BTN_Voltar.setEnabled(false);
         BTN_Cadastrar.setVisible(false);
-        BTN_Voltar.setVisible(false);
         BTN_Editar.setVisible(false);
-        TXT_Data.setEnabled(false);
-        BTN_Voltar.setVisible(false);
+        TXT_Data.setEnabled(false);       
         TBL_Clientes.setVisible(false);
         TBL_Servicos.setVisible(false);
         habilitarcampos(false);
@@ -122,7 +120,7 @@ public class OSTela extends javax.swing.JInternalFrame {
         TXT_CodCliente.setText(TBL_Servicos.getModel().getValueAt(setar, 10).toString());  
         BTN_Imprimir.setEnabled(true);
         BTN_Editar.setVisible(true);
-        BTN_Voltar.setVisible(true);
+        BTN_Voltar.setEnabled(true);
     }
     
     private void imprimir(){
@@ -462,6 +460,10 @@ public class OSTela extends javax.swing.JInternalFrame {
             }
         });
 
+        jSeparator1.setBackground(new java.awt.Color(7, 143, 201));
+        jSeparator1.setForeground(new java.awt.Color(7, 143, 201));
+        jSeparator1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
         TBL_Servicos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TBL_Servicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -739,12 +741,13 @@ public class OSTela extends javax.swing.JInternalFrame {
     private void BTN_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CadastrarActionPerformed
         popularOSBeans();
         ServicosC.verificardados(ServicosB);
-        TXT_Aparelho.setText("");
-        TXT_Serial.setText("");
-        TXT_CodCliente.setText("");
-        TXT_CodCliente.setText(ServicosC.controleDeCodigo());
-        DataAtual = new Date();
-        TXT_Data.setText(Formatodata.format(DataAtual));
+        limparCampos();
+        ((DefaultTableModel) TBL_Clientes.getModel()).setRowCount(0);
+        BTN_Novo.setVisible(true); 
+        BTN_Cadastrar.setVisible(false);
+        //TXT_CodCliente.setText(ServicosC.controleDeCodigo());
+        //DataAtual = new Date();
+        //TXT_Data.setText(Formatodata.format(DataAtual));
     }//GEN-LAST:event_BTN_CadastrarActionPerformed
 
     private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
@@ -753,7 +756,7 @@ public class OSTela extends javax.swing.JInternalFrame {
         TXT_Data.setText(Formatodata.format(DataAtual)); 
         BTN_Novo.setVisible(false);      
         BTN_Cadastrar.setVisible(true);
-        BTN_Voltar.setVisible(true);
+        BTN_Voltar.setEnabled(true);
         TXT_CodServico.setText(ServicosC.controleDeCodigo());
         TXT_CodServico.setEnabled(true);  
         TXT_Clientes.setEnabled(true);
@@ -765,7 +768,7 @@ public class OSTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BTN_NovoActionPerformed
 
     private void BTN_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VoltarActionPerformed
-        BTN_Voltar.setVisible(false); 
+        BTN_Voltar.setEnabled(false); 
         BTN_Imprimir.setEnabled(false);
         limparCampos();
         ((DefaultTableModel) TBL_Clientes.getModel()).setRowCount(0);
@@ -788,6 +791,8 @@ public class OSTela extends javax.swing.JInternalFrame {
     private void BTN_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EditarActionPerformed
         popularOSBeansEditar();
         ServicosC.verificardadosEditar(ServicosB);
+        BTN_Editar.setVisible(false);
+        ((DefaultTableModel) TBL_Servicos.getModel()).setRowCount(0);
         limparCampos();
     }//GEN-LAST:event_BTN_EditarActionPerformed
 
@@ -809,6 +814,7 @@ public class OSTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TXT_PesqServKeyReleased
 
     private void TBL_ServicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_ServicosMouseClicked
+        BTN_Novo.setVisible(false);
         TXT_PesqServ.setText("");
         setar_camposServicos();
         TXT_CodCliente.setEnabled(true);
@@ -898,6 +904,7 @@ public class OSTela extends javax.swing.JInternalFrame {
         TXT_CodServico.setText("");
         TXT_Data.setText("");
         TXT_PesqServ.setText("");
+        TXT_Clientes.setText("");
     }
     
     final void popularOSBeans(){

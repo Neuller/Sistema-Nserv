@@ -84,7 +84,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="Rel_Clientes">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Clientes"/>
+                <Property name="text" type="java.lang.String" value="Clientes - Completo"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Cursor em Forma de M&#xe3;o"/>
                 </Property>
@@ -93,12 +93,22 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Rel_ClientesActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="Rel_Servicos">
+            <MenuItem class="javax.swing.JMenuItem" name="Rel_Estoque">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Servi&#xe7;os"/>
+                <Property name="text" type="java.lang.String" value="Estoque - Completo"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Rel_ServicosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Rel_EstoqueActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Rel_Clientes30">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Clientes - 30 Dias"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Rel_Clientes30ActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

@@ -13,11 +13,9 @@ import javax.swing.JOptionPane;
 
 public class ServicosDAO {
     
-    OSTela ostela;
     
     public ServicosDAO(){
         
-        OSTela ostela = new OSTela();
         
     }
     
@@ -116,7 +114,7 @@ public class ServicosDAO {
         }
         
     }
-    
+
 }
 
 
