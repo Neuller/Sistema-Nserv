@@ -51,8 +51,6 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        PainelCabecalho = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         PainelGeral = new javax.swing.JPanel();
         TXT_NCM = new javax.swing.JTextField();
         TXT_Buscar = new javax.swing.JTextField();
@@ -83,12 +81,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setTitle("Cadastro de Estoque");
-        setPreferredSize(new java.awt.Dimension(480, 540));
-
-        PainelCabecalho.setBackground(new java.awt.Color(7, 143, 201));
-        PainelCabecalho.setPreferredSize(new java.awt.Dimension(480, 480));
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/ico_nserv.png"))); // NOI18N
+        setPreferredSize(new java.awt.Dimension(480, 500));
 
         PainelGeral.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -249,8 +242,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
-                        .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TXT_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PainelGeralLayout.createSequentialGroup()
                                 .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -259,10 +251,13 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelGeralLayout.createSequentialGroup()
                                         .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(1, 1, 1)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
                                 .addGap(9, 9, 9)
                                 .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PainelGeralLayout.createSequentialGroup()
+                                .addComponent(TXT_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(TXT_Nome)))
                     .addComponent(jSeparator4)
                     .addComponent(jScrollPane1)
@@ -272,7 +267,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TXT_Buscar))
                     .addComponent(jSeparator1))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PainelGeralLayout.setVerticalGroup(
             PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,35 +318,15 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                 .addGap(71, 71, 71))
         );
 
-        javax.swing.GroupLayout PainelCabecalhoLayout = new javax.swing.GroupLayout(PainelCabecalho);
-        PainelCabecalho.setLayout(PainelCabecalhoLayout);
-        PainelCabecalhoLayout.setHorizontalGroup(
-            PainelCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PainelGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelCabecalhoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(19, 19, 19))
-        );
-        PainelCabecalhoLayout.setVerticalGroup(
-            PainelCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PainelCabecalhoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PainelGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PainelCabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(PainelGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PainelCabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(PainelGeral, javax.swing.GroupLayout.PREFERRED_SIZE, 437, Short.MAX_VALUE)
         );
 
         pack();
@@ -462,7 +437,6 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     private javax.swing.JButton BTN_Novo;
     private javax.swing.JButton BTN_Pesquisar;
     private javax.swing.JButton BTN_Voltar;
-    private javax.swing.JPanel PainelCabecalho;
     private javax.swing.JPanel PainelGeral;
     private javax.swing.JTable TBL_Estoque;
     private javax.swing.JTextField TXT_Buscar;
@@ -479,7 +453,6 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

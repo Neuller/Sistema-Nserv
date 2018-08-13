@@ -172,7 +172,7 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         setForeground(java.awt.Color.white);
         setTitle("Pesquisar / Editar Serviços");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(960, 745));
+        setPreferredSize(new java.awt.Dimension(960, 630));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -556,10 +556,10 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PainelGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(PainelGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setBounds(0, 0, 960, 602);
+        setBounds(0, 0, 960, 601);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
@@ -619,6 +619,7 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         TXT_CodServico.setEnabled(true);  
         TXT_Serial.setEnabled(true);
         TXT_Informacao.setEnabled(true); 
+        TXT_Servico.setEnabled(true);
         TXT_Valor.setEnabled(true);  
         TXT_Data.setEnabled(true); 
     }//GEN-LAST:event_TBL_ServicosMouseClicked
@@ -686,6 +687,7 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         TXT_CodServico.setEnabled(valor); 
         TXT_Serial.setEnabled(valor);
         TXT_Data.setEnabled(valor);
+        TXT_Servico.setEnabled(valor);
 }   
     
     final void limparCampos(){
