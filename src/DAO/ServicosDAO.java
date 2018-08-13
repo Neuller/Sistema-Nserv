@@ -92,17 +92,18 @@ public class ServicosDAO {
   
     public void editarOS(ServicosBeans OS){
         try {
-            String SQLInsertion = "update servicos set Genero = ?, Situacao = ?, Aparelho = ?, Serial = ?, Informacao = ?, Tecnico = ?, Garantia = ?, Valor = ? where CodServicos = ?";
+            String SQLInsertion = "update servicos set Genero = ?, Situacao = ?, Aparelho = ?, Serial = ?, Informacao = ?, Servico = ?, Tecnico = ?, Garantia = ?, Valor = ? where CodServicos = ?";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);        
             st.setString(1, OS.getGenero());
             st.setString(2, OS.getSituacao());
             st.setString(3, OS.getAparelho());
             st.setString(4, OS.getSerial());
             st.setString(5, OS.getInformacao());
-            st.setString(6, OS.getTecnico());
-            st.setString(7, OS.getGarantia());
-            st.setDouble(8, OS.getValor());
-            st.setInt(9, OS.getCodServicos());
+            st.setString(6, OS.getServico());
+            st.setString(7, OS.getTecnico());
+            st.setString(8, OS.getGarantia());
+            st.setDouble(9, OS.getValor());
+            st.setInt(10, OS.getCodServicos());
             st.execute();
             Conexao.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Editado com sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));

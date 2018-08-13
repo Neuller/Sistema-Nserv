@@ -125,7 +125,7 @@ public class ServicoCad extends javax.swing.JInternalFrame {
         
         private void CadastrarOS(ServicosBeans OS){
         try {
-            String SQLInsertion = "insert into servicos(Data_Servico, Genero, Situacao, Aparelho, Serial, Informacao, Tecnico, Garantia, Valor, CodCliente) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String SQLInsertion = "insert into servicos(Data_Servico, Genero, Situacao, Aparelho, Serial, Informacao, Servico, Tecnico, Garantia, Valor, CodCliente) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
             st.setString(1, Corretores.ConverterParaSQL(OS.getData_Servico()));
             st.setString(2, OS.getGenero());
@@ -133,10 +133,11 @@ public class ServicoCad extends javax.swing.JInternalFrame {
             st.setString(4, OS.getAparelho());
             st.setString(5, OS.getSerial());
             st.setString(6, OS.getInformacao());
-            st.setString(7, OS.getTecnico());
-            st.setString(8, OS.getGarantia());
-            st.setDouble(9, OS.getValor());
-            st.setInt(10, OS.getCodCliente());                    
+            st.setString(7, OS.getServico());
+            st.setString(8, OS.getTecnico());
+            st.setString(9, OS.getGarantia());
+            st.setDouble(10, OS.getValor());
+            st.setInt(11, OS.getCodCliente());                    
             st.execute();
             Conexao.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));            
@@ -744,6 +745,7 @@ public class ServicoCad extends javax.swing.JInternalFrame {
     ServicosB.setAparelho(TXT_Aparelho.getText().toUpperCase());
     ServicosB.setSerial(TXT_Serial.getText().toUpperCase());
     ServicosB.setInformacao(TXT_Informacao.getText().toUpperCase());
+    ServicosB.setServico("");
     ServicosB.setTecnico(CB_Tecnico.getSelectedItem().toString());
     ServicosB.setGarantia(CB_Garantia.getSelectedItem().toString());
     ServicosB.setValor(Double.parseDouble(TXT_Valor.getText().replace(",",".")));

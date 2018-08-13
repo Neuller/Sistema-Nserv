@@ -48,8 +48,7 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         initComponents();     
         BTN_Imprimir.setEnabled(false);
         BTN_Voltar.setEnabled(false);
-        BTN_Cadastrar.setVisible(false);
-        BTN_Editar.setVisible(false);
+        BTN_Editar.setEnabled(false);
         TXT_Data.setEnabled(false);       
         TBL_Servicos.setVisible(false);
         habilitarcampos(false);
@@ -67,7 +66,7 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
     }   
     
     private void pesquisar_servico(){
-        String SQLInsertion = "select CodServicos as ID, Data_Servico as DataServico, Genero as Genero, Situacao as Situacao, Aparelho as Aparelho, Serial as Serial, Informacao as Informacao, Tecnico as Tecnico, Garantia as Garantia, Valor as Valor, CodCliente as IDCLIENTE from servicos where Serial like ?";
+        String SQLInsertion = "select CodServicos as ID, Data_Servico as DataServico, Genero as Genero, Situacao as Situacao, Aparelho as Aparelho, Serial as Serial, Informacao as Informacao, Servico as Servico, Tecnico as Tecnico, Garantia as Garantia, Valor as Valor, CodCliente as IDCLIENTE from servicos where Serial like ?";
         try {
            
             PreparedStatement pst = Conexao.getConnection().prepareStatement(SQLInsertion);
@@ -94,10 +93,11 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         TXT_Aparelho.setText(TBL_Servicos.getModel().getValueAt(setar, 4).toString());  
         TXT_Serial.setText(TBL_Servicos.getModel().getValueAt(setar, 5).toString());  
         TXT_Informacao.setText(TBL_Servicos.getModel().getValueAt(setar, 6).toString());  
-        CB_Tecnico.setSelectedItem(TBL_Servicos.getModel().getValueAt(setar, 7).toString());  
-        CB_Garantia.setSelectedItem(TBL_Servicos.getModel().getValueAt(setar, 8).toString());  
-        TXT_Valor.setText(String.valueOf((Double)TBL_Servicos.getModel().getValueAt(setar, 9)));          
-        TXT_CodCliente.setText(TBL_Servicos.getModel().getValueAt(setar, 10).toString());  
+        TXT_Servico.setText(TBL_Servicos.getModel().getValueAt(setar, 7).toString());  
+        CB_Tecnico.setSelectedItem(TBL_Servicos.getModel().getValueAt(setar, 8).toString());  
+        CB_Garantia.setSelectedItem(TBL_Servicos.getModel().getValueAt(setar, 9).toString());  
+        TXT_Valor.setText(String.valueOf((Double)TBL_Servicos.getModel().getValueAt(setar, 10)));          
+        TXT_CodCliente.setText(TBL_Servicos.getModel().getValueAt(setar, 11).toString());  
         BTN_Imprimir.setEnabled(true);
         BTN_Editar.setVisible(true);
         BTN_Voltar.setEnabled(true);
@@ -156,10 +156,10 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         TXT_Informacao = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         TXT_Valor = new javax.swing.JTextField();
-        BTN_Novo = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        TXT_Servico = new javax.swing.JTextField();
         BTN_Voltar = new javax.swing.JButton();
         BTN_Imprimir = new javax.swing.JButton();
-        BTN_Cadastrar = new javax.swing.JButton();
         BTN_Editar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -283,7 +283,13 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         jLabel6.setText("Informação");
 
         TXT_Informacao.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        TXT_Informacao.setText("\n\n\n\n\n\n\n");
         TXT_Informacao.setOpaque(false);
+        TXT_Informacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_InformacaoActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel8.setText("Valor");
@@ -296,6 +302,11 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel11.setText("Serviço");
+
+        TXT_Servico.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout PN_OSLayout = new javax.swing.GroupLayout(PN_OS);
         PN_OS.setLayout(PN_OSLayout);
         PN_OSLayout.setHorizontalGroup(
@@ -304,18 +315,18 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(PN_OSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PN_OSLayout.createSequentialGroup()
-                        .addGroup(PN_OSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PN_OSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(PN_OSLayout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(TXT_CodServico, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PN_OSLayout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(TXT_CodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PN_OSLayout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(20, 20, 20)
                                 .addComponent(TXT_Data, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(PN_OSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,7 +342,7 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(CB_Garantia, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                         .addComponent(RBOrca)
                         .addGap(18, 18, 18)
                         .addComponent(RBOS)
@@ -356,7 +367,12 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
                             .addGroup(PN_OSLayout.createSequentialGroup()
                                 .addGap(110, 110, 110)
                                 .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(PN_OSLayout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TXT_Servico)
+                        .addContainerGap())))
         );
         PN_OSLayout.setVerticalGroup(
             PN_OSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,15 +384,14 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
                             .addComponent(CB_Situacao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(RBOrca, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(RBOS, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(RBOS, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TXT_CodServico, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PN_OSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CB_Tecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PN_OSLayout.createSequentialGroup()
-                        .addGroup(PN_OSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TXT_CodServico, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PN_OSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -396,24 +411,19 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
                     .addComponent(TXT_Serial, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PN_OSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TXT_Informacao, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PN_OSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TXT_Informacao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TXT_Servico, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PN_OSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        BTN_Novo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        BTN_Novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/New.png"))); // NOI18N
-        BTN_Novo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BTN_Novo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_NovoActionPerformed(evt);
-            }
-        });
 
         BTN_Voltar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         BTN_Voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Voltar.png"))); // NOI18N
@@ -433,15 +443,6 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
             }
         });
 
-        BTN_Cadastrar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        BTN_Cadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Valid.png"))); // NOI18N
-        BTN_Cadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BTN_Cadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_CadastrarActionPerformed(evt);
-            }
-        });
-
         BTN_Editar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         BTN_Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Edit.png"))); // NOI18N
         BTN_Editar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -458,20 +459,20 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         TBL_Servicos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TBL_Servicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "DataServico", "Genero", "Situacao", "Aparelho", "Serial", "Informacao", "Tecnico", "Garantia", "Valor", "IDCLIENTE"
+                "ID", "DataServico", "Genero", "Situacao", "Aparelho", "Serial", "Informacao", "Servico", "Tecnico", "Garantia", "Valor", "IDCLIENTE"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -514,23 +515,16 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
                         .addComponent(TXT_PesqServ, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(684, Short.MAX_VALUE))
-                    .addGroup(PainelGeralLayout.createSequentialGroup()
-                        .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PN_OS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2))
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelGeralLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BTN_Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 674, Short.MAX_VALUE))
+                    .addComponent(PN_OS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelGeralLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTN_Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         PainelGeralLayout.setVerticalGroup(
@@ -546,14 +540,12 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PN_OS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTN_Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -564,10 +556,10 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PainelGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PainelGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setBounds(0, 0, 960, 600);
+        setBounds(0, 0, 960, 602);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
@@ -579,31 +571,6 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CB_SituacaoActionPerformed
 
-    private void BTN_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CadastrarActionPerformed
-        popularOSBeans();
-        ServicosC.verificardados(ServicosB);
-        limparCampos();
-        BTN_Novo.setVisible(true); 
-        BTN_Cadastrar.setVisible(false);
-        //TXT_CodCliente.setText(ServicosC.controleDeCodigo());
-        //DataAtual = new Date();
-        //TXT_Data.setText(Formatodata.format(DataAtual));
-    }//GEN-LAST:event_BTN_CadastrarActionPerformed
-
-    private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
-        limparCampos();
-        DataAtual = new Date();
-        TXT_Data.setText(Formatodata.format(DataAtual)); 
-        BTN_Novo.setVisible(false);      
-        BTN_Cadastrar.setVisible(true);
-        BTN_Voltar.setEnabled(true);
-        TXT_CodServico.setText(ServicosC.controleDeCodigo());
-        TXT_CodServico.setEnabled(true);  
-        TXT_CodCliente.setEnabled(false); 
-        TXT_Data.setEnabled(true);       
-        ((DefaultTableModel) TBL_Servicos.getModel()).setRowCount(0);
-    }//GEN-LAST:event_BTN_NovoActionPerformed
-
     private void BTN_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VoltarActionPerformed
         BTN_Voltar.setEnabled(false); 
         BTN_Imprimir.setEnabled(false);
@@ -611,9 +578,7 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         ((DefaultTableModel) TBL_Servicos.getModel()).setRowCount(0);
         habilitarcampos(false);
         TXT_CodCliente.setEnabled(false);        
-        BTN_Cadastrar.setVisible(false);
-        BTN_Editar.setVisible(false);
-        BTN_Novo.setVisible(true);                               
+        BTN_Editar.setVisible(false);                             
     }//GEN-LAST:event_BTN_VoltarActionPerformed
 
     private void TXT_CodServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_CodServicoActionPerformed
@@ -628,8 +593,8 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         popularOSBeansEditar();
         ServicosC.verificardadosEditar(ServicosB);
         BTN_Editar.setVisible(false);
-        ((DefaultTableModel) TBL_Servicos.getModel()).setRowCount(0);
-        limparCampos();
+        //((DefaultTableModel) TBL_Servicos.getModel()).setRowCount(0);
+        //limparCampos();
     }//GEN-LAST:event_BTN_EditarActionPerformed
 
     private void BTN_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ImprimirActionPerformed
@@ -646,9 +611,9 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TXT_PesqServKeyReleased
 
     private void TBL_ServicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_ServicosMouseClicked
-        BTN_Novo.setVisible(false);
         TXT_PesqServ.setText("");
         setar_camposServicos();
+        BTN_Editar.setEnabled(true);
         TXT_CodCliente.setEnabled(true);
         TXT_Aparelho.setEnabled(true);
         TXT_CodServico.setEnabled(true);  
@@ -670,12 +635,14 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_PesqServActionPerformed
 
+    private void TXT_InformacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_InformacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TXT_InformacaoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTN_Cadastrar;
     private javax.swing.JButton BTN_Editar;
     private javax.swing.JButton BTN_Imprimir;
-    private javax.swing.JButton BTN_Novo;
     private javax.swing.JButton BTN_Voltar;
     private javax.swing.ButtonGroup ButtonGroup;
     private javax.swing.JComboBox<String> CB_Garantia;
@@ -693,9 +660,11 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TXT_Informacao;
     private javax.swing.JTextField TXT_PesqServ;
     private javax.swing.JTextField TXT_Serial;
+    private javax.swing.JTextField TXT_Servico;
     private javax.swing.JTextField TXT_Valor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -730,20 +699,6 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         TXT_PesqServ.setText("");
     }
     
-    final void popularOSBeans(){
-      
-    ServicosB.setData_Servico(TXT_Data.getText());
-    ServicosB.setGenero(Tipo.toString());   
-    ServicosB.setSituacao(CB_Situacao.getSelectedItem().toString());    
-    ServicosB.setAparelho(TXT_Aparelho.getText().toUpperCase());
-    ServicosB.setSerial(TXT_Serial.getText().toUpperCase());
-    ServicosB.setInformacao(TXT_Informacao.getText().toUpperCase());
-    ServicosB.setTecnico(CB_Tecnico.getSelectedItem().toString());
-    ServicosB.setGarantia(CB_Garantia.getSelectedItem().toString());
-    ServicosB.setValor(Double.parseDouble(TXT_Valor.getText().replace(",",".")));
-    ServicosB.setCodCliente(Integer.parseInt(TXT_CodCliente.getText()));
-}
-    
     final void popularOSBeansEditar(){
         
     ServicosB.setCodServicos(Integer.parseInt(TXT_CodServico.getText()));  
@@ -752,6 +707,7 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
     ServicosB.setAparelho(TXT_Aparelho.getText().toUpperCase());
     ServicosB.setSerial(TXT_Serial.getText().toUpperCase());
     ServicosB.setInformacao(TXT_Informacao.getText().toUpperCase());
+    ServicosB.setServico(TXT_Servico.getText());
     ServicosB.setTecnico(CB_Tecnico.getSelectedItem().toString());
     ServicosB.setGarantia(CB_Garantia.getSelectedItem().toString());
     ServicosB.setValor(Double.parseDouble(TXT_Valor.getText().replace(",",".")));

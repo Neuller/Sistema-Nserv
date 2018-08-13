@@ -39,7 +39,7 @@ public class Principal extends javax.swing.JFrame {
         
         CadastroProdutos.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_stock.png")));
         MenuClientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_client.png")));
-        PesqOS.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_os.png")));
+        PesqOS.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_pesqos.png")));
         MenuDesconectar.setIcon(new ImageIcon(getClass().getResource("/Icones/desconect.png")));
         Rel_Clientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_reportfull.png")));
         Rel_Estoque.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_reportfull.png")));

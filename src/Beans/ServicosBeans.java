@@ -10,10 +10,19 @@ public class ServicosBeans {
     private String Situacao;
     private String Aparelho;
     private String Informacao;
+    private String Servico;
     private String Tecnico;
     private String Garantia;
     private double Valor;
     private int CodCliente;
+
+    public String getServico() {
+        return Servico;
+    }
+
+    public void setServico(String Servico) {
+        this.Servico = Servico;
+    }
 
     public int getCodServicos() {
         return CodServicos;
