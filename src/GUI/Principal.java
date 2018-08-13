@@ -2,7 +2,6 @@ package GUI;
 
 import Utilitarios.Conexao;
 import Utilitarios.GerentedeJanelas;
-import java.awt.GridLayout;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.logging.Level;
@@ -15,13 +14,15 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 
+
 public class Principal extends javax.swing.JFrame {
     
     GerentedeJanelas gerentedeJanelas;
     //FundoTela tela;
     EstoqueTela estoquetela;
     ClienteTela clientetela;
-    OSTela ostela;
+    ServicoCad servicoCad;
+    ServicoPesq servicoPesq;
     Connection conexao = null;
 
     
@@ -31,18 +32,20 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Código para abrir tela inteira
-        setLayout(new GridLayout());
+        //setLayout(new GridLayout());
         //tela = new FundoTela("/Icones/FundoTela.png");   // Fundo Responsivo
         //getContentPane().add(tela);
         
         
         CadastroProdutos.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_stock.png")));
         MenuClientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_client.png")));
-        MenuOS.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_os.png")));
+        PesqOS.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_os.png")));
         MenuDesconectar.setIcon(new ImageIcon(getClass().getResource("/Icones/desconect.png")));
         Rel_Clientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_reportfull.png")));
         Rel_Estoque.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_reportfull.png")));
         Rel_Clientes30.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_report30.png")));
+        ServicosCad.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_os.png")));
+        MenuUsuarios.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_user.png")));
         
         ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
         setIconImage(logo.getImage());
@@ -59,14 +62,16 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jDesktopPane1 = new javax.swing.JDesktopPane()
+        ;
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuCadastro = new javax.swing.JMenu();
         MenuClientes = new javax.swing.JMenuItem();
         CadastroProdutos = new javax.swing.JMenuItem();
+        ServicosCad = new javax.swing.JMenuItem();
         MenuUsuarios = new javax.swing.JMenuItem();
         MenuServicos = new javax.swing.JMenu();
-        MenuOS = new javax.swing.JMenuItem();
+        PesqOS = new javax.swing.JMenuItem();
         MenuRelatorios = new javax.swing.JMenu();
         Rel_Clientes = new javax.swing.JMenuItem();
         Rel_Estoque = new javax.swing.JMenuItem();
@@ -115,6 +120,14 @@ public class Principal extends javax.swing.JFrame {
         });
         MenuCadastro.add(CadastroProdutos);
 
+        ServicosCad.setText("Serviços");
+        ServicosCad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ServicosCadActionPerformed(evt);
+            }
+        });
+        MenuCadastro.add(ServicosCad);
+
         MenuUsuarios.setText("Usuários");
         MenuUsuarios.setName("MenuUsuarios"); // NOI18N
         MenuUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -128,13 +141,13 @@ public class Principal extends javax.swing.JFrame {
 
         MenuServicos.setText("Serviços");
 
-        MenuOS.setText("Emitir Serviços");
-        MenuOS.addActionListener(new java.awt.event.ActionListener() {
+        PesqOS.setText("Pesquisar / Editar");
+        PesqOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuOSActionPerformed(evt);
+                PesqOSActionPerformed(evt);
             }
         });
-        MenuServicos.add(MenuOS);
+        MenuServicos.add(PesqOS);
 
         jMenuBar1.add(MenuServicos);
 
@@ -224,12 +237,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_Rel_ClientesActionPerformed
     }
     
-    private void MenuOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuOSActionPerformed
+    private void PesqOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesqOSActionPerformed
         //ostela = new OSTela();
         //tela.add(ostela);
         //ostela.setVisible(true);
-        gerentedeJanelas.abrirJanelas(ostela.getInstancia());
-    }//GEN-LAST:event_MenuOSActionPerformed
+        gerentedeJanelas.abrirJanelas(servicoPesq.getInstancia());
+    }//GEN-LAST:event_PesqOSActionPerformed
 
     private void Rel_EstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rel_EstoqueActionPerformed
         int confirma = JOptionPane.showConfirmDialog(null, "Confirma a visualização do Relatório?", "Atenção", JOptionPane.YES_NO_OPTION);
@@ -269,6 +282,10 @@ public class Principal extends javax.swing.JFrame {
         }
     }                                            
     }//GEN-LAST:event_Rel_Clientes30ActionPerformed
+
+    private void ServicosCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServicosCadActionPerformed
+        gerentedeJanelas.abrirJanelas(servicoCad.getInstancia());
+    }//GEN-LAST:event_ServicosCadActionPerformed
     
 
     public static void main(String args[]) {
@@ -308,13 +325,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuCadastro;
     private javax.swing.JMenuItem MenuClientes;
     private javax.swing.JMenuItem MenuDesconectar;
-    private javax.swing.JMenuItem MenuOS;
     private javax.swing.JMenu MenuRelatorios;
     private javax.swing.JMenu MenuServicos;
     private javax.swing.JMenuItem MenuUsuarios;
+    private javax.swing.JMenuItem PesqOS;
     private javax.swing.JMenuItem Rel_Clientes;
     private javax.swing.JMenuItem Rel_Clientes30;
     private javax.swing.JMenuItem Rel_Estoque;
+    private javax.swing.JMenuItem ServicosCad;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
