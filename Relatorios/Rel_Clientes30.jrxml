@@ -29,8 +29,10 @@ BETWEEN
 	<title>
 		<band height="80" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="455" y="7" width="100" height="20" uuid="c881a716-f7b6-4864-af08-b893d8dfd382"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="443" y="7" width="112" height="20" uuid="c881a716-f7b6-4864-af08-b893d8dfd382"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -40,10 +42,17 @@ BETWEEN
 				</textElement>
 				<text><![CDATA[Relatório de Clientes]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="227" y="36" width="100" height="20" uuid="55d1647e-8fff-4041-b58d-9bd7d0ca8785"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Últimos 30 Dias]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="133" splitType="Stretch">
+		<band height="150" splitType="Stretch">
 			<image>
 				<reportElement x="59" y="0" width="437" height="133" uuid="42360de9-1bfa-4c9a-a98f-2f4721de906d"/>
 				<imageExpression><![CDATA["D:\\NSERV\\Painel.jpg"]]></imageExpression>
