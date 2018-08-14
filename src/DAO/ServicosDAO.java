@@ -1,7 +1,6 @@
 package DAO;
 
 import Beans.ServicosBeans;
-import GUI.OSTela;
 import Utilitarios.Conexao;
 import Utilitarios.Corretores;
 import java.sql.PreparedStatement;

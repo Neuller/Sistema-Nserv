@@ -92,10 +92,10 @@ public class ServicoCad extends javax.swing.JInternalFrame {
             JasperPrint impressao;           
         try {
             if(!TXT_Serial.getText().equals("")){ 
-            relatorio = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/Relatorios/Imp_Servicos.jrxml");
+            relatorio = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/Relatorios/Entrada.jrxml");
             impressao = JasperFillManager.fillReport(relatorio, p, conexao);
             JasperViewer view  = new JasperViewer(impressao, false);
-            view.setTitle("Ordem de Serviço/Orçamento");
+            view.setTitle("Entrada de Equipamento");
             view.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(null, "Tenha um Serial de Equipamento para Impressão", "Atenção", 0);
