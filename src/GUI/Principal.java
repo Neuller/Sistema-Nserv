@@ -2,18 +2,18 @@ package GUI;
 
 import Utilitarios.Conexao;
 import Utilitarios.GerentedeJanelas;
+import java.awt.Color;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
-
+import javax.swing.ImageIcon;
 
 public class Principal extends javax.swing.JFrame {
     
@@ -35,8 +35,7 @@ public class Principal extends javax.swing.JFrame {
         //setLayout(new GridLayout());
         //tela = new FundoTela("/Icones/FundoTela.png");   // Fundo Responsivo
         //getContentPane().add(tela);
-        
-        
+               
         CadastroProdutos.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_stock.png")));
         MenuClientes.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_client.png")));
         PesqOS.setIcon(new ImageIcon(getClass().getResource("/Icones/ico_pesqos.png")));
@@ -50,7 +49,7 @@ public class Principal extends javax.swing.JFrame {
         ImageIcon logo = new ImageIcon(getClass().getResource("/Icones/ico_nserv.png"));
         setIconImage(logo.getImage());
         
-        this.gerentedeJanelas = new GerentedeJanelas(jDesktopPane1);
+        this.gerentedeJanelas = new GerentedeJanelas(jDesktopPane);
         
         conexao = Conexao.getConnection();
         
@@ -62,8 +61,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jDesktopPane1 = new javax.swing.JDesktopPane()
-        ;
+        jDesktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuCadastro = new javax.swing.JMenu();
         MenuClientes = new javax.swing.JMenuItem();
@@ -88,14 +86,14 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nserv - Administrador");
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jDesktopPaneLayout = new javax.swing.GroupLayout(jDesktopPane);
+        jDesktopPane.setLayout(jDesktopPaneLayout);
+        jDesktopPaneLayout.setHorizontalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jDesktopPaneLayout.setVerticalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 279, Short.MAX_VALUE)
         );
 
@@ -202,11 +200,11 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(jDesktopPane, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(jDesktopPane, javax.swing.GroupLayout.Alignment.TRAILING)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -333,7 +331,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem Rel_Clientes30;
     private javax.swing.JMenuItem Rel_Estoque;
     private javax.swing.JMenuItem ServicosCad;
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
