@@ -2,7 +2,6 @@ package GUI;
 
 import Utilitarios.Conexao;
 import Utilitarios.GerentedeJanelas;
-import java.awt.Color;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.logging.Level;
@@ -30,8 +29,15 @@ public class Principal extends javax.swing.JFrame {
     public static boolean fecha1 = false;
        
     public Principal() {
+        
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Código para abrir tela inteira
+        try {
+            jDesktopPane.add(TeladeFundo);
+            TeladeFundo.setMaximum(true);
+            TeladeFundo.setVisible(true);
+        } catch (Exception e) {
+        }
         //setLayout(new GridLayout());
         //tela = new FundoTela("/Icones/FundoTela.png");   // Fundo Responsivo
         //getContentPane().add(tela);
@@ -317,6 +323,8 @@ public class Principal extends javax.swing.JFrame {
             }
         });
     }
+    
+    private TeladeFundo TeladeFundo = new TeladeFundo();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem CadastroProdutos;
