@@ -21,6 +21,7 @@ public class Principal extends javax.swing.JFrame {
     EstoqueTela estoquetela;
     ClienteTela clientetela;
     ServicoCad servicoCad;
+    UserTela Usertela;
     ServicoPesq servicoPesq;
     Connection conexao = null;
 
@@ -30,7 +31,7 @@ public class Principal extends javax.swing.JFrame {
        
     public Principal() {
         
-        initComponents();
+        initComponents(); 
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Código para abrir tela inteira
         try {
             jDesktopPane.add(TeladeFundo);
@@ -262,7 +263,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     private void MenuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuUsuariosActionPerformed
-        // TODO add your handling code here:
+        gerentedeJanelas.abrirJanelas(Usertela.getInstancia());
     }//GEN-LAST:event_MenuUsuariosActionPerformed
 
     private void MenuDesconectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuDesconectarActionPerformed
