@@ -22,33 +22,36 @@ public class UserTela extends javax.swing.JInternalFrame {
    
     public UserTela() {
         initComponents();
+        
+        UserB = new UserBeans();
+        
     }
     
-    private boolean verificardados(UserBeans User){
+    private boolean verificardados(UserBeans UserB){
         
-        if(User.getNome_Usuario().equals("")){
+        if(UserB.getNome_Usuario().equals("")){
            JOptionPane.showMessageDialog(null, "Preencha o campo Login", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         } 
              
-        if(User.getSenha_Usuario().equals("")){
+        if(UserB.getSenha_Usuario().equals("")){
            JOptionPane.showMessageDialog(null, "Preencha o campo Senha", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         
-        CadastrarOS(User);
+        CadastrarOS(UserB);
         
         return true;        
     }
 
-    private void CadastrarOS(UserBeans User){
+    private void CadastrarOS(UserBeans UserB){
         try {
             String SQLInsertion = "insert into usuarios(Nome_Usuario, Sexo_Usuario, Tipo_Usuario, Senha_Usuario) values (?, ?, ?, ?)";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
-            st.setString(1, User.getNome_Usuario());
-            st.setString(2, User.getSexo_Usuario());
-            st.setString(3, User.getTipo_Usuario());
-            st.setString(4, User.getSenha_Usuario());                  
+            st.setString(1, UserB.getNome_Usuario());
+            st.setString(2, UserB.getSexo_Usuario());
+            st.setString(3, UserB.getTipo_Usuario());
+            st.setString(4, UserB.getSenha_Usuario());                  
             st.execute();
             Conexao.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));            
