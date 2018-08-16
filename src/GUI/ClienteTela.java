@@ -2,8 +2,13 @@ package GUI;
 
 import Beans.ClienteBeans;
 import Controller.ClienteController;
+import Utilitarios.Conexao;
+import Utilitarios.Corretores;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -42,6 +47,76 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         ClienteB = new ClienteBeans();
         ClienteC = new ClienteController();
         Modelo = (DefaultTableModel)TBL_Clientes.getModel();
+    }
+    
+    public boolean verificardadosEditar(ClienteBeans Cliente){
+        if(Cliente.getNome().equals("")){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }            
+        
+        editarCliente(Cliente);
+        
+        return true;        
+    }
+    
+    public void editarCliente(ClienteBeans Cliente){
+        try {
+            String SQLInsertion = "update clientes set Cli_Nome = ?, Cli_Telefone = ?, Cli_Celular = ? where CodCliente = ?";
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
+            st.setString(1, Cliente.getNome());
+            st.setString(2, Cliente.getTelefone());
+            st.setString(3, Cliente.getCelular());
+            st.setInt(4, Cliente.getCodigo());
+            st.execute();
+            Conexao.getConnection().commit();
+            JOptionPane.showMessageDialog(null, "Registro editado com sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
+            
+            Modelo.setNumRows(0);
+            TXT_Buscar.setEnabled(false);
+            TXT_Buscar.setText("");
+            BTN_Editar.setVisible(false);
+            BTN_Voltar.setVisible(false);
+            BTN_Novo.setVisible(true);
+            
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, ex, "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Erro ao editar registro", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+            
+        }
+        
+    }
+    
+    public boolean verificardados(ClienteBeans Cliente){
+        if(Cliente.getNome().equals("")){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }           
+        
+        CadastrarCliente(Cliente);
+        
+        return true;        
+    }
+    
+    public void CadastrarCliente(ClienteBeans Cliente){
+        try {
+            String SQLInsertion = "insert into clientes(Cli_Nome, Cli_Telefone, Cli_DataCadastro, Cli_Celular) values (?, ?, ?, ?)";
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
+            st.setString(1, Cliente.getNome());
+            st.setString(2, Cliente.getTelefone());
+            st.setString(3, Corretores.ConverterParaSQL(Cliente.getDataCad()));
+            st.setString(4, Cliente.getCelular());
+            
+            st.execute();
+            Conexao.getConnection().commit();
+            JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
+            
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, ex, "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Erro ao Cadastrar Cliente", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+            
+        }
+               
     }
 
     @SuppressWarnings("unchecked")
@@ -328,7 +403,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
     private void BTN_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CadastrarActionPerformed
         popularClienteBeans();
-        ClienteC.verificardados(ClienteB);
+        verificardados(ClienteB);
         limparCampos();
         DataAtual = new Date();
         TXT_Data.setText(Formatodata.format(DataAtual));
@@ -339,10 +414,8 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
     private void BTN_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EditarActionPerformed
         popularClienteBeans();
-        ClienteC.verificardadosEditar(ClienteB);
-        limparCampos();
-        Modelo.removeRow(TBL_Clientes.getSelectedRow());
-        TXT_Buscar.setText("");
+        verificardadosEditar(ClienteB);
+        limparCampos();            
         habilitarcampos(false);
     }//GEN-LAST:event_BTN_EditarActionPerformed
 
@@ -367,6 +440,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         TXT_Telefone.setText(ClienteB.getTelefone());
         TXT_Celular.setText(ClienteB.getCelular());
         TXT_Data.setText(ClienteB.getDataCad());
+        BTN_Editar.setVisible(true);
     }//GEN-LAST:event_TBL_ClientesMouseClicked
 
     private void TBL_ClientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_ClientesMousePressed
@@ -375,6 +449,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
     private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
         limparCampos();
+        BTN_Novo.setVisible(false);
         BTN_Voltar.setVisible(true);
         BTN_Cadastrar.setVisible(true);
         DataAtual = new Date();
@@ -396,12 +471,14 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         TXT_Buscar.setEnabled(true);
         BTN_Novo.setVisible(false);
         BTN_Voltar.setVisible(true);
-        BTN_Editar.setVisible(true);
+        //BTN_Editar.setVisible(false);
         BTN_Cadastrar.setVisible(false);
         habilitarcampos(false);
     }//GEN-LAST:event_BTN_PesquisarActionPerformed
 
     private void BTN_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VoltarActionPerformed
+        //Modelo.removeRow(TBL_Clientes.getSelectedRow());
+        Modelo.setRowCount( 0 );
         TXT_Codigo.setEnabled(false);
         habilitarcampos(false);
         BTN_Cadastrar.setVisible(false);
@@ -409,7 +486,6 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         TXT_Buscar.setEnabled(false);
         BTN_Novo.setVisible(true);
         limparCampos();
-        Modelo.removeRow(TBL_Clientes.getSelectedRow());
         TXT_Buscar.setText("");
         BTN_Voltar.setVisible(false);
     }//GEN-LAST:event_BTN_VoltarActionPerformed

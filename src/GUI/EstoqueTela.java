@@ -2,8 +2,13 @@ package GUI;
 
 import Beans.EstoqueBeans;
 import Controller.EstoqueController;
+import Utilitarios.Conexao;
 import Utilitarios.SoNumeros;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -28,6 +33,8 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
  
     public EstoqueTela() {
         initComponents();
+        TXT_Codigo.setText("0");
+        TXT_Codigo.setDocument(new SoNumeros());
         //TXT_Valor.setDocument(new SoNumeros());
         TXT_Quantidade.setDocument(new SoNumeros());
         TXT_NF.setDocument(new SoNumeros());
@@ -43,6 +50,82 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
        EstoqueC = new EstoqueController();
        Modelo = (DefaultTableModel)TBL_Estoque.getModel();
        formatoDecimal = new DecimalFormat("0.00");
+    }
+    
+    public boolean verificardados(EstoqueBeans Estoque){
+        if(Estoque.getNome().equals("")){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }
+        
+        if(Estoque.getCodigo() == 0){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Código", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }     
+        
+        CadastrarProduto(Estoque);
+        
+        return true;        
+    }    
+    
+    public void CadastrarProduto(EstoqueBeans Estoque){
+        try {
+            String SQLInsertion = "insert into estoque(CodEstoque, Est_Nome, Est_Quantidade, Est_Valor, Est_NF, Est_NCM) values (?, ?, ?, ?, ?, ?)";
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
+            st.setInt(1, Estoque.getCodigo());
+            st.setString(2, Estoque.getNome());
+            st.setInt(3, Estoque.getQuantidade());
+            st.setDouble(4, Estoque.getValor());
+            st.setInt(5, Estoque.getNF());
+            st.setInt(6, Estoque.getNCM());      
+            st.execute();
+            Conexao.getConnection().commit();
+            JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
+            
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, ex, "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Erro ao Cadastrar Produto", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+            
+        }
+               
+    }   
+    
+    public boolean verificardadosEditar(EstoqueBeans Estoque){
+        if(Estoque.getNome().equals("")){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }
+        
+        if(Estoque.getCodigo() == 0){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Código", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }  
+
+        editarProduto(Estoque);  
+        
+        return true;        
+    }
+    
+    public void editarProduto(EstoqueBeans Estoque){
+        try {
+            String SQLInsertion = "update estoque set Est_Nome = ?, Est_Quantidade = ?, Est_Valor = ?, Est_NF = ?, Est_NCM = ? where CodEstoque = ?";
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
+            st.setString(1, Estoque.getNome());
+            st.setInt(2, Estoque.getQuantidade());
+            st.setDouble(3, Estoque.getValor());
+            st.setInt(4, Estoque.getNF());
+            st.setInt(5, Estoque.getNCM()); 
+            st.setInt(6, Estoque.getCodigo());
+            st.execute();
+            Conexao.getConnection().commit();
+            JOptionPane.showMessageDialog(null, "Produto editado com sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
+            
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, ex, "", 0, new ImageIcon("Imagens/btn_sair.png"));
+           JOptionPane.showMessageDialog(null, "Erro ao editar Produto", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+            
+        }
+        
     }
 
 
@@ -81,7 +164,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setTitle("Cadastro de Estoque");
-        setPreferredSize(new java.awt.Dimension(420, 500));
+        setPreferredSize(new java.awt.Dimension(414, 500));
 
         PainelGeral.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -110,7 +193,6 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("NCM/SH");
 
-        TXT_Codigo.setEditable(false);
         TXT_Codigo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TXT_Codigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,38 +318,40 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(TXT_Buscar))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(PainelGeralLayout.createSequentialGroup()
-                                    .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(PainelGeralLayout.createSequentialGroup()
-                                    .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel1)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel2))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(TXT_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(PainelGeralLayout.createSequentialGroup()
-                                            .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(TXT_NF)
-                                                    .addComponent(TXT_NCM, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelGeralLayout.createSequentialGroup()
-                                                    .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(1, 1, 1)))
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jLabel3)
-                                            .addGap(9, 9, 9)
-                                            .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(TXT_Nome)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PainelGeralLayout.createSequentialGroup()
+                                .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PainelGeralLayout.createSequentialGroup()
+                                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TXT_Nome)
+                                    .addGroup(PainelGeralLayout.createSequentialGroup()
+                                        .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(TXT_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(PainelGeralLayout.createSequentialGroup()
+                                                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(TXT_NF)
+                                                        .addComponent(TXT_NCM, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelGeralLayout.createSequentialGroup()
+                                                        .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(1, 1, 1)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel3)
+                                                .addGap(9, 9, 9)
+                                                .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -342,30 +426,20 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         habilitarcampos(true);
         limparCampos();
         BTN_Cadastrar.setVisible(true);
-        BTN_Voltar.setVisible(true);
-        EstoqueC.controleDeCodigo();
-        TXT_Codigo.setText(EstoqueC.controleDeCodigo());
-        TXT_Valor.setText("0");
-        TXT_Quantidade.setText("0");
-        TXT_NF.setText("0");
-        TXT_NCM.setText("0");
+        BTN_Voltar.setVisible(true);  
+        BTN_Novo.setVisible(false);
     }//GEN-LAST:event_BTN_NovoActionPerformed
 
     private void BTN_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CadastrarActionPerformed
         popularEstoqueBeans();
-        EstoqueC.verificardados(EstoqueB);
-        //limparCampos();
-        TXT_Nome.setText("");
-        TXT_Codigo.setText(EstoqueC.controleDeCodigo());
-        TXT_Valor.setText("0");
-        TXT_Quantidade.setText("0");
-        TXT_NF.setText("0");
-        TXT_NCM.setText("0");
+        verificardados(EstoqueB);
+        limparCampos();
+        
     }//GEN-LAST:event_BTN_CadastrarActionPerformed
 
     private void BTN_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EditarActionPerformed
         popularEstoqueBeans();
-        EstoqueC.verificardadosEditar(EstoqueB);
+        verificardadosEditar(EstoqueB);
         limparCampos();
         Modelo.removeRow(TBL_Estoque.getSelectedRow());
         TXT_Buscar.setText("");
@@ -390,9 +464,9 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         habilitarcampos(true);
         BTN_Editar.setVisible(true);
         EstoqueB = EstoqueC.controlePreencherCampos(Integer.parseInt(Modelo.getValueAt(TBL_Estoque.getSelectedRow(), 0).toString()));
-        TXT_Codigo.setText(EstoqueB.getCodigo()+ "");
+        TXT_Codigo.setText(EstoqueB.getCodigo() + "");
         TXT_Nome.setText(EstoqueB.getNome());
-        TXT_Quantidade.setText(EstoqueB.getQuantidade()+ "");
+        TXT_Quantidade.setText(EstoqueB.getQuantidade() + "");
         TXT_Valor.setText(EstoqueB.getValor() + "");
         TXT_NF.setText(EstoqueB.getNF() + "");
         TXT_NCM.setText(EstoqueB.getNCM() + "");
@@ -414,20 +488,19 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         habilitarcampos(false);
         TXT_Buscar.setEnabled(true);
         BTN_Novo.setVisible(false);
-        BTN_Editar.setVisible(true);
+
         BTN_Cadastrar.setVisible(false); 
         BTN_Voltar.setVisible(true);
     }//GEN-LAST:event_BTN_PesquisarActionPerformed
 
     private void BTN_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VoltarActionPerformed
-        TXT_Codigo.setEnabled(false);
         habilitarcampos(false);
         BTN_Cadastrar.setVisible(false);
         BTN_Editar.setVisible(false);
         TXT_Buscar.setEnabled(false);
         BTN_Novo.setVisible(true);
         limparCampos();
-        Modelo.removeRow(TBL_Estoque.getSelectedRow());
+        Modelo.setNumRows(0);
         TXT_Buscar.setText("");
         BTN_Voltar.setVisible(false);
     }//GEN-LAST:event_BTN_VoltarActionPerformed
@@ -462,6 +535,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     final void habilitarcampos(boolean b) {
+    TXT_Codigo.setEnabled(b);
     TXT_Valor.setEnabled(b);
     TXT_Quantidade.setEnabled(b);
     TXT_NF.setEnabled(b);
@@ -470,6 +544,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     }
 
     final void popularEstoqueBeans() {
+    EstoqueB.setCodigo(Integer.parseInt(TXT_Codigo.getText()));    
     EstoqueB.setNome(TXT_Nome.getText());
     EstoqueB.setQuantidade(Integer.parseInt(TXT_Quantidade.getText()));
     EstoqueB.setValor(Double.parseDouble(TXT_Valor.getText().replace(",",".")));
@@ -478,7 +553,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     }
 
     final void limparCampos() {
-    TXT_Codigo.setText("");
+    TXT_Codigo.setText("0");
     TXT_Nome.setText("");
     TXT_Quantidade.setText("");
     TXT_Valor.setText("");

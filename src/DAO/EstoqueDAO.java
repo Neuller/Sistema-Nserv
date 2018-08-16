@@ -18,48 +18,11 @@ public class EstoqueDAO {
         
     }
     
-    public void CadastrarProduto(EstoqueBeans Estoque){
-        try {
-            String SQLInsertion = "insert into estoque(Est_Nome, Est_Quantidade, Est_Valor, Est_NF, Est_NCM) values (?, ?, ?, ?, ?)";
-            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
-            st.setString(1, Estoque.getNome());
-            st.setInt(2, Estoque.getQuantidade());
-            st.setDouble(3, Estoque.getValor());
-            st.setInt(4, Estoque.getNF());
-            st.setInt(5, Estoque.getNCM());
-            
-            st.execute();
-            Conexao.getConnection().commit();
-            JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
-            
-        } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, ex, "", 0, new ImageIcon("Imagens/btn_sair.png"));
-           JOptionPane.showMessageDialog(null, "Erro ao Cadastrar Produto", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-            
-        }
-               
-    }
     
-    public String proximoProduto(){
-            String SQLSelection = "select * from estoque order by CodEstoque desc limit 1";
-        try {
-            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLSelection);
-            ResultSet rs = st.executeQuery();
-            if(rs.next()){
-                return (Integer.parseInt(rs.getString("CodEstoque")) + 1) + "";
-            }else{
-                return "1";
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Buscar Produto", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-            return "0";
-        }
-        
-    }     
     
     public void buscarProduto(String Pesquisa, DefaultTableModel Modelo){     
         try {
-            String SQLSelection = "select * from estoque where Est_Nome like '%" + Pesquisa + "%'" ;  
+            String SQLSelection = "select * from estoque where CodEstoque like '%" + Pesquisa + "%'" ;  
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
@@ -92,26 +55,5 @@ public class EstoqueDAO {
         
         return Estoque;
     }
-  
-    public void editarProduto(EstoqueBeans Estoque){
-        try {
-            String SQLInsertion = "update estoque set Est_Nome = ?, Est_Quantidade = ?, Est_Valor = ?, Est_NF = ?, Est_NCM = ? where CodEstoque = ?";
-            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
-            st.setString(1, Estoque.getNome());
-            st.setInt(2, Estoque.getQuantidade());
-            st.setDouble(3, Estoque.getValor());
-            st.setInt(4, Estoque.getNF());
-            st.setInt(5, Estoque.getNCM());
-            st.setInt(6, Estoque.getCodigo());
-            st.execute();
-            Conexao.getConnection().commit();
-            JOptionPane.showMessageDialog(null, "Produto editado com sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
-            
-        } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, ex, "", 0, new ImageIcon("Imagens/btn_sair.png"));
-           JOptionPane.showMessageDialog(null, "Erro ao editar Produto", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-            
-        }
-        
-    }
+     
 }

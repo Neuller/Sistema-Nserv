@@ -30,7 +30,7 @@ public class UserTela extends javax.swing.JInternalFrame {
     private boolean verificardados(UserBeans UserB){
         
         if(UserB.getNome_Usuario().equals("")){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Login", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+           JOptionPane.showMessageDialog(null, "Preencha todos os Campos", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         } 
              

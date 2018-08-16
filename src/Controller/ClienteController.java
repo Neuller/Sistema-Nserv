@@ -17,16 +17,7 @@ public class ClienteController {
         
     }
     
-    public boolean verificardados(ClienteBeans Cliente){
-        if(Cliente.getNome().equals("")){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }           
-        
-        ClienteD.CadastrarCliente(Cliente);
-        
-        return true;        
-    }
+    
     
     public String controleDeCodigo(){
         return ClienteD.proximoCliente();
@@ -39,15 +30,5 @@ public class ClienteController {
     public ClienteBeans controlePreencherCampos(int Codigo){
         return ClienteD.preencherCampos(Codigo);
     }
-    
-    public boolean verificardadosEditar(ClienteBeans Cliente){
-        if(Cliente.getNome().equals("")){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }            
         
-        ClienteD.editarCliente(Cliente);
-        
-        return true;        
-    }
 }
