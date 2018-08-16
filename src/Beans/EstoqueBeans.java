@@ -10,11 +10,11 @@ package Beans;
         private int NCM;
 
         public int getCodigo() {
-            return Codigo;
+        return Codigo;
         }
 
         public void setCodigo(int Codigo) {
-            this.Codigo = Codigo;
+        this.Codigo = Codigo;
         }
 
         public String getNome() {

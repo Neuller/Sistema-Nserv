@@ -2,11 +2,11 @@ package GUI;
 
 import Beans.EstoqueBeans;
 import Controller.EstoqueController;
+import DAO.EstoqueDAO;
 import Utilitarios.Conexao;
 import Utilitarios.SoNumeros;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +19,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
    EstoqueBeans EstoqueB;
    EstoqueController EstoqueC;
    DefaultTableModel Modelo;
-   DecimalFormat formatoDecimal;
+   EstoqueDAO EstoqueD;
    
    private static EstoqueTela estoquetela;   
    
@@ -32,9 +32,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
 
  
     public EstoqueTela() {
-        initComponents();
-        TXT_Codigo.setText("0");
-        TXT_Codigo.setDocument(new SoNumeros());
+        initComponents();        
         //TXT_Valor.setDocument(new SoNumeros());
         TXT_Quantidade.setDocument(new SoNumeros());
         TXT_NF.setDocument(new SoNumeros());
@@ -48,39 +46,62 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         
        EstoqueB = new EstoqueBeans();
        EstoqueC = new EstoqueController();
-       Modelo = (DefaultTableModel)TBL_Estoque.getModel();
-       formatoDecimal = new DecimalFormat("0.00");
+       EstoqueD = new EstoqueDAO();
+       Modelo = (DefaultTableModel)TBL_Estoque.getModel();     
     }
     
-    public boolean verificardados(EstoqueBeans Estoque){
-        if(Estoque.getNome().equals("")){
+    public boolean verificardados(EstoqueBeans EstoqueB){
+        if(EstoqueB.getNome().equals("")){
            JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         
-        if(Estoque.getCodigo() == 0){
+        if(EstoqueB.getCodigo() == 0){
            JOptionPane.showMessageDialog(null, "Preencha o campo Código", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }     
         
-        CadastrarProduto(Estoque);
+        if(EstoqueB.getQuantidade() == 0){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }  
+        
+        if(EstoqueB.getValor() == 0){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }  
+        
+        if(EstoqueB.getNF() == 0){
+           JOptionPane.showMessageDialog(null, "Preencha o campo NF/e", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }  
+        
+        if(EstoqueB.getNCM() == 0){
+           JOptionPane.showMessageDialog(null, "Preencha o campo NCM/SH", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }                 
+        
+        CadastrarProduto(EstoqueB);
         
         return true;        
     }    
     
-    public void CadastrarProduto(EstoqueBeans Estoque){
+    public void CadastrarProduto(EstoqueBeans EstoqueB){
         try {
             String SQLInsertion = "insert into estoque(CodEstoque, Est_Nome, Est_Quantidade, Est_Valor, Est_NF, Est_NCM) values (?, ?, ?, ?, ?, ?)";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
-            st.setInt(1, Estoque.getCodigo());
-            st.setString(2, Estoque.getNome());
-            st.setInt(3, Estoque.getQuantidade());
-            st.setDouble(4, Estoque.getValor());
-            st.setInt(5, Estoque.getNF());
-            st.setInt(6, Estoque.getNCM());      
+            st.setInt(1, EstoqueB.getCodigo());
+            st.setString(2, EstoqueB.getNome());
+            st.setInt(3, EstoqueB.getQuantidade());
+            st.setDouble(4, EstoqueB.getValor());
+            st.setInt(5, EstoqueB.getNF());
+            st.setInt(6, EstoqueB.getNCM());      
             st.execute();
             Conexao.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
+            
+            limparCampos();
+            
             
         } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(null, ex, "", 0, new ImageIcon("Imagens/btn_sair.png"));
@@ -90,32 +111,52 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                
     }   
     
-    public boolean verificardadosEditar(EstoqueBeans Estoque){
-        if(Estoque.getNome().equals("")){
+    public boolean verificardadosEditar(EstoqueBeans EstoqueB){
+        if(EstoqueB.getNome().equals("")){
            JOptionPane.showMessageDialog(null, "Preencha o campo Nome", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }
         
-        if(Estoque.getCodigo() == 0){
+        if(EstoqueB.getCodigo() == 0){
            JOptionPane.showMessageDialog(null, "Preencha o campo Código", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }  
+        
+        if(EstoqueB.getQuantidade() == 0){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }  
+        
+        if(EstoqueB.getValor() == 0){
+           JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }  
+        
+        if(EstoqueB.getNF() == 0){
+           JOptionPane.showMessageDialog(null, "Preencha o campo NF/e", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }  
+        
+        if(EstoqueB.getNCM() == 0){
+           JOptionPane.showMessageDialog(null, "Preencha o campo NCM/SH", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        return false;
+        }
 
-        editarProduto(Estoque);  
+        editarProduto(EstoqueB);  
         
         return true;        
     }
     
-    public void editarProduto(EstoqueBeans Estoque){
+    public void editarProduto(EstoqueBeans EstoqueB){
         try {
             String SQLInsertion = "update estoque set Est_Nome = ?, Est_Quantidade = ?, Est_Valor = ?, Est_NF = ?, Est_NCM = ? where CodEstoque = ?";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
-            st.setString(1, Estoque.getNome());
-            st.setInt(2, Estoque.getQuantidade());
-            st.setDouble(3, Estoque.getValor());
-            st.setInt(4, Estoque.getNF());
-            st.setInt(5, Estoque.getNCM()); 
-            st.setInt(6, Estoque.getCodigo());
+            st.setString(1, EstoqueB.getNome());
+            st.setInt(2, EstoqueB.getQuantidade());
+            st.setDouble(3, EstoqueB.getValor());
+            st.setInt(4, EstoqueB.getNF());
+            st.setInt(5, EstoqueB.getNCM()); 
+            st.setInt(6, EstoqueB.getCodigo());
             st.execute();
             Conexao.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Produto editado com sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
@@ -127,7 +168,6 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         }
         
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -153,11 +193,11 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         BTN_Cadastrar = new javax.swing.JButton();
         BTN_Editar = new javax.swing.JButton();
-        TXT_Valor = new javax.swing.JFormattedTextField();
         jSeparator4 = new javax.swing.JSeparator();
         TXT_Quantidade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         BTN_Novo = new javax.swing.JButton();
+        TXT_Valor = new javax.swing.JTextField();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -276,17 +316,6 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
             }
         });
 
-        TXT_Valor.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TXT_ValorFocusLost(evt);
-            }
-        });
-        TXT_Valor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TXT_ValorActionPerformed(evt);
-            }
-        });
-
         TXT_Quantidade.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -298,6 +327,13 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         BTN_Novo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTN_NovoActionPerformed(evt);
+            }
+        });
+
+        TXT_Valor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        TXT_Valor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_ValorActionPerformed(evt);
             }
         });
 
@@ -337,21 +373,20 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                                 .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TXT_Nome)
                                     .addGroup(PainelGeralLayout.createSequentialGroup()
+                                        .addComponent(TXT_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 168, Short.MAX_VALUE))
+                                    .addGroup(PainelGeralLayout.createSequentialGroup()
                                         .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(TXT_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(PainelGeralLayout.createSequentialGroup()
-                                                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(TXT_NF)
-                                                        .addComponent(TXT_NCM, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelGeralLayout.createSequentialGroup()
-                                                        .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(1, 1, 1)))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel3)
-                                                .addGap(9, 9, 9)
-                                                .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                                            .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(TXT_NF)
+                                                .addComponent(TXT_NCM, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelGeralLayout.createSequentialGroup()
+                                                .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(1, 1, 1)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -362,8 +397,8 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                 .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -424,7 +459,11 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
 
     private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
         habilitarcampos(true);
-        limparCampos();
+        TXT_Codigo.setText("0");
+        TXT_Quantidade.setText("0");
+        TXT_NF.setText("0");
+        TXT_NCM.setText("0");
+        TXT_Valor.setText("0");
         BTN_Cadastrar.setVisible(true);
         BTN_Voltar.setVisible(true);  
         BTN_Novo.setVisible(false);
@@ -432,9 +471,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
 
     private void BTN_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CadastrarActionPerformed
         popularEstoqueBeans();
-        verificardados(EstoqueB);
-        limparCampos();
-        
+        verificardados(EstoqueB);       
     }//GEN-LAST:event_BTN_CadastrarActionPerformed
 
     private void BTN_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EditarActionPerformed
@@ -470,25 +507,17 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         TXT_Valor.setText(EstoqueB.getValor() + "");
         TXT_NF.setText(EstoqueB.getNF() + "");
         TXT_NCM.setText(EstoqueB.getNCM() + "");
+
     }//GEN-LAST:event_TBL_EstoqueMouseClicked
 
     private void TBL_EstoqueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_EstoqueMousePressed
 
     }//GEN-LAST:event_TBL_EstoqueMousePressed
 
-    private void TXT_ValorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TXT_ValorFocusLost
-
-    }//GEN-LAST:event_TXT_ValorFocusLost
-
-    private void TXT_ValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_ValorActionPerformed
-
-    }//GEN-LAST:event_TXT_ValorActionPerformed
-
     private void BTN_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PesquisarActionPerformed
         habilitarcampos(false);
         TXT_Buscar.setEnabled(true);
         BTN_Novo.setVisible(false);
-
         BTN_Cadastrar.setVisible(false); 
         BTN_Voltar.setVisible(true);
     }//GEN-LAST:event_BTN_PesquisarActionPerformed
@@ -505,6 +534,10 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         BTN_Voltar.setVisible(false);
     }//GEN-LAST:event_BTN_VoltarActionPerformed
 
+    private void TXT_ValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_ValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TXT_ValorActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Cadastrar;
@@ -520,7 +553,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TXT_NF;
     private javax.swing.JTextField TXT_Nome;
     private javax.swing.JTextField TXT_Quantidade;
-    private javax.swing.JFormattedTextField TXT_Valor;
+    private javax.swing.JTextField TXT_Valor;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -555,10 +588,10 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     final void limparCampos() {
     TXT_Codigo.setText("0");
     TXT_Nome.setText("");
-    TXT_Quantidade.setText("");
-    TXT_Valor.setText("");
-    TXT_NF.setText("");
-    TXT_NCM.setText("");
+    TXT_Quantidade.setText("0");
+    TXT_Valor.setText("0");
+    TXT_NF.setText("0");
+    TXT_NCM.setText("0");
     }
 }
 
