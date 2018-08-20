@@ -213,6 +213,11 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
         TXT_Buscar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TXT_Buscar.setOpaque(false);
+        TXT_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TXT_BuscarMouseClicked(evt);
+            }
+        });
         TXT_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TXT_BuscarActionPerformed(evt);
@@ -424,7 +429,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TXT_CodigoActionPerformed
 
     private void TXT_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_BuscarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_TXT_BuscarActionPerformed
 
     private void TXT_BuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_BuscarKeyReleased
@@ -469,6 +474,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
     private void BTN_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PesquisarActionPerformed
         TXT_Buscar.setEnabled(true);
+        TXT_Buscar.setText("Pesquisa por Nome...");
         BTN_Novo.setVisible(false);
         BTN_Voltar.setVisible(true);
         //BTN_Editar.setVisible(false);
@@ -493,6 +499,10 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     private void TXT_DataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_DataActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_DataActionPerformed
+
+    private void TXT_BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TXT_BuscarMouseClicked
+        TXT_Buscar.setText("");
+    }//GEN-LAST:event_TXT_BuscarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -26,7 +26,7 @@ public class EstoqueDAO {
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
-                Modelo.addRow(new Object[] {rs.getString("CodEstoque"), rs.getString("Est_Nome"), rs.getString("Est_Quantidade"), rs.getString("Est_Valor"), rs.getString("Est_NF"), rs.getString("Est_NCM")});      
+                Modelo.addRow(new Object[] {rs.getInt("CodEstoque"), rs.getString("Est_Nome"), rs.getInt("Est_Quantidade"), rs.getDouble("Est_Valor"), rs.getInt("Est_NF"), rs.getInt("Est_NCM")});      
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Buscar Produto", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));

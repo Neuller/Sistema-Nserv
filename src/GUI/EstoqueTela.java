@@ -33,7 +33,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
  
     public EstoqueTela() {
         initComponents();        
-        //TXT_Valor.setDocument(new SoNumeros());
+        TXT_Valor.setDocument(new SoNumeros());
         TXT_Quantidade.setDocument(new SoNumeros());
         TXT_NF.setDocument(new SoNumeros());
         TXT_NCM.setDocument(new SoNumeros());
@@ -49,6 +49,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
        EstoqueD = new EstoqueDAO();
        Modelo = (DefaultTableModel)TBL_Estoque.getModel();     
     }
+  
     
     public boolean verificardados(EstoqueBeans EstoqueB){
         if(EstoqueB.getNome().equals("")){
@@ -161,12 +162,28 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
             Conexao.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Produto editado com sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
             
+            limparCampos();
+            Modelo.setNumRows(0);
+            TXT_Buscar.setText("");
+            habilitarcampos(false);
+            TXT_Buscar.setEnabled(false);
+        
         } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(null, ex, "", 0, new ImageIcon("Imagens/btn_sair.png"));
            JOptionPane.showMessageDialog(null, "Erro ao editar Produto", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
             
         }
         
+    }
+    
+    private void setar_camposServicos(){      
+        int setar = TBL_Estoque.getSelectedRow();
+        TXT_Codigo.setText(TBL_Estoque.getModel().getValueAt(setar, 0).toString());        
+        TXT_Nome.setText(TBL_Estoque.getModel().getValueAt(setar, 1).toString());  
+        TXT_Quantidade.setText(TBL_Estoque.getModel().getValueAt(setar, 2).toString());  
+        TXT_Valor.setText(String.valueOf((Double)TBL_Estoque.getModel().getValueAt(setar, 3)));     
+        TXT_NF.setText(TBL_Estoque.getModel().getValueAt(setar, 4).toString()); 
+        TXT_NCM.setText(TBL_Estoque.getModel().getValueAt(setar, 5).toString());     
     }
 
     @SuppressWarnings("unchecked")
@@ -216,6 +233,11 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         });
 
         TXT_Buscar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        TXT_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TXT_BuscarMouseClicked(evt);
+            }
+        });
         TXT_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TXT_BuscarActionPerformed(evt);
@@ -269,7 +291,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Quantidade", "Valor", "NF/e", "NCM/SH"
+                "Codigo", "Nome", "Quantidade", "Valor", "NF/e", "NCM/SH"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -476,12 +498,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
 
     private void BTN_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EditarActionPerformed
         popularEstoqueBeans();
-        verificardadosEditar(EstoqueB);
-        limparCampos();
-        Modelo.removeRow(TBL_Estoque.getSelectedRow());
-        TXT_Buscar.setText("");
-        habilitarcampos(false);
-        TXT_Buscar.setEnabled(false);
+        verificardadosEditar(EstoqueB);                      
     }//GEN-LAST:event_BTN_EditarActionPerformed
 
     private void TXT_CodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_CodigoActionPerformed
@@ -489,7 +506,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TXT_CodigoActionPerformed
 
     private void TXT_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_BuscarActionPerformed
-        // TODO add your handling code here:
+   
     }//GEN-LAST:event_TXT_BuscarActionPerformed
 
     private void TXT_BuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_BuscarKeyReleased
@@ -499,15 +516,16 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
 
     private void TBL_EstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_EstoqueMouseClicked
         habilitarcampos(true);
+        setar_camposServicos();
         BTN_Editar.setVisible(true);
-        EstoqueB = EstoqueC.controlePreencherCampos(Integer.parseInt(Modelo.getValueAt(TBL_Estoque.getSelectedRow(), 0).toString()));
+        /*EstoqueB = EstoqueC.controlePreencherCampos(Integer.parseInt(Modelo.getValueAt(TBL_Estoque.getSelectedRow(), 0).toString()));
         TXT_Codigo.setText(EstoqueB.getCodigo() + "");
         TXT_Nome.setText(EstoqueB.getNome());
         TXT_Quantidade.setText(EstoqueB.getQuantidade() + "");
         TXT_Valor.setText(EstoqueB.getValor() + "");
         TXT_NF.setText(EstoqueB.getNF() + "");
         TXT_NCM.setText(EstoqueB.getNCM() + "");
-
+*/
     }//GEN-LAST:event_TBL_EstoqueMouseClicked
 
     private void TBL_EstoqueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBL_EstoqueMousePressed
@@ -517,6 +535,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     private void BTN_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PesquisarActionPerformed
         habilitarcampos(false);
         TXT_Buscar.setEnabled(true);
+        TXT_Buscar.setText("Pesquisa por Código...");
         BTN_Novo.setVisible(false);
         BTN_Cadastrar.setVisible(false); 
         BTN_Voltar.setVisible(true);
@@ -537,6 +556,10 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     private void TXT_ValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_ValorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_ValorActionPerformed
+
+    private void TXT_BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TXT_BuscarMouseClicked
+        TXT_Buscar.setText("");
+    }//GEN-LAST:event_TXT_BuscarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
