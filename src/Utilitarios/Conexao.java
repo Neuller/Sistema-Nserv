@@ -10,12 +10,21 @@ import javax.swing.JOptionPane;
 
 
 public class Conexao {
-    
+    // Banco de Dados LocalXampp
+    /*
     private final String URL = "jdbc:mysql://localhost:3306/nserv";
     private final String Driver = "org.gjt.mm.mysql.Driver";
     private final String Usuario = "root";
     private final String Senha = "";
     private static Connection Con;
+*/
+    // Banco de Dados Hospedado
+    private final String URL = "jdbc:mysql://nservbd.mysql.uhserver.com:3306/nservbd";
+    private final String Driver = "org.gjt.mm.mysql.Driver";
+    private final String Usuario = "nserv";
+    private final String Senha = "2525@32Nv";
+    private static Connection Con;
+    
     
     public Conexao(){
         try {
