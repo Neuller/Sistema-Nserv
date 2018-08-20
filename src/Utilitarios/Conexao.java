@@ -21,8 +21,8 @@ public class Conexao {
     // Banco de Dados Hospedado
     private final String URL = "jdbc:mysql://nservbd.mysql.uhserver.com:3306/nservbd";
     private final String Driver = "org.gjt.mm.mysql.Driver";
-    private final String Usuario = "nserv";
-    private final String Senha = "2525@32Nv";
+    private final String Usuario = "";
+    private final String Senha = "";
     private static Connection Con;
     
     
