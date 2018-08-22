@@ -49,8 +49,8 @@ FROM
 	<pageHeader>
 		<band height="150" splitType="Stretch">
 			<image>
-				<reportElement x="59" y="0" width="437" height="133" uuid="55f5ac2c-f155-4c2e-a042-35e2df07c07f"/>
-				<imageExpression><![CDATA["D:\\NSERV\\Painel.jpg"]]></imageExpression>
+				<reportElement x="59" y="2" width="437" height="133" uuid="c6bf31c7-ba4e-4cc6-90c7-cbdb5bd6a38f"/>
+				<imageExpression><![CDATA["Relatorios/Painel.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</pageHeader>
@@ -136,7 +136,7 @@ FROM
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="50" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

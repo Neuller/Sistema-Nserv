@@ -29,7 +29,7 @@ FROM
      `clientes` clientes INNER JOIN `servicos` servicos ON clientes.`CodCliente` = servicos.`CodCliente`
 
 WHERE
-  servicos.`Serial` = $P{Cod_Serial}]]>
+  servicos.`Serial` = $P{Cod_Serial} ]]>
 	</queryString>
 	<field name="clientes_CodCliente" class="java.lang.Integer"/>
 	<field name="clientes_Cli_Nome" class="java.lang.String"/>
@@ -121,8 +121,8 @@ WHERE
 	<pageHeader>
 		<band height="150" splitType="Stretch">
 			<image>
-				<reportElement x="59" y="0" width="437" height="133" uuid="34f665e5-9c72-41b8-a8fd-653620017e01"/>
-				<imageExpression><![CDATA["D:\\NSERV\\Painel.jpg"]]></imageExpression>
+				<reportElement x="59" y="2" width="437" height="133" uuid="7a4b9bb8-3412-452a-ad94-7023542039da"/>
+				<imageExpression><![CDATA["Relatorios/Painel.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</pageHeader>

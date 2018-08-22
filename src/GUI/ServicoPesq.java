@@ -61,8 +61,7 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         ServicosC = new ServicosController();
 
         Modelo2 = (DefaultTableModel)TBL_Servicos.getModel();
-        conexao = Conexao.getConnection();
-           
+        conexao = Conexao.getConnection();                 
     }   
     
     private void pesquisar_servico(){
@@ -104,14 +103,15 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
     }
     
     private void imprimir(){
-         int confirma = JOptionPane.showConfirmDialog(null, "Confirma a visualização da Impressão?", "Atenção", JOptionPane.YES_NO_OPTION);
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a visualização da Impressão?", "Atenção", JOptionPane.YES_NO_OPTION);
         if(confirma ==  JOptionPane.YES_OPTION){
-            Map p = new HashMap();
-            p.put("Cod_Serial", TXT_Serial.getText().toString());
+            Map p = new HashMap();            
+            p.put("Cod_Serial", TXT_Serial.getText().toString());   
+            //p.put("Imagem", ClassLoader.getSystemResourceAsStream("/Icones/Painel.jpg"));            
             JasperReport relatorio;
             JasperPrint impressao;           
         try {
-            if(!TXT_Serial.getText().equals("")){ 
+            if(!TXT_Serial.getText().equals("")){               
             relatorio = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/Relatorios/Saida.jrxml");
             impressao = JasperFillManager.fillReport(relatorio, p, conexao);
             JasperViewer view  = new JasperViewer(impressao, false);

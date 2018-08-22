@@ -88,6 +88,7 @@ public class ServicoCad extends javax.swing.JInternalFrame {
         if(confirma ==  JOptionPane.YES_OPTION){
             Map p = new HashMap();
             p.put("Cod_Serial", TXT_Serial.getText().toString());
+            p.put("Imagem", "/Icones/Painel.jpg");
             JasperReport relatorio;
             JasperPrint impressao;           
         try {
