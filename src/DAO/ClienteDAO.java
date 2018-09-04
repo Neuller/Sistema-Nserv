@@ -41,7 +41,21 @@ public class ClienteDAO {
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLSelection);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
-                Modelo.addRow(new Object[] {rs.getString("CodCliente"), rs.getString("Cli_Nome"), rs.getString("Cli_Telefone"), rs.getString("Cli_Celular")});      
+                Modelo.addRow(new Object[] {rs.getString("CodCliente"), rs.getString("Cli_Nome"), rs.getString("Cli_Telefone"), rs.getString("Cli_Celular"), rs.getString("Cli_Email")});      
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar Cliente", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
+        }
+        
+    }
+    
+        public void buscarCliente2(String Pesquisa, DefaultTableModel Modelo){     
+        try {
+            String SQLSelection = "select * from clientes where CodCliente like '%" + Pesquisa + "%'" ;  
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLSelection);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                Modelo.addRow(new Object[] {rs.getString("CodCliente"), rs.getString("Cli_Nome"), rs.getString("Cli_Telefone"), rs.getString("Cli_Celular"), rs.getString("Cli_Email")});      
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Buscar Cliente", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
@@ -62,6 +76,7 @@ public class ClienteDAO {
                Cliente.setTelefone(rs.getString("Cli_Telefone"));
                Cliente.setDataCad(Corretores.ConverterParaJava(rs.getString("Cli_DataCadastro")));
                Cliente.setCelular(rs.getString("Cli_Celular"));
+               Cliente.setEmail(rs.getString("Cli_Email"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Buscar Cliente", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));

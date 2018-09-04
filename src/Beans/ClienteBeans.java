@@ -8,6 +8,7 @@ public class ClienteBeans {
     private String Telefone;
     private String DataCad;
     private String Celular;
+    private String Email;
     
     public  ClienteBeans(){
         
@@ -19,6 +20,14 @@ public class ClienteBeans {
 
     public void setCodigo(int Codigo) {
         this.Codigo = Codigo;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     public String getNome() {

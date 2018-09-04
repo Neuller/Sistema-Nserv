@@ -40,6 +40,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         TXT_Codigo.setEnabled(false);
         TXT_Data.setEnabled(false);
         TXT_Buscar.setEnabled(false);
+        TXT_Buscar2.setEnabled(false);
         habilitarcampos(false);
         Formatodata = new SimpleDateFormat("dd/MM/yyyy");
         
@@ -62,12 +63,13 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     
     public void editarCliente(ClienteBeans Cliente){
         try {
-            String SQLInsertion = "update clientes set Cli_Nome = ?, Cli_Telefone = ?, Cli_Celular = ? where CodCliente = ?";
+            String SQLInsertion = "update clientes set Cli_Nome = ?, Cli_Telefone = ?, Cli_Celular = ?, Cli_Email = ? where CodCliente = ?";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
             st.setString(1, Cliente.getNome());
             st.setString(2, Cliente.getTelefone());
             st.setString(3, Cliente.getCelular());
             st.setInt(4, Cliente.getCodigo());
+            st.setString(5, Cliente.getEmail());
             st.execute();
             Conexao.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Registro editado com sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
@@ -100,13 +102,13 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     
     public void CadastrarCliente(ClienteBeans Cliente){
         try {
-            String SQLInsertion = "insert into clientes(Cli_Nome, Cli_Telefone, Cli_DataCadastro, Cli_Celular) values (?, ?, ?, ?)";
+            String SQLInsertion = "insert into clientes(Cli_Nome, Cli_Telefone, Cli_DataCadastro, Cli_Celular, Cli_Email) values (?, ?, ?, ?, ?)";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
             st.setString(1, Cliente.getNome());
             st.setString(2, Cliente.getTelefone());
             st.setString(3, Corretores.ConverterParaSQL(Cliente.getDataCad()));
             st.setString(4, Cliente.getCelular());
-            
+            st.setString(5, Cliente.getEmail());
             st.execute();
             Conexao.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
@@ -155,13 +157,17 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         BTN_Voltar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        TXT_Email = new javax.swing.JTextField();
+        TXT_Buscar2 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setTitle("Cadastro de Clientes");
-        setPreferredSize(new java.awt.Dimension(560, 400));
+        setPreferredSize(new java.awt.Dimension(560, 460));
 
         PainelGeral.setBackground(new java.awt.Color(255, 255, 255));
+        PainelGeral.setPreferredSize(new java.awt.Dimension(547, 401));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Telefone");
@@ -172,11 +178,11 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Telefone", "Celular"
+                "Código", "Nome", "Telefone", "Celular", "Email"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -304,6 +310,30 @@ public class ClienteTela extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel7.setText("E-mail");
+
+        TXT_Email.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        TXT_Email.setOpaque(false);
+
+        TXT_Buscar2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        TXT_Buscar2.setOpaque(false);
+        TXT_Buscar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TXT_Buscar2MouseClicked(evt);
+            }
+        });
+        TXT_Buscar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_Buscar2ActionPerformed(evt);
+            }
+        });
+        TXT_Buscar2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TXT_Buscar2KeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout PainelGeralLayout = new javax.swing.GroupLayout(PainelGeral);
         PainelGeral.setLayout(PainelGeralLayout);
         PainelGeralLayout.setHorizontalGroup(
@@ -337,10 +367,6 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TXT_Celular, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PainelGeralLayout.createSequentialGroup()
-                        .addComponent(BTN_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TXT_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PainelGeralLayout.createSequentialGroup()
                         .addComponent(BTN_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BTN_Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -348,7 +374,19 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                         .addComponent(BTN_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BTN_Voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(PainelGeralLayout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TXT_Email))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelGeralLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(TXT_Buscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelGeralLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(BTN_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TXT_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         PainelGeralLayout.setVerticalGroup(
@@ -370,17 +408,23 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8)
                     .addComponent(TXT_Celular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TXT_Telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(TXT_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TXT_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTN_Pesquisar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TXT_Buscar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -445,6 +489,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         TXT_Telefone.setText(ClienteB.getTelefone());
         TXT_Celular.setText(ClienteB.getCelular());
         TXT_Data.setText(ClienteB.getDataCad());
+        TXT_Email.setText(ClienteB.getEmail());
         BTN_Editar.setVisible(true);
     }//GEN-LAST:event_TBL_ClientesMouseClicked
 
@@ -474,7 +519,9 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
     private void BTN_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PesquisarActionPerformed
         TXT_Buscar.setEnabled(true);
+        TXT_Buscar2.setEnabled(true);
         TXT_Buscar.setText("Pesquisa por Nome...");
+        TXT_Buscar2.setText("Pesquisa por Código...");
         BTN_Novo.setVisible(false);
         BTN_Voltar.setVisible(true);
         //BTN_Editar.setVisible(false);
@@ -504,6 +551,19 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         TXT_Buscar.setText("");
     }//GEN-LAST:event_TXT_BuscarMouseClicked
 
+    private void TXT_Buscar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TXT_Buscar2MouseClicked
+        TXT_Buscar2.setText("");
+    }//GEN-LAST:event_TXT_Buscar2MouseClicked
+
+    private void TXT_Buscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_Buscar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TXT_Buscar2ActionPerformed
+
+    private void TXT_Buscar2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_Buscar2KeyReleased
+        Modelo.setNumRows(0);
+        ClienteC.controlePesquisa2(TXT_Buscar2.getText(), Modelo);
+    }//GEN-LAST:event_TXT_Buscar2KeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Cadastrar;
@@ -514,15 +574,18 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     private javax.swing.JPanel PainelGeral;
     private javax.swing.JTable TBL_Clientes;
     private javax.swing.JTextField TXT_Buscar;
+    private javax.swing.JTextField TXT_Buscar2;
     private javax.swing.JTextField TXT_Celular;
     private javax.swing.JTextField TXT_Codigo;
     private javax.swing.JTextField TXT_Data;
+    private javax.swing.JTextField TXT_Email;
     private javax.swing.JTextField TXT_Nome;
     private javax.swing.JTextField TXT_Telefone;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -536,6 +599,7 @@ final void habilitarcampos(boolean valor){
     TXT_Telefone.setEnabled(valor);
     TXT_Celular.setEnabled(valor);
     TXT_Data.setEnabled(valor);
+    TXT_Email.setEnabled(valor);
 }
 
 final void popularClienteBeans(){
@@ -543,6 +607,7 @@ final void popularClienteBeans(){
     ClienteB.setTelefone(TXT_Telefone.getText());
     ClienteB.setCelular(TXT_Celular.getText());
     ClienteB.setDataCad(TXT_Data.getText());
+    ClienteB.setEmail(TXT_Email.getText());
 }
 
 final void limparCampos(){
@@ -551,6 +616,7 @@ final void limparCampos(){
     TXT_Telefone.setText("");
     TXT_Celular.setText("");
     TXT_Data.setText("");
+    TXT_Email.setText("");
 }
 
 }

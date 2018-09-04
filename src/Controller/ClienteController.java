@@ -15,9 +15,7 @@ public class ClienteController {
         ClienteD = new ClienteDAO();
         
         
-    }
-    
-    
+    }  
     
     public String controleDeCodigo(){
         return ClienteD.proximoCliente();
@@ -25,6 +23,10 @@ public class ClienteController {
     
     public void controlePesquisa(String Pesquisa, DefaultTableModel Modelo){
         ClienteD.buscarCliente(Pesquisa, Modelo);
+    }
+    
+    public void controlePesquisa2(String Pesquisa, DefaultTableModel Modelo){
+        ClienteD.buscarCliente2(Pesquisa, Modelo);
     }
     
     public ClienteBeans controlePreencherCampos(int Codigo){
