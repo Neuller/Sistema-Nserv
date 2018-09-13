@@ -699,6 +699,7 @@ public class ServicoPesq extends javax.swing.JInternalFrame {
         TXT_CodServico.setText("");
         TXT_Data.setText("");
         TXT_PesqServ.setText("");
+        TXT_Servico.setText("");
     }
     
     final void popularOSBeansEditar(){

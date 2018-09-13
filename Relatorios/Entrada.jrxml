@@ -13,6 +13,7 @@
      clientes.`Cli_Telefone` AS clientes_Cli_Telefone,
      clientes.`Cli_DataCadastro` AS clientes_Cli_DataCadastro,
      clientes.`Cli_Celular` AS clientes_Cli_Celular,
+clientes.`Cli_Email` AS clientes_Cli_Email,
      servicos.`CodServicos` AS servicos_CodServicos,
      servicos.`Data_Servico` AS servicos_Data_Servico,
      servicos.`Genero` AS servicos_Genero,
@@ -24,12 +25,12 @@
      servicos.`Tecnico` AS servicos_Tecnico,
      servicos.`Garantia` AS servicos_Garantia,
      servicos.`Valor` AS servicos_Valor,
-     servicos.`CodCliente` AS servicos_CodCliente
+     servicos.`CodCliente` AS servicos_CodCliente,
+     clientes.`Cli_Email` AS clientes_Cli_Email
 FROM
      `clientes` clientes INNER JOIN `servicos` servicos ON clientes.`CodCliente` = servicos.`CodCliente`
-
 WHERE
-  servicos.`Serial` = $P{Cod_Serial}]]>
+     servicos.`Serial` = $P{Cod_Serial}]]>
 	</queryString>
 	<field name="clientes_CodCliente" class="java.lang.Integer"/>
 	<field name="clientes_Cli_Nome" class="java.lang.String"/>
@@ -48,6 +49,7 @@ WHERE
 	<field name="servicos_Garantia" class="java.lang.String"/>
 	<field name="servicos_Valor" class="java.lang.Double"/>
 	<field name="servicos_CodCliente" class="java.lang.Integer"/>
+	<field name="clientes_Cli_Email" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -113,7 +115,7 @@ WHERE
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="66" splitType="Stretch">
+		<band height="76" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="90" height="20" uuid="30da11c5-837e-4d7f-a5f9-8e23f3ad969c"/>
 				<textElement verticalAlignment="Middle">
@@ -171,8 +173,22 @@ WHERE
 				<textFieldExpression><![CDATA[$F{clientes_Cli_Celular}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="52" width="555" height="1" uuid="1b4dea31-3d88-414b-bfb7-6edda25fb2d4"/>
+				<reportElement x="0" y="65" width="555" height="1" uuid="1b4dea31-3d88-414b-bfb7-6edda25fb2d4"/>
 			</line>
+			<staticText>
+				<reportElement x="0" y="40" width="90" height="20" uuid="7e1a04d2-885a-417c-849c-f82fe39862a1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="40" width="450" height="20" uuid="dcffff03-45b4-407b-9dc0-f61c3857aff4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clientes_Cli_Email}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>

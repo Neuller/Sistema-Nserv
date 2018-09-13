@@ -62,26 +62,11 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         return false;
         }     
         
-        if(EstoqueB.getQuantidade() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }  
-        
         if(EstoqueB.getValor() == 0){
            JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }  
-        
-        if(EstoqueB.getNF() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo NF/e", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }  
-        
-        if(EstoqueB.getNCM() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo NCM/SH", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }                 
-        
+            
         CadastrarProduto(EstoqueB);
         
         return true;        
@@ -122,27 +107,12 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
            JOptionPane.showMessageDialog(null, "Preencha o campo Código", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }  
-        
-        if(EstoqueB.getQuantidade() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }  
-        
+   
         if(EstoqueB.getValor() == 0){
            JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
         return false;
         }  
-        
-        if(EstoqueB.getNF() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo NF/e", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }  
-        
-        if(EstoqueB.getNCM() == 0){
-           JOptionPane.showMessageDialog(null, "Preencha o campo NCM/SH", "", 0, new ImageIcon(getClass().getResource("/Icones/btn_sair.png")));
-        return false;
-        }
-
+  
         editarProduto(EstoqueB);  
         
         return true;        
@@ -315,6 +285,7 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel3.setText("Valor");
 
+        TXT_NF.setBackground(new java.awt.Color(255, 255, 0));
         TXT_NF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -405,7 +376,6 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelGeralLayout.createSequentialGroup()
                                                 .addComponent(TXT_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(1, 1, 1)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(TXT_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -429,13 +399,10 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
                 .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(TXT_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PainelGeralLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel4))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelGeralLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXT_NF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TXT_NF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PainelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -482,9 +449,6 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     private void BTN_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NovoActionPerformed
         habilitarcampos(true);
         TXT_Codigo.setText("0");
-        TXT_Quantidade.setText("0");
-        TXT_NF.setText("0");
-        TXT_NCM.setText("0");
         TXT_Valor.setText("0");
         BTN_Cadastrar.setVisible(true);
         BTN_Voltar.setVisible(true);  
@@ -611,10 +575,10 @@ public class EstoqueTela extends javax.swing.JInternalFrame {
     final void limparCampos() {
     TXT_Codigo.setText("0");
     TXT_Nome.setText("");
-    TXT_Quantidade.setText("0");
+    TXT_Quantidade.setText("");
     TXT_Valor.setText("0");
-    TXT_NF.setText("0");
-    TXT_NCM.setText("0");
+    TXT_NF.setText("");
+    TXT_NCM.setText("");
     }
 }
 

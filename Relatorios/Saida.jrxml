@@ -24,12 +24,12 @@
      servicos.`Tecnico` AS servicos_Tecnico,
      servicos.`Garantia` AS servicos_Garantia,
      servicos.`Valor` AS servicos_Valor,
-     servicos.`CodCliente` AS servicos_CodCliente
+     servicos.`CodCliente` AS servicos_CodCliente,
+     clientes.`Cli_Email` AS clientes_Cli_Email
 FROM
      `clientes` clientes INNER JOIN `servicos` servicos ON clientes.`CodCliente` = servicos.`CodCliente`
-
 WHERE
-  servicos.`Serial` = $P{Cod_Serial} ]]>
+     servicos.`Serial` = $P{Cod_Serial}]]>
 	</queryString>
 	<field name="clientes_CodCliente" class="java.lang.Integer"/>
 	<field name="clientes_Cli_Nome" class="java.lang.String"/>
@@ -48,6 +48,7 @@ WHERE
 	<field name="servicos_Garantia" class="java.lang.String"/>
 	<field name="servicos_Valor" class="java.lang.Double"/>
 	<field name="servicos_CodCliente" class="java.lang.Integer"/>
+	<field name="clientes_Cli_Email" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -127,7 +128,7 @@ WHERE
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="66" splitType="Stretch">
+		<band height="76" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="90" height="20" uuid="c6c09fd3-8684-400f-90ce-e9ac57c0abca"/>
 				<textElement verticalAlignment="Middle">
@@ -185,8 +186,22 @@ WHERE
 				<textFieldExpression><![CDATA[$F{clientes_Cli_Celular}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="52" width="555" height="1" uuid="9b99e10f-6913-46f8-be18-d27ed5b15d00"/>
+				<reportElement x="0" y="65" width="555" height="1" uuid="9b99e10f-6913-46f8-be18-d27ed5b15d00"/>
 			</line>
+			<staticText>
+				<reportElement x="0" y="40" width="90" height="20" uuid="401270e9-b40f-42b9-a252-e95ae21ea226"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="40" width="450" height="20" uuid="acbd8fb7-4d1d-4673-b354-934bc8bba551"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clientes_Cli_Email}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>

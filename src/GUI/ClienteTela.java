@@ -77,6 +77,8 @@ public class ClienteTela extends javax.swing.JInternalFrame {
             Modelo.setNumRows(0);
             TXT_Buscar.setEnabled(false);
             TXT_Buscar.setText("");
+            TXT_Buscar2.setEnabled(false);
+            TXT_Buscar2.setText("");
             BTN_Editar.setVisible(false);
             BTN_Voltar.setVisible(false);
             BTN_Novo.setVisible(true);
@@ -537,9 +539,9 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         BTN_Cadastrar.setVisible(false);
         BTN_Editar.setVisible(false);
         TXT_Buscar.setEnabled(false);
+        TXT_Buscar2.setEnabled(false);
         BTN_Novo.setVisible(true);
         limparCampos();
-        TXT_Buscar.setText("");
         BTN_Voltar.setVisible(false);
     }//GEN-LAST:event_BTN_VoltarActionPerformed
 
@@ -617,6 +619,8 @@ final void limparCampos(){
     TXT_Celular.setText("");
     TXT_Data.setText("");
     TXT_Email.setText("");
+    TXT_Buscar.setText("");
+    TXT_Buscar2.setText("");
 }
 
 }
