@@ -67,9 +67,9 @@ public class ClienteTela extends javax.swing.JInternalFrame {
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsertion);
             st.setString(1, Cliente.getNome());
             st.setString(2, Cliente.getTelefone());
-            st.setString(3, Cliente.getCelular());
-            st.setInt(4, Cliente.getCodigo());
-            st.setString(5, Cliente.getEmail());
+            st.setString(3, Cliente.getCelular());      
+            st.setString(4, Cliente.getEmail());
+            st.setInt(5, Cliente.getCodigo());
             st.execute();
             Conexao.getConnection().commit();
             JOptionPane.showMessageDialog(null, "Registro editado com sucesso", "", 1, new ImageIcon(getClass().getResource("/Icones/ok.png")));
