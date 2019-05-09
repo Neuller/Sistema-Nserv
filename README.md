@@ -1,4 +1,2 @@
-@uthor Ncesar;
-'Em Desenvolvimento'
-# Sistema-Nserv
+Copyright © Ncesar
 
